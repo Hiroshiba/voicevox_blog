@@ -7,6 +7,7 @@ import { withBaseUrl } from "@/helper";
 import { $nemoDownloadModal } from "@/store";
 import { useStore } from "@nanostores/react";
 import { useEffect, useState } from "react";
+import Dialog from "../Dialog";
 
 type OsType = "Windows" | "Mac" | "Linux";
 type ModeType =
@@ -89,71 +90,66 @@ export default function DownloadNemoModal() {
     }
   };
 
+  const downloadUrl = downloadUrls[selectedOs][selectedMode]?.url;
+  const downloadName = downloadUrls[selectedOs][selectedMode]?.name;
+  const isDownloadDisabled = !downloadUrl;
+
   return (
-    <div
-      className={"modal-download modal" + (isActive ? " is-active" : "")}
-      role="dialog"
-      data-theme="light"
+    <Dialog
+      open={isActive}
+      title="Nemo エンジン ダウンロード"
+      onClose={hide}
+      bodyClassName="space-y-4"
+      footer={
+        <a
+          href={downloadUrl}
+          download={downloadName}
+          target="_blank"
+          rel="noreferrer"
+          className={[
+            "inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500",
+            isDownloadDisabled
+              ? "pointer-events-none bg-slate-300 text-slate-600"
+              : "bg-indigo-600 text-white hover:bg-indigo-500",
+          ].join(" ")}
+          aria-disabled={isDownloadDisabled}
+        >
+          ダウンロード
+        </a>
+      }
     >
-      <div className="modal-background" onClick={hide} role="presentation" />
-      <div className="modal-card">
-        <header className="modal-card-head has-text-centered">
-          <p className="modal-card-title">Nemo エンジン ダウンロード</p>
-          <button
-            className="delete"
-            aria-label="close"
-            onClick={hide}
-            type="button"
-          />
-        </header>
+      <DownloadModalSelecter
+        label="OS"
+        selected={selectedOs}
+        setSelected={selectOs}
+        candidates={["Windows", "Mac", "Linux"]}
+      />
 
-        <section className="modal-card-body">
-          <DownloadModalSelecter
-            label="OS"
-            selected={selectedOs}
-            setSelected={selectOs}
-            candidates={["Windows", "Mac", "Linux"]}
-          />
+      <hr className="border-slate-200" />
 
-          <hr className="my-3" />
+      <DownloadModalSelecter
+        label="対応モード"
+        selected={selectedMode}
+        setSelected={setSelectedMode}
+        candidates={modeAvailables[selectedOs]}
+      />
+      <p className="text-center text-xs text-slate-600">
+        ※ GPUモードの方が快適ですが、利用するためには
+        <a className="underline" href={withBaseUrl("/qa/")}>
+          対応するGPU
+        </a>
+        が必要です
+      </p>
 
-          <DownloadModalSelecter
-            label="対応モード"
-            selected={selectedMode}
-            setSelected={setSelectedMode}
-            candidates={modeAvailables[selectedOs]}
-          />
-          <p className="has-text-centered is-size-7">
-            ※ GPUモードの方が快適ですが、利用するためには
-            <a href={withBaseUrl("/qa/")}>対応するGPU</a>
-            が必要です
-          </p>
+      <hr className="border-slate-200" />
 
-          <hr className="my-3" />
-
-          <p className="has-text-centered">
-            VOICEVOX 内の「マルチエンジン機能」を ON にしたあと、
-            <br />
-            ダウンロードした .vvpp ファイルをダブルクリックするか
-            <br />
-            「エンジン」→「エンジンの管理」で Nemo 音声を追加できます。
-          </p>
-        </section>
-
-        <footer className="modal-card-foot is-justify-content-flex-end">
-          <div className="buttons">
-            <a
-              href={downloadUrls[selectedOs][selectedMode]?.url}
-              download={downloadUrls[selectedOs][selectedMode]?.name}
-              target="_blank"
-              rel="noreferrer"
-              className="button is-primary"
-            >
-              <span className="has-text-weight-semibold">ダウンロード</span>
-            </a>
-          </div>
-        </footer>
-      </div>
-    </div>
+      <p className="text-center text-sm text-slate-700">
+        VOICEVOX 内の「マルチエンジン機能」を ON にしたあと、
+        <br />
+        ダウンロードした .vvpp ファイルをダブルクリックするか
+        <br />
+        「エンジン」→「エンジンの管理」で Nemo 音声を追加できます。
+      </p>
+    </Dialog>
   );
 }

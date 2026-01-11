@@ -7,6 +7,7 @@ import { withBaseUrl } from "@/helper";
 import { $downloadModal } from "@/store";
 import { useStore } from "@nanostores/react";
 import { useEffect, useState } from "react";
+import Dialog from "../Dialog";
 
 type OsType = "Windows" | "Mac" | "Linux";
 type ModeType =
@@ -176,80 +177,79 @@ export default function DownloadModal() {
     }
   };
 
+  const downloadUrl =
+    downloadUrls[selectedOs][selectedMode]?.[selectedPackage]?.url;
+  const downloadName =
+    downloadUrls[selectedOs][selectedMode]?.[selectedPackage]?.name;
+  const isDownloadDisabled = !downloadUrl;
+
   return (
-    <div
-      className={"modal-download modal" + (isActive ? " is-active" : "")}
-      role="dialog"
-      data-theme="light"
+    <Dialog
+      open={isActive}
+      title="VOICEVOX ダウンロード"
+      onClose={hide}
+      panelClassName="max-w-3xl"
+      bodyClassName="space-y-4"
+      footer={
+        <>
+          <a
+            href={withBaseUrl("/term/")}
+            className="inline-flex items-center justify-center rounded-md bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-900 hover:bg-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          >
+            利用規約
+          </a>
+          <a
+            href={downloadUrl}
+            download={downloadName}
+            target="_blank"
+            rel="noreferrer"
+            className={[
+              "inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500",
+              isDownloadDisabled
+                ? "pointer-events-none bg-slate-300 text-slate-600"
+                : "bg-indigo-600 text-white hover:bg-indigo-500",
+            ].join(" ")}
+            aria-disabled={isDownloadDisabled}
+          >
+            ダウンロード
+          </a>
+        </>
+      }
     >
-      <div className="modal-background" onClick={hide} role="presentation" />
-      <div className="modal-card">
-        <header className="modal-card-head has-text-centered">
-          <p className="modal-card-title">VOICEVOX ダウンロード</p>
-          <button
-            className="delete"
-            aria-label="close"
-            onClick={hide}
-            type="button"
-          />
-        </header>
+      <Selector
+        label="OS"
+        selected={selectedOs}
+        setSelected={selectOs}
+        candidates={["Windows", "Mac", "Linux"]}
+      />
 
-        <section className="modal-card-body">
-          <Selector
-            label="OS"
-            selected={selectedOs}
-            setSelected={selectOs}
-            candidates={["Windows", "Mac", "Linux"]}
-          />
+      <hr className="border-slate-200" />
 
-          <hr className="my-3" />
+      <Selector
+        label="対応モード"
+        selected={selectedOrDefaultMode}
+        setSelected={(mode) => selectMode(selectedOs, mode)}
+        candidates={modeAvailables[selectedOs]}
+      />
+      <p className="text-center text-xs text-slate-600">
+        ※ GPUモードの方が快適ですが、利用するためには
+        <a className="underline" href={withBaseUrl("/qa/")}>
+          対応するGPU
+        </a>
+        が必要です
+      </p>
 
-          <Selector
-            label="対応モード"
-            selected={selectedOrDefaultMode}
-            setSelected={(mode) => selectMode(selectedOs, mode)}
-            candidates={modeAvailables[selectedOs]}
-          />
-          <p className="has-text-centered is-size-7">
-            ※ GPUモードの方が快適ですが、利用するためには
-            <a href={withBaseUrl("/qa/")}>対応するGPU</a>
-            が必要です
-          </p>
+      <hr className="border-slate-200" />
 
-          <hr className="my-3" />
-
-          <Selector
-            label="パッケージ"
-            selected={selectedOrDefaultPackage}
-            setSelected={setSelectedPackage}
-            candidates={packageAvailables[selectedOs][selectedOrDefaultMode]!}
-          />
-          <p className="has-text-centered is-size-7">
-            ※ 推奨パッケージはインストーラー版です
-          </p>
-        </section>
-
-        <footer className="modal-card-foot is-justify-content-flex-end">
-          <div className="buttons">
-            <a href={withBaseUrl("/term/")} className="button">
-              <span>利用規約</span>
-            </a>
-            <a
-              href={
-                downloadUrls[selectedOs][selectedMode]?.[selectedPackage]?.url
-              }
-              download={
-                downloadUrls[selectedOs][selectedMode]?.[selectedPackage]?.name
-              }
-              target="_blank"
-              rel="noreferrer"
-              className="button is-primary"
-            >
-              <span className="has-text-weight-semibold">ダウンロード</span>
-            </a>
-          </div>
-        </footer>
-      </div>
-    </div>
+      <Selector
+        label="パッケージ"
+        selected={selectedOrDefaultPackage}
+        setSelected={setSelectedPackage}
+        candidates={packageAvailables[selectedOs][selectedOrDefaultMode]!}
+      />
+      <p className="text-center text-xs text-slate-600">
+        ※ 推奨パッケージはインストーラー版です
+      </p>
+    </Dialog>
   );
 }

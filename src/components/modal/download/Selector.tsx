@@ -10,29 +10,27 @@ export default function Selector<T extends string>({
   candidates: T[];
 }) {
   return (
-    <div className="columns is-tablet is-centered is-vcentered py-0 my-2">
-      <div className="column is-3 py-0 my-1">
-        <p className="has-text-centered is-size-5 has-text-weight-bold">
-          {label}
-        </p>
-      </div>
-      <div className="column is-6 py-0 my-1">
-        <div className="buttons is-centered">
-          {candidates.map((candidate, index) => (
+    <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
+      <p className="text-sm font-semibold text-slate-700">{label}</p>
+      <div className="flex flex-wrap items-center justify-center gap-2">
+        {candidates.map((candidate) => {
+          const isSelected = candidate === selected;
+          return (
             <button
-              key={index}
-              className={`button is-rounded ${
-                candidate == selected
-                  ? "is-success has-text-weight-semibold"
-                  : ""
-              }`}
+              key={candidate}
+              className={[
+                "inline-flex items-center justify-center rounded-full px-4 py-2 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-indigo-500",
+                isSelected
+                  ? "bg-emerald-600 text-white"
+                  : "bg-slate-100 text-slate-900 hover:bg-slate-200",
+              ].join(" ")}
               onClick={() => setSelected(candidate)}
               type="button"
             >
-              <span>{candidate}</span>
+              {candidate}
             </button>
-          ))}
-        </div>
+          );
+        })}
       </div>
     </div>
   );

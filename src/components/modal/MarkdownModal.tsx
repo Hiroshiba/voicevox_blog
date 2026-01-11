@@ -1,3 +1,5 @@
+import Dialog from "./Dialog";
+
 export default function MarkdownModal({
   isActive,
   title,
@@ -11,33 +13,21 @@ export default function MarkdownModal({
   hide: () => void;
   className?: string;
 }) {
+  // Note: markdown styling is still provided by `src/styles/markdown.scss` (Bulma-based for now).
   return (
-    <div
-      className={`${className} modal` + (isActive ? " is-active" : "")}
-      role="dialog"
-      data-theme="light"
+    <Dialog
+      open={isActive}
+      title={title}
+      onClose={hide}
+      panelClassName={className}
+      bodyClassName="max-h-[75vh] overflow-auto"
     >
-      <div className="modal-background" onClick={hide}></div>
-      <div className="modal-card">
-        <header className="modal-card-head has-text-centered">
-          <p className="modal-card-title">{title}</p>
-          <button
-            className="delete"
-            aria-label="close"
-            onClick={hide}
-            type="button"
-          />
-        </header>
-        <section className="modal-card-body">
-          <div
-            className="markdown"
-            dangerouslySetInnerHTML={{
-              __html: html,
-            }}
-          ></div>
-        </section>
-        <footer className="modal-card-foot is-justify-content-flex-end"></footer>
-      </div>
-    </div>
+      <div
+        className="markdown"
+        dangerouslySetInnerHTML={{
+          __html: html,
+        }}
+      />
+    </Dialog>
   );
 }

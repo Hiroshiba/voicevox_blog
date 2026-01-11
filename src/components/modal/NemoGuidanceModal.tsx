@@ -10,93 +10,70 @@ import {
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useStore } from "@nanostores/react";
+import Dialog from "./Dialog";
 
 export default function NemoGuidanceModal() {
   const isActive = useStore($nemoGuidanceModal);
   const hide = () => $nemoGuidanceModal.set(false);
 
   return (
-    <>
-      <div
-        className={"modal-nemo-guidance modal" + (isActive ? " is-active" : "")}
-        role="dialog"
-        data-theme="light"
-      >
-        <div className="modal-background" onClick={hide} role="presentation" />
-        <div className="modal-card">
-          <header className="modal-card-head has-text-centered">
-            <p className="modal-card-title">VOICEVOX Nemo ご利用案内</p>
-            <button
-              className="delete"
-              aria-label="close"
-              onClick={hide}
-              type="button"
-            ></button>
-          </header>
-
-          <section className="modal-card-body">
-            <div className="step-by-step">
-              <h3>- Step 1 -</h3>
-              <p>VOICEVOX ソフトウェアをインストール</p>
-              <button
-                className="button is-align-self-center is-primary is-rounded is-medium"
-                onClick={() => {
-                  $downloadModal.set(true);
-                  sendEvent("download", "software");
-                }}
-              >
-                <span className="icon">
-                  <FontAwesomeIcon icon={faDownload} />
-                </span>
-                <span className="has-text-weight-semibold">
-                  VOICEVOX ダウンロード
-                </span>
-              </button>
-            </div>
-
-            <hr />
-
-            <div className="step-by-step">
-              <h3>- Step 2 -</h3>
-              <p>
-                VOICEVOX ソフトウェアを起動して
-                <br />
-                設定→オプション→高度な設定→<b>マルチエンジン機能</b>をON
-              </p>
-            </div>
-
-            <hr />
-
-            <div className="step-by-step">
-              <h3>- Step 3 -</h3>
-              <p>Nemo エンジンを追加</p>
-              <button
-                className="button is-align-self-center is-primary is-rounded is-medium"
-                onClick={() => $nemoDownloadModal.set(true)}
-              >
-                <span className="icon">
-                  <FontAwesomeIcon icon={faDownload} />
-                </span>
-                <span className="has-text-weight-semibold">
-                  Nemo エンジン ダウンロード
-                </span>
-              </button>
-            </div>
-
-            <hr />
-
-            <p className="policy-note">
-              ※ VOICEVOX ソフトウェアにはキャラクターの音声も含まれます。
-              <br />
-              キャラクターの音声と Nemo の音声は利用規約が異なるので
-              <br />
-              ご利用の際は各音声の利用規約をご確認ください。
-            </p>
-          </section>
-
-          <footer className="modal-card-foot"></footer>
-        </div>
+    <Dialog
+      open={isActive}
+      title="VOICEVOX Nemo ご利用案内"
+      onClose={hide}
+      bodyClassName="space-y-5"
+    >
+      <div className="flex flex-col items-center gap-2 text-center">
+        <h3 className="text-sm font-semibold text-slate-600">- Step 1 -</h3>
+        <p>VOICEVOX ソフトウェアをインストール</p>
+        <button
+          className="inline-flex items-center justify-center gap-2 rounded-full bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          onClick={() => {
+            $downloadModal.set(true);
+            sendEvent("download", "software");
+          }}
+          type="button"
+        >
+          <FontAwesomeIcon icon={faDownload} />
+          <span>VOICEVOX ダウンロード</span>
+        </button>
       </div>
-    </>
+
+      <hr className="border-slate-200" />
+
+      <div className="flex flex-col items-center gap-2 text-center">
+        <h3 className="text-sm font-semibold text-slate-600">- Step 2 -</h3>
+        <p>
+          VOICEVOX ソフトウェアを起動して
+          <br />
+          設定→オプション→高度な設定→<b>マルチエンジン機能</b>をON
+        </p>
+      </div>
+
+      <hr className="border-slate-200" />
+
+      <div className="flex flex-col items-center gap-2 text-center">
+        <h3 className="text-sm font-semibold text-slate-600">- Step 3 -</h3>
+        <p>Nemo エンジンを追加</p>
+        <button
+          className="inline-flex items-center justify-center gap-2 rounded-full bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          onClick={() => $nemoDownloadModal.set(true)}
+          type="button"
+        >
+          <FontAwesomeIcon icon={faDownload} />
+          <span>Nemo エンジン ダウンロード</span>
+        </button>
+      </div>
+
+      <hr className="border-slate-200" />
+
+      <p className="text-center text-sm text-slate-600">
+        ※ VOICEVOX ソフトウェアにはキャラクターの音声も含まれます。
+        <br />
+        キャラクターの音声と Nemo の音声は利用規約が異なるので
+        <br />
+        ご利用の際は各音声の利用規約をご確認ください。
+      </p>
+    </Dialog>
   );
 }

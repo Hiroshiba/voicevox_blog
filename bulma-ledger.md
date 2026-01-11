@@ -7,7 +7,6 @@
 - `src/pages/dev/thumb_generator/product/[characterId].astro`（`import "@/styles/bulma.scss"`）
 
 ## 2) SCSS の `@use "bulma/sass/*"`（mixin / 変数 / helpers）
-- `src/components/modal/Modals.astro`
 - `src/pages/dormitory/[characterId]/[...descriptionType].astro`
 - `src/pages/dormitory/call_names/_Cell.astro`
 - `src/pages/dormitory/call_names/index.astro`
@@ -24,16 +23,14 @@
 - `src/styles/markdown.scss`
 
 ## 3) `@extend`（Bulma クラス依存）
-- `src/components/modal/Modals.astro`
 - `src/styles/helper.scss`
 - `src/styles/markdown.scss`
 
 ## 4) `--bulma-*`（CSS 変数依存）
 - `src/components/Header/index.astro`
 - `src/components/PlayButton/PlayButton.tsx`
-- `src/components/modal/Modals.astro`
 - `src/pages/song/index.astro`
 
 ## 5) Bulma クラス（`is-*` / `has-*` など）依存（広範囲）
-- `src/layouts/*`, `src/components/*`, `src/pages/*` に点在（特に `modal/*`, `Header`, `PlayButton`, `talk`, `dormitory`, `nemo`）。
+- `src/layouts/*`, `src/components/*`, `src/pages/*` に点在（特に `Header`, `PlayButton`, `talk`, `dormitory`, `nemo`）。
 - 置換は “ページ/断面単位” で行い、混在は plan2 のルールに従う。
