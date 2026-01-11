@@ -17,16 +17,22 @@
 - 現状: `src/layouts/Base.astro` が `data-theme={isDark ? "dark" : "light"}` を付与。
 - Tailwind 側で `data-theme` を `dark` トリガーにするか、`class="dark"` 方式に寄せるかを決める（将来の CSS/JS の責務が変わる）。
 
+ユーザー解答：tailwindのデファクトに合わせたいです
+
 ### 2) Tailwind の “ベーススタイル（preflight）” をどう扱うか
 - Bulma も Tailwind も「素の HTML 要素」を前提にした設計があるため、併用期間に崩れが出やすい。
 - 方針候補:
   - 併用期間は Tailwind preflight を無効化し、置換が進んだら有効化する
   - 最初から有効化して差分を Playwright スナップショットで管理しながら直す
 
+ユーザー解答：もし可能なら最初から有効化したいですが、強い希望はないです
+
 ### 3) “コンポーネントでスタイルを持つ” か “ユーティリティ直書き” か
 - この repo は Astro と React の混在が前提（README の運用方針もそれ）。
 - 推奨: Tailwind のユーティリティを基盤にしつつ、再利用頻度が高いものは “プリミティブ” として React 側に寄せて集約する（Astro からは薄いラッパーで呼ぶ）。
   - 理由: 「React の中で Astro コンポーネントを使いづらい」制約を避けるため、スタイルと a11y を React 側で完結させやすい。
+
+ユーザー解答：今AstroコンポーネントのものはAstroコンポーネントのまま残したいです。難しければ一旦ユーティリティ直書きで対応してください
 
 ## 主要な課題（移行時に詰まりやすい箇所）
 ### a11y（モーダル/ドロップダウン/ボタン）
@@ -34,9 +40,13 @@
 - Tailwind にはコンポーネントがないため、置換のついでに “アクセシブルな Dialog/Dropdown” をどこで担保するかが最大の論点。
   - 方針候補: React 側で headless な Dialog 実装（既製の a11y 対応ライブラリ or 自前）に寄せる。
 
+ユーザー解答：今AstroコンポーネントのものはAstroコンポーネントのまま残したいです
+
 ### Sass 依存（`@use` mixin / `@extend`）→ Tailwind 置換
 - Bulma の `@include mobile/touch/...` と `@extend .mb-6` のような書き方は、そのまま Tailwind に移せない。
 - 置換は「SCSS を残しつつ `@layer components` + `@apply` を使う」か「素直に class を書き換える」かの二択になりがちで、統一しないと保守不能になる。
+
+ユーザー解答：大変だったとしてもtailwindのデファクトに合わせたいです
 
 ### “見た目の tokens” を Bulma から引き剥がす
 - 今は Bulma の Sass 変数・CSS 変数が実質的な design tokens になっている。
@@ -45,6 +55,8 @@
 ### 併用期間の衝突（特に `button`, `title`, `container`, `section`）
 - Bulma のクラス（`button`, `title`, `container`, `section`, `columns`…）は既に大量に使われているため、移行は “差し替え” ではなく “共存して徐々に消す” になる。
 - 併用期間は「新規は Tailwind で書く」「既存 Bulma クラスを増やさない」をルール化しないと負債が増える。
+
+ユーザー解答：これはとても課題だと思います、重点的に再考してください
 
 ## 実行フェーズ（この plan をそのまま TODO 化して進める）
 ### Phase 0: インベントリとガードレール
