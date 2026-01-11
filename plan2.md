@@ -15,7 +15,7 @@
 - 方針: Tailwind のデファクトに合わせて `class="dark"` 駆動に寄せる。
 - 移行期間の互換: 既存 `data-theme="dark"` をすぐ捨てない（段階移行のため）。
 - `data-theme` を捨てるタイミング（本 plan の責任範囲で固定）:
-  - 入口: `src/layouts/Base.astro` に `class={isDark ? "dark" : ""}` を付与し、Tailwind 側は `darkMode: "class"` にする。
+  - 入口: `src/layouts/Base.astro` に `class={isDark ? "dark" : ""}` を付与する。Tailwind v4 は CSS-first なので `src/styles/global.css` 側で `dark` variant を class 駆動にする（`@custom-variant`）。
   - 併用: `data-theme` は残すが、“新規の分岐”は `dark:` に統一する（`data-theme` を参照する CSS/JS を増やさない）。
   - 出口（削除条件）: `rg -n "data-theme" src` が `Base.astro` 以外で 0 になり、かつ主要ページの VRT が成立した時点で `data-theme` を削除する。
 
@@ -79,6 +79,9 @@ Tailwind は headless なので、a11y は計画上の成果物として固定�
 ### Phase 0: 現状固定（“やる/やらない”の境界を作る）
 - Bulma 依存点のリストを “削除対象台帳” として固定する（`bulma.scss`/`helper.scss`/`markdown.scss`/`Base.astro`/`modal/*`/`bulma/sass` を `@use` しているページ群）。
 - Playwright のスナップショット対象ページを決める（崩れ検知の基準面）。
+- Playwright のスクショ実行は「レポートを自動で開かない」ことを必須ルールにする（非対話環境でハングするため）。
+  - 実行コマンドは `CI=1 pnpm test:e2e`（`playwright.config.mts` が `open: "never"` になる）に統一する。
+  - レポート表示は別コマンドで明示的に行う（`pnpm playwright show-report` を手動実行）。
 
 ### Phase 1: Tailwind 導入の方式を決め切る（ここが曖昧だと後が全て死ぬ）
 - Tailwind は `pnpm astro add tailwind` で導入する（Astro 標準の導入経路に寄せる）。

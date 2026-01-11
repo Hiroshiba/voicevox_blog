@@ -3,6 +3,8 @@ import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 import { defineConfig } from "astro/config";
 
+import tailwindcss from "@tailwindcss/vite";
+
 const site = process.env.NETLIFY
   ? process.env.DEPLOY_URL
   : "https://voicevox.hiroshiba.jp";
@@ -38,6 +40,8 @@ export default defineConfig({
         },
       },
     },
+
+    plugins: [tailwindcss()],
   },
 
   devToolbar: {

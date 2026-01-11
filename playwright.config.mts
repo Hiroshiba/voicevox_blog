@@ -1,5 +1,13 @@
 import { defineConfig, devices } from "@playwright/test";
 
+const hasDisplay =
+  process.platform === "win32" ||
+  process.platform === "darwin" ||
+  !!process.env.DISPLAY ||
+  !!process.env.WAYLAND_DISPLAY;
+const shouldOpenHtmlReportOnFailure =
+  !process.env.CI && hasDisplay && process.env.PLAYWRIGHT_HTML_OPEN !== "never";
+
 export default defineConfig({
   testDir: "./tests",
   fullyParallel: true,
@@ -8,7 +16,7 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   reporter: process.env.CI
     ? [["html", { open: "never" }], ["github"]]
-    : [["html", { open: "on-failure" }]],
+    : [["html", { open: shouldOpenHtmlReportOnFailure ? "on-failure" : "never" }]],
   timeout: 90 * 1000,
 
   use: {
