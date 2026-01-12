@@ -27,3 +27,6 @@
 - `src/pages/song/index.astro` の `--bulma-link-text` 参照を `--vv-link-text` 参照へ置換。
 - `CI=1 pnpm test:e2e tests/e2e/screenshot/index.spec.ts` が `20 passed` することを再確認。
 - 以後 `--bulma-*` を増やさないため、CI の `lint` job にガードを追加（`.github/workflows/test.yml`）。
+- `src/styles/helper.scss` の Bulma Sass（`@use "bulma/sass/*"`）と Bulma への `@extend` を撤去し、`.button.circle-icon` 相当のスタイルを自前定義へ置換（VRT 維持）。
+- `bulma-ledger.md` の `helper.scss` を Bulma Sass/@extend 台帳から除外。
+- `CI=1 pnpm test:e2e tests/e2e/screenshot/index.spec.ts` が `20 passed` することを確認。

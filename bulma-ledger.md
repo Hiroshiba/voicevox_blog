@@ -19,11 +19,9 @@
 - `src/pages/song/index.astro`
 - `src/pages/talk/_CharacterCard.astro`
 - `src/styles/bulma.scss`
-- `src/styles/helper.scss`
 - `src/styles/markdown.scss`
 
 ## 3) `@extend`（Bulma クラス依存）
-- `src/styles/helper.scss`
 - `src/styles/markdown.scss`
 
 ## 4) `--bulma-*`（CSS 変数依存）
