@@ -195,15 +195,15 @@ const backgroundImageUrl = `url(${(await getImage({ src: backgroundImage })).src
 
         text-align: center;
 
-        h1 {
-          color: rgba($primary, 0.75) !important;
-          font-size: 7.5rem;
-          text-shadow: 0 0 10px
-            rgb(
-              from color-mix(in srgb, var(--bulma-link-text) 95%, black) R G B /
-                0.55
-            );
-        }
+            h1 {
+              color: rgba($primary, 0.75) !important;
+              font-size: 7.5rem;
+              text-shadow: 0 0 10px
+                rgb(
+                  from color-mix(in srgb, var(--vv-link-text) 95%, black) R G B /
+                    0.55
+                );
+            }
 
         .subtitle {
           @extend .is-4;

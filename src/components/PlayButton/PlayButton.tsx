@@ -48,14 +48,14 @@ export default function PlayButton({
     () =>
       !color
         ? {
-            "--bulma-loading-color": "var(--bulma-primary)",
+            "--vv-loading-color": "var(--vv-primary)",
             ...style,
           }
         : {
             backgroundColor: "white",
             borderColor: color,
             color: color,
-            "--bulma-loading-color": color,
+            "--vv-loading-color": color,
             ...style,
           },
     [color, style],
@@ -111,7 +111,7 @@ export default function PlayButton({
       onClick={isPlaying ? stop : play}
       className={`button circle-icon ${color || "is-primary"} ${
         !(isReady || debouncedIsReady) ? "is-loading" : ""
-      } ${className}`}
+      } vv-bulma-loading-bridge ${className}`}
       style={colorAddedStyle}
       type="button"
       aria-label={`${name}を${isPlaying ? "停止" : "再生"}}`}

@@ -22,3 +22,8 @@
 - 既存の見た目（Bulma `.content` + `.title`/spacing 相当）を維持するため、`src/styles/markdown.scss` を復元し、`src/components/Markdown.astro` / `src/components/modal/Modals.astro` の読み込みを復帰。
 - `src/pages/qa/_layout.astro` の `@extend`（Bulma helper）も VRT 互換のため復帰。
 - `CI=1 pnpm test:e2e tests/e2e/screenshot/index.spec.ts` が `20 passed` することを確認。
+- Bulma CSS 変数への直接依存を減らすため、`src/styles/global.css` に `--vv-*`（アプリ側トークン）を追加し、Bulma→アプリ変数のブリッジを集約（`--bulma-*` を “ここだけ” に寄せる）。
+- `src/components/PlayButton/PlayButton.tsx` の `--bulma-loading-color` 直接設定を撤去し、`--vv-loading-color` + `.vv-bulma-loading-bridge` に置換。
+- `src/pages/song/index.astro` の `--bulma-link-text` 参照を `--vv-link-text` 参照へ置換。
+- `CI=1 pnpm test:e2e tests/e2e/screenshot/index.spec.ts` が `20 passed` することを再確認。
+- 以後 `--bulma-*` を増やさないため、CI の `lint` job にガードを追加（`.github/workflows/test.yml`）。
