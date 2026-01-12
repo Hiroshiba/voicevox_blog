@@ -196,13 +196,7 @@ const postCharacterKey =
 </script>
 
 <style lang="scss" define:vars={{ characterBackgroundColor }} is:global>
-  @use "@/styles/vars.scss" as *;
   @use "@/styles/helper.scss" as *;
-
-  @use "bulma/sass/elements" as *;
-  @use "bulma/sass/utilities/initial-variables" as *;
-  @use "bulma/sass/utilities/mixins" as *;
-  @use "bulma/sass/helpers" as *;
 
   .top {
     display: grid;
@@ -211,12 +205,12 @@ const postCharacterKey =
       "charamenu charamenu";
     grid-template-columns: 1fr 1fr;
     grid-template-rows: calc(100vh - 3.25rem - 5rem) 5rem;
-    min-height: calc($desktop / 2);
-    max-height: $desktop;
+    min-height: 512px;
+    max-height: 1024px;
 
     position: relative;
 
-    @include mobile {
+    @media screen and (max-width: 768px) {
       grid-template-areas:
         "character"
         "charamenu"
@@ -256,7 +250,7 @@ const postCharacterKey =
         height: 100%;
         background-color: var(--characterBackgroundColor);
 
-        @include mobile {
+        @media screen and (max-width: 768px) {
           width: 100%; // FIXME: 左右に空間が空いてしまう
         }
       }
@@ -299,9 +293,10 @@ const postCharacterKey =
       flex-direction: column;
       justify-content: center;
       align-items: start;
-      @extend .px-6;
+      padding-left: 3rem !important;
+      padding-right: 3rem !important;
 
-      @include mobile {
+      @media screen and (max-width: 768px) {
         padding-left: 0 !important;
         padding-right: 0 !important;
         align-items: center;
@@ -313,7 +308,7 @@ const postCharacterKey =
         gap: 0.5rem;
         flex-wrap: wrap;
 
-        @include mobile {
+        @media screen and (max-width: 768px) {
           flex-direction: column;
           align-items: center;
         }

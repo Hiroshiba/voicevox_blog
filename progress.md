@@ -46,3 +46,5 @@
 - `bulma-ledger.md` から `src/pages/dormitory/call_names/index.astro` の Bulma Sass 依存を除外。
 - `src/pages/index.astro` の Bulma Sass 依存（`@use "bulma/sass/utilities/*"` + mixin/変数）を撤去し、同等の media query とサイズ値を直書き（VRT 維持狙い）。
 - `bulma-ledger.md` から `src/pages/index.astro` の Bulma Sass 依存を除外。
+- `src/pages/product/_TopContainer.astro` の Bulma Sass 依存（`@use "bulma/sass/*"` + `@extend .px-6` + `@include mobile` + `$desktop`）を撤去し、同等の padding / media query / サイズ値を直書き（VRT 維持）。
+- `bulma-ledger.md` から `src/pages/product/_TopContainer.astro` の Bulma Sass 依存を除外。
