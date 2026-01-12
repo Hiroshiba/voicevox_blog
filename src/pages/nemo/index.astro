@@ -48,7 +48,7 @@ const voicevoxIconImageUrl = `url(${(await getImage({ src: voicevoxIconImage }))
           <div class="buttons">
             <button
               {...{ [showNemoGuidanceModalAttr]: "" }}
-              class="button is-primary is-rounded is-medium is-responsive"
+              class="button is-primary is-rounded"
             >
               <span class="icon">
                 <FontAwesomeIcon icon={faDownload} />
@@ -57,30 +57,30 @@ const voicevoxIconImageUrl = `url(${(await getImage({ src: voicevoxIconImage }))
             </button>
             <button
               {...{ [showNemoTermModalAttr]: "" }}
-              class="button is-normal is-rounded is-white is-medium is-responsive"
+              class="button is-normal is-rounded is-white"
             >
               <span>利用規約</span>
             </button>
           </div>
         </div>
       </div>
-      <div class="feature container is-max-widescreen mb-6 pb-6">
-        <div class="feature-cell is-size-5 is-size-6-mobile">
+      <div class="feature container is-max-widescreen">
+        <div class="feature-cell">
           商用利用・非商用利用
           <br />
           問わず無料
         </div>
-        <div class="feature-cell is-size-5 is-size-6-mobile">
+        <div class="feature-cell">
           マルチOSに対応
           <br />
           (Win / Mac / Linux)
         </div>
-        <div class="feature-cell is-size-5 is-size-6-mobile">
+        <div class="feature-cell">
           簡単に使える
           <br />
           わかりやすい操作画面
         </div>
-        <div class="feature-cell is-size-5 is-size-6-mobile">
+        <div class="feature-cell">
           イントネーションの
           <br />
           詳細な調整も可能
@@ -97,7 +97,7 @@ const voicevoxIconImageUrl = `url(${(await getImage({ src: voicevoxIconImage }))
     </section>
 
     <section class="section py-0">
-      <div class="speakers-container container is-max-desktop mt-6 pt-6">
+      <div class="speakers-container container is-max-desktop">
         {
           // 内部で表示するドロップメニューが兄弟要素で隠れてしまうのでz-indexを指定している
           speakerKeys.map((key, i) => (
@@ -108,7 +108,7 @@ const voicevoxIconImageUrl = `url(${(await getImage({ src: voicevoxIconImage }))
           ))
         }
       </div>
-      <div class="speaker-contact-explain container is-max-desktop my-6 pb-6 is-size-5">
+      <div class="speaker-contact-explain container is-max-desktop">
         より柔軟な演技や高品質な音声をお求めの場合は、
         <br />
         上記のリンク先にてご本人へご依頼いただけます。
@@ -130,6 +130,8 @@ VOICEVOXの音声合成をアプリケーションやサービスに組み込め
   is:global
 >
   @use "@/styles/helper.scss" as *;
+  @use "bulma/sass/utilities/initial-variables" as *;
+  @use "bulma/sass/utilities/mixins" as *;
 
   .nemo {
     color: white;
@@ -150,7 +152,7 @@ VOICEVOXの音声合成をアプリケーションやサービスに組み込め
       justify-content: center;
       gap: 3rem;
 
-      @media screen and (max-width: 1023px) {
+      @include touch {
         height: auto;
         flex-direction: column-reverse;
         align-items: center;
@@ -166,20 +168,30 @@ VOICEVOXの音声合成をアプリケーションやサービスに組み込め
         justify-content: center;
         align-content: start;
 
-        @media screen and (max-width: 1023px) {
+        @include touch {
           align-items: center;
           text-align: center;
         }
 
         h1 {
-          font-size: 2rem;
+          @extend .is-size-3-touch;
+          @extend .is-size-2-desktop;
+          @extend .is-size-1-widescreen;
         }
         h2 {
-          font-size: 1.5rem;
+          @extend .is-size-4-touch;
+          @extend .is-size-4-desktop;
+          @extend .is-size-3-widescreen;
+        }
+        .buttons {
+          * {
+            @extend .is-medium;
+            @extend .is-responsive;
+          }
         }
 
         .powered-by {
-          margin-bottom: 0.25rem !important;
+          @extend .mb-1;
 
           &::before {
             content: "";
@@ -209,17 +221,21 @@ VOICEVOXの音声合成をアプリケーションやサービスに組み込め
     }
 
     .feature {
+      @extend .mb-6, .pb-6;
+
       width: 100%;
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
       gap: 1rem;
 
-      @media screen and (max-width: 1023px) {
+      @include touch {
         grid-template-columns: repeat(2, 1fr);
       }
 
       .feature-cell {
         background-color: #21212139;
+        @extend .is-size-5;
+        @extend .is-size-6-mobile;
         text-align: center;
         padding: 2rem 0;
         border-radius: 1rem;
@@ -227,21 +243,28 @@ VOICEVOXの音声合成をアプリケーションやサービスに組み込め
     }
 
     .explain {
-      margin-top: 3rem !important;
-      margin-bottom: 3rem !important;
-      padding-top: 3rem !important;
-      padding-bottom: 3rem !important;
-      font-size: 1.5rem;
+      @extend .my-6, .py-6;
+      @include desktop {
+        font-size: $size-3;
+      }
+      @include tablet-only {
+        font-size: $size-4;
+      }
+      @include mobile {
+        font-size: $size-5;
+      }
       text-align: center;
     }
 
     .speakers-container {
+      @extend .mt-6, .pt-6;
+
       display: grid;
-      gap: 32px;
+      gap: $gap;
       grid-template-columns: repeat(2, 1fr);
       place-content: center;
 
-      @media screen and (max-width: 768px) {
+      @include mobile {
         grid-template-columns: repeat(1, minmax(0, 25rem));
       }
 
@@ -258,10 +281,10 @@ VOICEVOXの音声合成をアプリケーションやサービスに組み込め
         }
 
         --height: 8rem;
-        @media screen and (max-width: 1023px) {
+        @include touch {
           --height: 6rem;
         }
-        @media screen and (max-width: 768px) {
+        @include mobile {
           --height: 4rem;
         }
 
@@ -295,22 +318,25 @@ VOICEVOXの音声合成をアプリケーションやサービスに組み込め
           text-align: center;
           gap: 0.5rem;
 
-          @media screen and (max-width: 1023px) {
+          @include touch {
             gap: 0.25rem;
           }
 
           .cv {
-            font-size: 0.75rem;
+            @extend .is-size-7;
+            @extend .is-size-6-desktop;
           }
           h3 {
-            font-size: 1.25rem;
+            @extend .is-size-5-desktop;
           }
 
           .dropdown {
             .dropdown-trigger {
               .button {
+                @extend .is-ghost;
                 color: white;
                 text-decoration: underline;
+                @extend .py-0;
                 height: auto;
                 &:active,
                 &:focus,
@@ -321,11 +347,24 @@ VOICEVOXの音声合成をアプリケーションやサービスに組み込め
             }
 
             .dropdown-content {
+              @extend .has-background-dark;
+
               .dropdown-item {
                 display: flex;
                 flex-direction: column;
                 text-align: center;
                 align-items: center;
+
+                @extend .has-text-white;
+
+                .button {
+                  @extend .circle-icon;
+                  @extend .ml-auto;
+                  @extend .is-dark;
+                  @extend .is-medium;
+                  @extend .has-text-white;
+                  @extend .mb-0;
+                }
               }
             }
           }
@@ -344,45 +383,9 @@ VOICEVOXの音声合成をアプリケーションやサービスに組み込め
     }
 
     .speaker-contact-explain {
+      @extend .my-6, .pb-6;
+      @extend .is-size-5;
       text-align: center;
-    }
-  }
-
-  @media screen and (max-width: 768px) {
-    .nemo .explain {
-      font-size: 1.25rem;
-    }
-  }
-
-  @media screen and (min-width: 769px) and (max-width: 1023px) {
-    .nemo .explain {
-      font-size: 1.5rem;
-    }
-  }
-
-  @media screen and (min-width: 1024px) {
-    .nemo .explain {
-      font-size: 2rem;
-    }
-
-    .nemo .speaker-labels .cv {
-      font-size: 1rem;
-    }
-  }
-
-  @media screen and (min-width: 1024px) {
-    .nemo .top .description h1 {
-      font-size: 2.5rem;
-    }
-  }
-
-  @media screen and (min-width: 1216px) {
-    .nemo .top .description h1 {
-      font-size: 3rem;
-    }
-
-    .nemo .top .description h2 {
-      font-size: 2rem;
     }
   }
 </style>

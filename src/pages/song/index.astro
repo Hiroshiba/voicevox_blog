@@ -145,6 +145,11 @@ const backgroundImageUrl = `url(${(await getImage({ src: backgroundImage })).src
 <style lang="scss" define:vars={{ backgroundImageUrl }} is:global>
   @use "@/styles/vars.scss" as *;
   @use "@/styles/helper.scss" as *;
+  @use "bulma/sass/elements" as *;
+  @use "bulma/sass/layout" as *;
+  @use "bulma/sass/utilities/initial-variables" as *;
+  @use "bulma/sass/utilities/mixins" as *;
+  @use "bulma/sass/helpers" as *;
 
   .song {
     color: white;
@@ -195,14 +200,14 @@ const backgroundImageUrl = `url(${(await getImage({ src: backgroundImage })).src
           font-size: 7.5rem;
           text-shadow: 0 0 10px
             rgb(
-              from color-mix(in srgb, var(--vv-link-text) 95%, black) R G B /
+              from color-mix(in srgb, var(--bulma-link-text) 95%, black) R G B /
                 0.55
             );
         }
 
         .subtitle {
-          font-size: 1.5rem;
-          font-weight: 700;
+          @extend .is-4;
+          @extend .has-text-weight-bold;
           text-shadow: 0 0 10px rgba(black, 0.75);
 
           // <wbr>で良い感じに改行するようにする
@@ -210,13 +215,13 @@ const backgroundImageUrl = `url(${(await getImage({ src: backgroundImage })).src
           overflow-wrap: break-word;
         }
 
-        @media screen and (max-width: 1023px) {
+        @include touch {
           h1 {
             font-size: 6rem;
           }
         }
 
-        @media screen and (max-width: 768px) {
+        @include mobile {
           gap: 0.5rem;
           margin-bottom: 5rem;
 
@@ -239,7 +244,8 @@ const backgroundImageUrl = `url(${(await getImage({ src: backgroundImage })).src
 
     .feature {
       width: 100%;
-      margin-bottom: 3rem !important;
+      @extend .is-max-widescreen;
+      @extend .mb-6;
 
       .feature-cells {
         width: 100%;
@@ -247,13 +253,14 @@ const backgroundImageUrl = `url(${(await getImage({ src: backgroundImage })).src
         grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
         gap: 1rem;
 
-        @media screen and (max-width: 1023px) {
+        @include touch {
           grid-template-columns: repeat(2, 1fr);
         }
 
         .feature-cell {
           background-color: #43554239;
-          font-size: 1.25rem !important;
+          @extend .is-size-5;
+          @extend .is-size-6-mobile;
           text-align: center;
           padding: 2rem 0;
           border-radius: 1rem;
@@ -264,7 +271,8 @@ const backgroundImageUrl = `url(${(await getImage({ src: backgroundImage })).src
     .voices {
       display: flex;
       flex-direction: column;
-      margin-bottom: 3rem !important;
+      @extend .is-max-widescreen;
+      @extend .mb-6;
 
       .voice-cards {
         display: flex;
@@ -284,55 +292,41 @@ const backgroundImageUrl = `url(${(await getImage({ src: backgroundImage })).src
           background-color: #282828;
           border-radius: 0.5rem;
           width: 10rem;
-          padding-top: 0.75rem !important;
-          padding-bottom: 0.75rem !important;
+          @extend .py-3;
 
           .voice-card-image {
             width: 70%;
           }
 
           .voice-card-content {
-            text-align: center;
+            @extend .has-text-centered;
 
             display: flex;
             flex-direction: column;
             gap: 0.5rem;
 
             .title {
-              font-size: 1rem;
-              font-weight: 500;
-              margin-bottom: 0 !important;
+              @extend .is-6;
+              @extend .has-text-weight-medium;
+              @extend .mb-0;
             }
 
             .buttons {
               align-items: center;
               justify-content: center;
-              margin-bottom: 0 !important;
+              @extend .mb-0;
               gap: 8px;
 
               .button {
-                margin-bottom: 0 !important;
+                @extend .mb-0;
               }
             }
 
             .style-name {
-              font-size: 0.75rem !important;
+              @extend .is-size-7;
             }
           }
         }
-      }
-    }
-
-    @media screen and (max-width: 768px) {
-      .feature .feature-cell {
-        font-size: 1rem !important;
-      }
-    }
-
-    @media screen and (min-width: 1408px) {
-      .feature.container,
-      .voices.container {
-        max-width: 1152px;
       }
     }
   }
