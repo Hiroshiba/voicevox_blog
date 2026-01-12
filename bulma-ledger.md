@@ -15,7 +15,6 @@
 - `src/pages/nemo/index.astro`
 - `src/pages/product/[characterId].astro`
 - `src/pages/product/_TopContainer.astro`
-- `src/pages/qa/_layout.astro`
 - `src/pages/song/index.astro`
 - `src/pages/talk/_CharacterCard.astro`
 - `src/styles/bulma.scss`

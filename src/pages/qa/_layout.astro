@@ -10,16 +10,15 @@ const props = Astro.props satisfies Props;
 
 <style lang="scss" is:global>
   @use "@/styles/vars.scss" as *;
-  @use "bulma/sass/helpers" as *;
 
   h2 {
-    @extend .p-4;
+    padding: 1rem !important;
     background-color: $primary;
     color: #3f213a;
   }
 
   h3 {
-    @extend .p-2;
+    padding: 0.5rem !important;
     background-color: rgb(208, 253, 216);
   }
 </style>

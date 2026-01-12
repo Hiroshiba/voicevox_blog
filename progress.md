@@ -33,3 +33,6 @@
 - Header の `--bulma-navbar-burger-color` 直接指定を撤去し、`src/styles/global.css` の `.vv-bulma-navbar-burger-color-bridge` 経由に移行（`src/components/Header/index.astro`, `src/components/Header/Header.tsx`）。
 - `--bulma-*` の増加を防ぐ CI ガードの許可リストを更新（`.github/workflows/test.yml`）。
 - `CI=1 pnpm test:e2e tests/e2e/screenshot/index.spec.ts` が `20 passed` することを確認。
+- `src/pages/qa/_layout.astro` の Bulma Sass helper 依存（`@use "bulma/sass/helpers"` + `@extend .p-*`）を撤去し、同等の padding を直書き（VRT 維持）。
+- `bulma-ledger.md` から `src/pages/qa/_layout.astro` の Bulma Sass 依存を除外。
+- `CI=1 pnpm test:e2e tests/e2e/screenshot/index.spec.ts` が `20 passed` することを確認。
