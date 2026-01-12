@@ -23,7 +23,7 @@ const { info, style } = Astro.props;
     <div class="dropdown is-hoverable">
       <div class="dropdown-trigger">
         <button
-          class="button"
+          class="button is-ghost py-0"
           aria-haspopup="true"
           aria-controls={`dropdown-${info.id}`}
           type="button"
@@ -32,8 +32,8 @@ const { info, style } = Astro.props;
         </button>
       </div>
       <div class="dropdown-menu" id={`dropdown-${info.id}`} role="menu">
-        <div class="dropdown-content">
-          <div class="dropdown-item">
+        <div class="dropdown-content has-background-dark">
+          <div class="dropdown-item has-text-white">
             <span>音声収録のご依頼先</span>
             <div class="buttons">
               {
@@ -57,7 +57,7 @@ const { info, style } = Astro.props;
                   ({ link, label, icon }) =>
                     link && (
                       <a
-                        class="button"
+                        class="button circle-icon ml-auto is-dark is-medium has-text-white mb-0"
                         href={link}
                         aria-label={`${info.cv}の${label}`}
                         target="_blank"

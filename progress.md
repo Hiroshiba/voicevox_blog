@@ -57,3 +57,7 @@
 - `bulma-ledger.md` から `src/pages/dormitory/[characterId]/[...descriptionType].astro` の Bulma Sass 依存を除外。
 - `src/pages/song/index.astro` の Bulma Sass 依存（`@use "bulma/sass/*"` + `@extend` + `@include touch/mobile`）を撤去し、同等の font-size/weight/padding/margin と media query を直書き（container の max 幅も維持）。
 - `bulma-ledger.md` から `src/pages/song/index.astro` の Bulma Sass 依存を除外。
+- `src/pages/nemo/index.astro` の Bulma Sass 依存（`@use "bulma/sass/utilities/*"` + `@extend` + mixin）を撤去し、同等のサイズ/余白と media query を直書き（ボタンやセルの一部は Bulma クラスを明示付与して差分を抑制）。
+- `src/pages/nemo/_SpeakerComponent.astro` の dropdown / link buttons も Bulma クラスを明示付与し、Nemo 側の `@extend` を撤去。
+- `bulma-ledger.md` から `src/pages/nemo/index.astro` の Bulma Sass 依存を除外。
+- `CI=1 pnpm test:e2e tests/e2e/screenshot/index.spec.ts` が `20 passed` することを確認。

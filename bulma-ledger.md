@@ -7,7 +7,6 @@
 - `src/pages/dev/thumb_generator/product/[characterId].astro`（`import "@/styles/bulma.scss"`）
 
 ## 2) SCSS の `@use "bulma/sass/*"`（mixin / 変数 / helpers）
-- `src/pages/nemo/index.astro`
 - `src/styles/bulma.scss`
 - `src/styles/markdown.scss`
 
