@@ -83,6 +83,28 @@ Tailwind は headless なので、a11y は計画上の成果物として固定�
   - 実行コマンドは `CI=1 pnpm test:e2e`（`playwright.config.mts` が `open: "never"` になる）に統一する。
   - レポート表示は別コマンドで明示的に行う（`pnpm playwright show-report` を手動実行）。
 
+## 6.5 VRT（スクショ）を壊さず進める運用
+この repo では VRT のスナップショットを「現状の見た目仕様」として扱い、移行作業は“差分ゼロ”を基本とする。
+
+### 6.5.1 ルール（VRT を仕様として固定）
+- 通常の移行 PR ではスナップショット更新をしない（= 差分は実装修正で潰す）。
+- 例外的にスナップショット更新が必要な作業（例: Markdown を Bulma `.content` から完全に外す）は「スナップショット更新専用 PR」に隔離し、更新理由・影響ページ・レビュー観点を本文に固定する。
+- 1 PR の変更範囲は「1 断面（または 1 ページ）」に閉じる（差分画像の読解コストを爆発させないため）。
+
+### 6.5.2 進め方（差分を出さないための手筋）
+- “危険断面”は最後まで Bulma を残す: Markdown / Header / 共通レイアウトは、VRT の差分が巨大になりやすいので「撤去の終盤まで温存」し、先にモーダル等の独立領域から進める。
+- “Bulma token” を先に引き剥がす: `--bulma-*` を参照している箇所は、見た目を固定したまま `--app-*` 等へ移植し、Bulma 本体の撤去に備える（VRT 上の差分を生みやすいのは token の断絶）。
+- Tailwind への置換は「Bulma と同じ見た目を再現する CSS を Tailwind 側に置く」順に寄せる:
+  - 例: Bulma の `.content` に相当する見た目を Tailwind 側で実装できてから Markdown の Bulma 依存を外す（先に外すと差分が膨らむ）。
+  - 例: `button` / `navbar` などの semantic class を消す前に、同等の padding/typography を Tailwind 側で“同値”に寄せる。
+
+### 6.5.3 preflight の扱い（VRT で崩れるなら切り替え順を変える）
+- preflight 有効化で差分が広範囲に出る場合は、(a) preflight を一時的に無効化する、または (b) Bulma の前提に合わせる “補正 CSS” を `src/styles/global.css` に追加して差分を潰す。
+- “補正 CSS” は出口条件付きで入れる（例: `rg "bulma" src/styles` が 0 になったら削除）。
+
+### 6.5.4 テスト側での揺れ対策（必要最小限）
+- どうしても差分が安定しない箇所だけ、Playwright でマスク/無効化する（例: `<video>` controls のように）。増やす場合は「なぜ UI 側で潰せないか」をセットで残す。
+
 ### Phase 1: Tailwind 導入の方式を決め切る（ここが曖昧だと後が全て死ぬ）
 - Tailwind は `pnpm astro add tailwind` で導入する（Astro 標準の導入経路に寄せる）。
 - `dark` 駆動（class）への寄せ方を確定し、`data-theme` の削除条件（2.1）に従って段階移行する。

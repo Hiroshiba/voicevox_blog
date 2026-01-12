@@ -31,7 +31,7 @@ const { frontmatter } = article;
       <h1 class="title">{frontmatter.title}</h1>
       <p class="has-text-grey-light">{frontmatter.date}</p>
       <Markdown>
-        <div class="markdown mt-5" set:html={article.compiledContent()} />
+        <div class="mt-5" set:html={article.compiledContent()} />
       </Markdown>
     </div>
   </section>

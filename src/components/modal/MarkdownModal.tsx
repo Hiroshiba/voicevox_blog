@@ -13,7 +13,6 @@ export default function MarkdownModal({
   hide: () => void;
   className?: string;
 }) {
-  // Note: markdown styling is still provided by `src/styles/markdown.scss` (Bulma-based for now).
   return (
     <Dialog
       open={isActive}

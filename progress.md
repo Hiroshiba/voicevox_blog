@@ -16,3 +16,9 @@
 ### 次にやる（plan2 Phase 1/0）
 - Bulma 依存の“削除対象台帳”を `rg "bulma/sass|--bulma-|@extend \\.|has-background-|is-" src` 等で固定し、置換単位（ページ/断面）を切る。
 - preflight で崩れるページ/種類を分類（特に markdown / header / 共通レイアウト）。
+
+## 2026-01-12
+- Markdown の Bulma 依存（`src/styles/markdown.scss`）を Tailwind 側へ寄せる検討を実施したが、VRT（`tests/e2e/screenshot/index.spec.ts`）の差分が大きく、既存スナップショット維持を優先して一旦保留。
+- 既存の見た目（Bulma `.content` + `.title`/spacing 相当）を維持するため、`src/styles/markdown.scss` を復元し、`src/components/Markdown.astro` / `src/components/modal/Modals.astro` の読み込みを復帰。
+- `src/pages/qa/_layout.astro` の `@extend`（Bulma helper）も VRT 互換のため復帰。
+- `CI=1 pnpm test:e2e tests/e2e/screenshot/index.spec.ts` が `20 passed` することを確認。
