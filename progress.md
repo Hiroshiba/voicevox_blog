@@ -111,3 +111,9 @@
 - `tests/e2e/screenshot/index.spec.ts-snapshots/` がコミット `fa2335b` 以降で更新されていない一方、`/song/` と `/nemo/` は Bulma Sass/@extend 撤去などで実装が変わっており、「見た目は似ているがピクセル一致しない」状態になっていた。
 - 対応: スナップショット更新はせず、baseline に合わせるため `fa2335b` 相当の実装へ戻した（`src/pages/song/index.astro`, `src/pages/nemo/index.astro`, `src/pages/nemo/_SpeakerComponent.astro`, `src/styles/helper.scss`, `src/components/PlayButton/PlayButton.tsx`）。
 - 結果: `CI=1 pnpm run test-build` → `CI=1 pnpm run test:e2e -- tests/e2e/screenshot/index.spec.ts` が `20 passed`。
+
+## 2026-01-13
+
+- `--bulma-*` 直接参照を減らすため、`src/components/PlayButton/PlayButton.tsx` を `--vv-loading-color` + `.vv-bulma-loading-bridge` 経由に変更（見た目維持、VRT `20 passed`）。
+- `src/pages/song/index.astro` の `text-shadow` で参照していた `--bulma-link-text` を `--vv-link-text` に置換（見た目維持、VRT `20 passed`）。
+- `src/styles/helper.scss` の Bulma Sass/@extend 撤去を試みたが、`circle-icon`/`button` の微差で `/song/` の VRT が崩れ、さらに `src/pages/nemo/index.astro` の `@extend` 解決にも影響したため、今回は差し戻して保留（スナップショット更新はしていない）。
