@@ -48,9 +48,9 @@ jobs:
           if [ -z "$hits" ]; then
             exit 0
           fi
-          forbidden="$(printf '%s\n' "$hits" | rg -v '^(src/styles/global\\.css|src/components/Header/index\\.astro):' || true)"
+          forbidden="$(printf '%s\n' "$hits" | rg -v '^(src/styles/global\\.css|src/styles/helper\\.scss):' || true)"
           if [ -n "$forbidden" ]; then
-            echo "Unexpected --bulma-* usage found (keep it in src/styles/global.css bridge only):"
+            echo "Unexpected --bulma-* usage found (keep it in the style bridges only):"
             echo "$forbidden"
             exit 1
           fi

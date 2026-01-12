@@ -25,8 +25,8 @@
 - `src/styles/markdown.scss`
 
 ## 4) `--bulma-*`（CSS 変数依存）
-- `src/components/Header/index.astro`
 - `src/styles/global.css`（Bulma→アプリ変数のブリッジ。Bulma 撤去時に実値へ置換）
+- `src/styles/helper.scss`（`.button.circle-icon` の見た目維持に Bulma の button tokens を参照）
 
 ## 5) Bulma クラス（`is-*` / `has-*` など）依存（広範囲）
 - `src/layouts/*`, `src/components/*`, `src/pages/*` に点在（特に `Header`, `PlayButton`, `talk`, `dormitory`, `nemo`）。

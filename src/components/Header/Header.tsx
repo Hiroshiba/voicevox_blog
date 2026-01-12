@@ -192,7 +192,9 @@ export default function Header({
           ))}
 
           <button
-            className={`navbar-burger ${isBurgerActive ? "is-active" : ""}`}
+            className={`navbar-burger vv-bulma-navbar-burger-color-bridge ${
+              isBurgerActive ? "is-active" : ""
+            }`}
             aria-label="menu"
             aria-expanded={`${isBurgerActive}`}
             data-target="navbar"

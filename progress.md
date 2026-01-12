@@ -30,3 +30,6 @@
 - `src/styles/helper.scss` の Bulma Sass（`@use "bulma/sass/*"`）と Bulma への `@extend` を撤去し、`.button.circle-icon` 相当のスタイルを自前定義へ置換（VRT 維持）。
 - `bulma-ledger.md` の `helper.scss` を Bulma Sass/@extend 台帳から除外。
 - `CI=1 pnpm test:e2e tests/e2e/screenshot/index.spec.ts` が `20 passed` することを確認。
+- Header の `--bulma-navbar-burger-color` 直接指定を撤去し、`src/styles/global.css` の `.vv-bulma-navbar-burger-color-bridge` 経由に移行（`src/components/Header/index.astro`, `src/components/Header/Header.tsx`）。
+- `--bulma-*` の増加を防ぐ CI ガードの許可リストを更新（`.github/workflows/test.yml`）。
+- `CI=1 pnpm test:e2e tests/e2e/screenshot/index.spec.ts` が `20 passed` することを確認。

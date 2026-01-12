@@ -10,3 +10,10 @@
 .vv-bulma-loading-bridge {
   --bulma-loading-color: var(--vv-loading-color, var(--vv-primary));
 }
+
+.vv-bulma-navbar-burger-color-bridge {
+  --bulma-navbar-burger-color: var(
+    --vv-navbar-burger-color,
+    var(--bulma-navbar-item-color)
+  );
+}
