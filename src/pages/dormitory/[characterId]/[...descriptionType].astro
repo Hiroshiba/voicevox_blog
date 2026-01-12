@@ -249,9 +249,6 @@ const backgroundImageUrl = `url(${(await getImage({ src: backgroundImage })).src
 </Base>
 
 <style lang="scss" define:vars={{ backgroundImageUrl }} is:global>
-  @use "bulma/sass/utilities/mixins" as *;
-  @use "bulma/sass/helpers" as *;
-
   @use "@/styles/helper" as *;
 
   .dormitory-character {
@@ -273,19 +270,19 @@ const backgroundImageUrl = `url(${(await getImage({ src: backgroundImage })).src
 
         max-width: 820px;
 
-        @include mobile {
+        @media screen and (max-width: 768px) {
           min-height: auto;
           max-height: unset;
         }
 
-        @include tablet {
+        @media screen and (min-width: 769px) {
           min-width: 768px;
         }
 
         .box {
           width: 100%;
           height: 550px;
-          @include mobile {
+          @media screen and (max-width: 768px) {
             height: auto;
           }
 
@@ -296,15 +293,17 @@ const backgroundImageUrl = `url(${(await getImage({ src: backgroundImage })).src
           border-width: 3px;
 
           .portrait-column {
-            @extend .py-1;
-            @extend .px-0;
+            padding-top: 0.25rem !important;
+            padding-bottom: 0.25rem !important;
+            padding-left: 0 !important;
+            padding-right: 0 !important;
 
             // 大きい画面では左側にいっぱい画像表示
-            @include tablet {
+            @media screen and (min-width: 769px) {
               border-right: solid;
             }
             // スマホ画面ではファーストビューに画像を表示
-            @include mobile {
+            @media screen and (max-width: 768px) {
               height: 100vh;
             }
           }
@@ -327,7 +326,7 @@ const backgroundImageUrl = `url(${(await getImage({ src: backgroundImage })).src
       .description-column {
         .section {
           height: 100%;
-          @extend .p-3;
+          padding: 0.75rem !important;
 
           display: flex;
           flex-direction: column;
@@ -337,8 +336,16 @@ const backgroundImageUrl = `url(${(await getImage({ src: backgroundImage })).src
           display: flex;
 
           .description-top-button {
-            @extend .circle-icon;
-            @extend .ml-auto;
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+
+            margin-left: auto !important;
+            width: 3rem;
+            height: 3rem;
+            border-width: 1.8px;
+
+            background-color: transparent;
+            border-radius: var(--vv-radius-rounded);
           }
         }
 
@@ -347,25 +354,26 @@ const backgroundImageUrl = `url(${(await getImage({ src: backgroundImage })).src
           border-width: 1.5px;
 
           &.description-type-button-selected {
-            @extend .has-text-weight-bold;
+            font-weight: 700;
           }
         }
 
         .description-profile {
-          @extend .is-size-5;
-          @extend .has-text-weight-bold;
-          @extend .mb-2;
+          font-size: 1.25rem !important;
+          font-weight: 700;
+          margin-bottom: 0.5rem !important;
         }
 
         .description-box {
-          @extend .pb-0;
-          @extend .pt-3;
+          padding-bottom: 0 !important;
+          padding-top: 0.75rem !important;
 
           display: flex;
           align-items: center;
 
           .description-label {
-            @extend .py-2;
+            padding-top: 0.5rem !important;
+            padding-bottom: 0.5rem !important;
             width: 7rem;
             border-radius: 10px;
             color: white;
@@ -373,11 +381,11 @@ const backgroundImageUrl = `url(${(await getImage({ src: backgroundImage })).src
           }
           .description-text {
             flex-grow: 1;
-            @extend .pl-3;
+            padding-left: 0.75rem !important;
           }
           .description-samples {
             flex-grow: 1;
-            @extend .pl-3;
+            padding-left: 0.75rem !important;
           }
         }
 
@@ -405,7 +413,7 @@ const backgroundImageUrl = `url(${(await getImage({ src: backgroundImage })).src
             justify-content: center;
             gap: 2rem;
 
-            @include mobile {
+            @media screen and (max-width: 768px) {
               flex-direction: row;
               height: 8rem;
             }
@@ -426,8 +434,8 @@ const backgroundImageUrl = `url(${(await getImage({ src: backgroundImage })).src
               }
 
               div:first-child {
-                @extend .has-text-weight-bold;
-                @extend .mb-1;
+                font-weight: 700;
+                margin-bottom: 0.25rem !important;
               }
             }
           }
@@ -446,7 +454,7 @@ const backgroundImageUrl = `url(${(await getImage({ src: backgroundImage })).src
                 display: flex;
                 flex: 1;
                 .description-call-one {
-                  @extend .p-0;
+                  padding: 0 !important;
 
                   flex: 1;
 
@@ -458,7 +466,8 @@ const backgroundImageUrl = `url(${(await getImage({ src: backgroundImage })).src
                     font-size: 1.5rem;
                   }
                   .description-call-text {
-                    @extend .py-1;
+                    padding-top: 0.25rem !important;
+                    padding-bottom: 0.25rem !important;
                     font-size: 0.8rem;
                     flex-grow: 1;
                     border-style: solid;

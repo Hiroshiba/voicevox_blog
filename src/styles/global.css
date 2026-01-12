@@ -6,6 +6,7 @@
   --vv-primary: var(--bulma-primary);
   --vv-link-text: var(--bulma-link-text);
   --vv-radius: var(--bulma-radius);
+  --vv-radius-rounded: var(--bulma-radius-rounded);
   --vv-navbar-height: var(--bulma-navbar-height);
 }
 
