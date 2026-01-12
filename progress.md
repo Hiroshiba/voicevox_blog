@@ -44,3 +44,5 @@
 - `src/pages/dormitory/call_names/index.astro` の Bulma Sass 依存（`@use "bulma/sass/*"` + `@extend .p-*` + `@include mobile` + `$navbar-height`）を撤去し、padding と media query を直書き（`height` は `--vv-navbar-height` を参照）。
 - `src/styles/global.css` に `--vv-navbar-height`（Bulma→アプリ token ブリッジ）を追加。
 - `bulma-ledger.md` から `src/pages/dormitory/call_names/index.astro` の Bulma Sass 依存を除外。
+- `src/pages/index.astro` の Bulma Sass 依存（`@use "bulma/sass/utilities/*"` + mixin/変数）を撤去し、同等の media query とサイズ値を直書き（VRT 維持狙い）。
+- `bulma-ledger.md` から `src/pages/index.astro` の Bulma Sass 依存を除外。

@@ -122,48 +122,50 @@ const landingMovieThumbUrl = (await getImage({ src: landingMovieThumb })).src;
   </div>
 </Base>
 
-<style lang="scss" is:global>
-  @use "bulma/sass/utilities/initial-variables" as *;
-  @use "bulma/sass/utilities/mixins" as *;
+<style is:global>
+  .landing .first-view {
+    display: flex;
+    flex-direction: column;
+  }
 
-  .landing {
-    .first-view {
-      @include desktop {
-        height: 100vh;
-      }
+  .landing .first-view .not-header {
+    flex-grow: 1;
+  }
 
-      display: flex;
-      flex-direction: column;
-      .not-header {
-        flex-grow: 1;
-      }
+  .landing video {
+    border: 1.5px solid;
+  }
+
+  .landing .top-title {
+    height: 6.6rem;
+    fill: #000000b3;
+    position: relative;
+    width: 100%;
+  }
+
+  .landing .top-title > svg {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  @media screen and (min-width: 1024px) {
+    .landing .first-view {
+      height: 100vh;
     }
+  }
 
-    video {
-      border: 1.5px solid;
+  @media screen and (max-width: 1023px) {
+    .landing .top-title {
+      height: 5.1rem;
     }
+  }
 
-    .top-title {
-      height: $size-1 * 2.2;
-      fill: #000000b3;
-      position: relative;
-      width: 100%;
-
-      & > svg {
-        position: absolute;
-        top: 0;
-        height: 100%;
-        left: 50%;
-        transform: translateX(-50%);
-      }
-
-      @include until($desktop) {
-        height: $size-1 * 1.7;
-      }
-
-      @include until($tablet) {
-        height: $size-1 * 1.1;
-      }
+  @media screen and (max-width: 768px) {
+    .landing .top-title {
+      height: 3.3rem;
     }
   }
 </style>
