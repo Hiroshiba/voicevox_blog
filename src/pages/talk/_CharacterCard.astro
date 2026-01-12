@@ -68,8 +68,6 @@ const characterKey = characterInfo.key;
 </div>
 
 <style lang="scss" is:global>
-  @use "bulma/sass/helpers" as *;
-
   .audio-sample {
     .audio-sample-pair {
       display: flex;
@@ -78,7 +76,8 @@ const characterKey = characterInfo.key;
       flex-wrap: wrap;
       gap: 3px 10px;
 
-      @extend .py-1;
+      padding-top: 0.25rem !important;
+      padding-bottom: 0.25rem !important;
 
       .audio-sample-label {
         width: 100px;

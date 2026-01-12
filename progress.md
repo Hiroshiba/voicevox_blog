@@ -36,3 +36,5 @@
 - `src/pages/qa/_layout.astro` の Bulma Sass helper 依存（`@use "bulma/sass/helpers"` + `@extend .p-*`）を撤去し、同等の padding を直書き（VRT 維持）。
 - `bulma-ledger.md` から `src/pages/qa/_layout.astro` の Bulma Sass 依存を除外。
 - `CI=1 pnpm test:e2e tests/e2e/screenshot/index.spec.ts` が `20 passed` することを確認。
+- `src/pages/talk/_CharacterCard.astro` の Bulma Sass helper 依存（`@use "bulma/sass/helpers"` + `@extend .py-1`）を撤去し、同等の padding を直書き（VRT 維持）。
+- `bulma-ledger.md` から `src/pages/talk/_CharacterCard.astro` の Bulma Sass 依存を除外。

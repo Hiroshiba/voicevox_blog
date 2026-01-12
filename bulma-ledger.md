@@ -16,7 +16,6 @@
 - `src/pages/product/[characterId].astro`
 - `src/pages/product/_TopContainer.astro`
 - `src/pages/song/index.astro`
-- `src/pages/talk/_CharacterCard.astro`
 - `src/styles/bulma.scss`
 - `src/styles/markdown.scss`
 
