@@ -10,7 +10,6 @@
 - `src/pages/dormitory/[characterId]/[...descriptionType].astro`
 - `src/pages/dormitory/index.astro`
 - `src/pages/nemo/index.astro`
-- `src/pages/product/[characterId].astro`
 - `src/pages/song/index.astro`
 - `src/styles/bulma.scss`
 - `src/styles/markdown.scss`
