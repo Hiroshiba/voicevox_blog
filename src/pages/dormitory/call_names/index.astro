@@ -131,10 +131,6 @@ function rgba2rgbOnWhite(
 </Base>
 
 <style lang="scss" is:global>
-  @use "bulma/sass/components/navbar" as *;
-  @use "bulma/sass/utilities/mixins" as *;
-  @use "bulma/sass/helpers" as *;
-
   $call-names-border: 1px solid gray;
   $call-names-cell-height: 80px;
   $call-names-cell-width: 150px;
@@ -146,7 +142,7 @@ function rgba2rgbOnWhite(
     //    Page コンポーネントのフッターやスタイルを変更すると他ページに影響が
     //    出る可能性があるので、画面が埋まるように高さを指定した。
     // FIXME: 二重スクロールをなくす
-    height: calc(100vh - $navbar-height);
+    height: calc(100vh - var(--vv-navbar-height));
     overflow: auto;
 
     .top-explain {
@@ -163,7 +159,7 @@ function rgba2rgbOnWhite(
 
       table {
         width: 100%;
-        @extend .p-0;
+        padding: 0 !important;
         margin: 0 auto;
         border-collapse: separate;
         table-layout: fixed;
@@ -181,7 +177,7 @@ function rgba2rgbOnWhite(
       td {
         height: $call-names-cell-height;
         width: $call-names-cell-width;
-        @extend .p-1;
+        padding: 0.25rem !important;
 
         // FIXME:
         // `table td:not([align]), table th:not([align])`セレクター によって
@@ -236,11 +232,6 @@ function rgba2rgbOnWhite(
             }
           }
 
-          @include mobile {
-            &.origin {
-              width: 6rem;
-            }
-          }
         }
       }
 
@@ -249,7 +240,8 @@ function rgba2rgbOnWhite(
         th {
           border-right: $call-names-border;
           width: $call-names-cell-width-column;
-          @extend .px-2;
+          padding-left: 0.5rem !important;
+          padding-right: 0.5rem !important;
 
           a {
             display: flex;
@@ -272,15 +264,6 @@ function rgba2rgbOnWhite(
             }
           }
 
-          @include mobile {
-            width: 6rem;
-            a {
-              justify-content: center;
-              p {
-                display: none;
-              }
-            }
-          }
         }
 
         td {
@@ -306,7 +289,7 @@ function rgba2rgbOnWhite(
       }
 
       .origin {
-        @extend .p-0;
+        padding: 0 !important;
 
         p {
           font-weight: normal;
@@ -315,13 +298,13 @@ function rgba2rgbOnWhite(
             position: absolute;
             bottom: 0;
             left: 0;
-            @extend .p-2;
+            padding: 0.5rem !important;
           }
           &:nth-child(2) {
             position: absolute;
             top: 0;
             right: 0;
-            @extend .p-2;
+            padding: 0.5rem !important;
           }
         }
 
@@ -336,6 +319,30 @@ function rgba2rgbOnWhite(
             gray calc(50% + 0.5px),
             transparent calc(50% + 1px)
           );
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .call-names-wrapper {
+      .call-names {
+        thead > tr {
+          th.origin {
+            width: 6rem;
+          }
+        }
+
+        tbody > tr {
+          th {
+            width: 6rem;
+            a {
+              justify-content: center;
+              p {
+                display: none;
+              }
+            }
+          }
         }
       }
     }

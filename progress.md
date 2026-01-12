@@ -41,3 +41,6 @@
 - `src/pages/dormitory/call_names/_Cell.astro` の Bulma Sass 依存（`@use "bulma/sass/*"` + `@extend .m-1` + `$radius`）を撤去し、`margin`/`border-radius` を直書き（`border-radius` は `--vv-radius` を参照）。
 - `src/styles/global.css` に `--vv-radius`（Bulma→アプリ token ブリッジ）を追加。
 - `bulma-ledger.md` から `src/pages/dormitory/call_names/_Cell.astro` の Bulma Sass 依存を除外。
+- `src/pages/dormitory/call_names/index.astro` の Bulma Sass 依存（`@use "bulma/sass/*"` + `@extend .p-*` + `@include mobile` + `$navbar-height`）を撤去し、padding と media query を直書き（`height` は `--vv-navbar-height` を参照）。
+- `src/styles/global.css` に `--vv-navbar-height`（Bulma→アプリ token ブリッジ）を追加。
+- `bulma-ledger.md` から `src/pages/dormitory/call_names/index.astro` の Bulma Sass 依存を除外。
