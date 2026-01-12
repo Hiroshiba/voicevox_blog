@@ -6,7 +6,6 @@
 import FontAwesomeIcon from "@/components/FontAwesomeIcon.astro";
 import { characterEntries, characterKeys } from "@/constants/characterEntry";
 import { characterInfos } from "@/constants/characterInfo";
-import "@/styles/bulma.scss";
 import "@/styles/global.scss";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
@@ -95,17 +94,17 @@ const isDebug = false;
         ソフトウェア
       </span>
       <span
-        class="button is-primary is-rounded is-large"
+        class="vv-thumb-download"
         style={{
           fontSize: "40px",
           marginTop: "38px",
           height: "70px",
         }}
       >
-        <span class="icon">
+        <span class="vv-thumb-download__icon">
           <FontAwesomeIcon icon={faDownload} />
         </span>
-        <span class="has-text-weight-semibold">ダウンロード</span>
+        <span class="vv-thumb-download__label">ダウンロード</span>
       </span>
     </div>
   </div>
@@ -176,3 +175,53 @@ const isDebug = false;
     }
   </div>
 </div>
+
+<style is:global>
+  html,
+  body {
+    margin: 0;
+  }
+
+  body {
+    width: 1200px;
+    height: 630px;
+    overflow: hidden;
+    text-rendering: optimizeLegibility;
+    font-family: "Unhinted Rounded M+ 1p", sans-serif;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  .vv-thumb-download {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 50px;
+    line-height: 60px;
+    border-radius: 9999px;
+    border: 0;
+
+    background-color: rgb(165, 212, 173);
+    color: rgb(23, 48, 27);
+    font-family: "Unhinted Rounded M+ 1p", sans-serif;
+    font-weight: 500;
+  }
+
+  .vv-thumb-download__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    margin-left: -20px;
+    margin-right: 10px;
+  }
+
+  .vv-thumb-download__label {
+    font-weight: 600;
+  }
+</style>

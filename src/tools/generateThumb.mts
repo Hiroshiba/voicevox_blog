@@ -7,6 +7,9 @@ import fs from "fs";
 import path from "path";
 import { chromium } from "playwright";
 import { type Page } from "playwright/test";
+import { exit } from "process";
+
+exit(-1); // 見た目変わってるかもしれないので一旦無効化しておく
 
 const imageDir = path.resolve(process.cwd(), "src", "assets");
 

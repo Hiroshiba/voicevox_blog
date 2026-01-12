@@ -117,3 +117,4 @@
 - `--bulma-*` 直接参照を減らすため、`src/components/PlayButton/PlayButton.tsx` を `--vv-loading-color` + `.vv-bulma-loading-bridge` 経由に変更（見た目維持、VRT `20 passed`）。
 - `src/pages/song/index.astro` の `text-shadow` で参照していた `--bulma-link-text` を `--vv-link-text` に置換（見た目維持、VRT `20 passed`）。
 - `src/styles/helper.scss` の Bulma Sass/@extend 撤去を試みたが、`circle-icon`/`button` の微差で `/song/` の VRT が崩れ、さらに `src/pages/nemo/index.astro` の `@extend` 解決にも影響したため、今回は差し戻して保留（スナップショット更新はしていない）。
+- `src/pages/dev/thumb_generator/product/[characterId].astro` の `import "@/styles/bulma.scss"` を撤去し、サムネ生成ページ専用の最小 CSS（フォント/ボタン）で置換。Playwright MCP で `getComputedStyle` とスクショを確認し、`generateThumb` が前提とする `1200x630` 固定も明示した（VRT `20 passed`、ただし既存サムネ画像の見た目は変わり得るため生成物更新は未実施）。
