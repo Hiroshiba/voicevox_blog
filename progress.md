@@ -73,3 +73,5 @@
   - `test-results/e2e-screenshot-index-screenshots-nemo-iPhone-X/screenshots-nemo-2-{expected,actual,diff}.png`
   - `test-results/e2e-screenshot-index-screenshots-song-iPhone-X/screenshots-song-2-{expected,actual,diff}.png`
 - 次回はまず同じ現象を再現させ、原因調査を行う。解決後この項目は削除予定。
+
+ユーザー解答：見た感じ、スマホ画面や大きい画面向けの設定、おそらく横幅に応じてcssを変える設定がうまく行っていないだけな気がします。
