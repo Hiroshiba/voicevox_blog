@@ -8,7 +8,6 @@
 
 ## 2) SCSS の `@use "bulma/sass/*"`（mixin / 変数 / helpers）
 - `src/pages/dormitory/[characterId]/[...descriptionType].astro`
-- `src/pages/dormitory/index.astro`
 - `src/pages/nemo/index.astro`
 - `src/pages/song/index.astro`
 - `src/styles/bulma.scss`

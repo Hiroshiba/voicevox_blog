@@ -290,9 +290,6 @@ const backgroundImageUrl = `url(${(await getImage({ src: backgroundImage })).src
   // FIXME: is:global指定を不要にする
 
   @use "@/styles/vars.scss" as *;
-  @use "bulma/sass/utilities/initial-variables" as *;
-  @use "bulma/sass/utilities/mixins" as *;
-  @use "bulma/sass/helpers" as *;
 
   .dormitory {
     background-image: var(--backgroundImageUrl);
@@ -307,7 +304,7 @@ const backgroundImageUrl = `url(${(await getImage({ src: backgroundImage })).src
 
     .section {
       .container {
-        max-width: $desktop;
+        max-width: 1024px;
         background-color: white;
 
         &.character-container {
@@ -316,14 +313,10 @@ const backgroundImageUrl = `url(${(await getImage({ src: backgroundImage })).src
           }
 
           .generation-label {
-            @extend .has-text-centered;
+            text-align: center;
             display: flex;
             align-items: center;
-            justify-content: end;
-
-            @include mobile {
-              justify-content: center;
-            }
+            justify-content: flex-end;
           }
 
           .jump-anchor-header-padding {
@@ -341,7 +334,7 @@ const backgroundImageUrl = `url(${(await getImage({ src: backgroundImage })).src
           }
 
           .character-card {
-            @extend .pt-3;
+            padding-top: 0.75rem !important;
             cursor: pointer;
 
             .card-image {
@@ -349,8 +342,9 @@ const backgroundImageUrl = `url(${(await getImage({ src: backgroundImage })).src
             }
 
             .card-content {
-              @extend .px-0;
-              @extend .has-text-centered;
+              padding-left: 0 !important;
+              padding-right: 0 !important;
+              text-align: center;
               border-top: solid 2.5px;
             }
           }
@@ -361,8 +355,9 @@ const backgroundImageUrl = `url(${(await getImage({ src: backgroundImage })).src
             justify-content: center;
 
             .card-content {
-              @extend .px-0;
-              @extend .has-text-centered;
+              padding-left: 0 !important;
+              padding-right: 0 !important;
+              text-align: center;
             }
           }
 
@@ -387,6 +382,12 @@ const backgroundImageUrl = `url(${(await getImage({ src: backgroundImage })).src
           }
         }
       }
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .dormitory .section .container.character-container .generation-label {
+      justify-content: center;
     }
   }
 </style>
