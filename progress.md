@@ -55,3 +55,5 @@
 - `src/pages/dormitory/[characterId]/[...descriptionType].astro` の Bulma Sass 依存（`@use "bulma/sass/*"` + `@extend` + `@include tablet/mobile`）を撤去し、同等の padding/typography/weight と media query を直書き（`.description-top-button` も見た目維持）。
 - `src/styles/global.css` に `--vv-radius-rounded`（Bulma→アプリ token ブリッジ）を追加。
 - `bulma-ledger.md` から `src/pages/dormitory/[characterId]/[...descriptionType].astro` の Bulma Sass 依存を除外。
+- `src/pages/song/index.astro` の Bulma Sass 依存（`@use "bulma/sass/*"` + `@extend` + `@include touch/mobile`）を撤去し、同等の font-size/weight/padding/margin と media query を直書き（container の max 幅も維持）。
+- `bulma-ledger.md` から `src/pages/song/index.astro` の Bulma Sass 依存を除外。

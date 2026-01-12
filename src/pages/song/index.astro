@@ -145,11 +145,6 @@ const backgroundImageUrl = `url(${(await getImage({ src: backgroundImage })).src
 <style lang="scss" define:vars={{ backgroundImageUrl }} is:global>
   @use "@/styles/vars.scss" as *;
   @use "@/styles/helper.scss" as *;
-  @use "bulma/sass/elements" as *;
-  @use "bulma/sass/layout" as *;
-  @use "bulma/sass/utilities/initial-variables" as *;
-  @use "bulma/sass/utilities/mixins" as *;
-  @use "bulma/sass/helpers" as *;
 
   .song {
     color: white;
@@ -195,19 +190,19 @@ const backgroundImageUrl = `url(${(await getImage({ src: backgroundImage })).src
 
         text-align: center;
 
-            h1 {
-              color: rgba($primary, 0.75) !important;
-              font-size: 7.5rem;
-              text-shadow: 0 0 10px
-                rgb(
-                  from color-mix(in srgb, var(--vv-link-text) 95%, black) R G B /
-                    0.55
-                );
-            }
+        h1 {
+          color: rgba($primary, 0.75) !important;
+          font-size: 7.5rem;
+          text-shadow: 0 0 10px
+            rgb(
+              from color-mix(in srgb, var(--vv-link-text) 95%, black) R G B /
+                0.55
+            );
+        }
 
         .subtitle {
-          @extend .is-4;
-          @extend .has-text-weight-bold;
+          font-size: 1.5rem;
+          font-weight: 700;
           text-shadow: 0 0 10px rgba(black, 0.75);
 
           // <wbr>で良い感じに改行するようにする
@@ -215,13 +210,13 @@ const backgroundImageUrl = `url(${(await getImage({ src: backgroundImage })).src
           overflow-wrap: break-word;
         }
 
-        @include touch {
+        @media screen and (max-width: 1023px) {
           h1 {
             font-size: 6rem;
           }
         }
 
-        @include mobile {
+        @media screen and (max-width: 768px) {
           gap: 0.5rem;
           margin-bottom: 5rem;
 
@@ -244,8 +239,7 @@ const backgroundImageUrl = `url(${(await getImage({ src: backgroundImage })).src
 
     .feature {
       width: 100%;
-      @extend .is-max-widescreen;
-      @extend .mb-6;
+      margin-bottom: 3rem !important;
 
       .feature-cells {
         width: 100%;
@@ -253,14 +247,13 @@ const backgroundImageUrl = `url(${(await getImage({ src: backgroundImage })).src
         grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
         gap: 1rem;
 
-        @include touch {
+        @media screen and (max-width: 1023px) {
           grid-template-columns: repeat(2, 1fr);
         }
 
         .feature-cell {
           background-color: #43554239;
-          @extend .is-size-5;
-          @extend .is-size-6-mobile;
+          font-size: 1.25rem !important;
           text-align: center;
           padding: 2rem 0;
           border-radius: 1rem;
@@ -271,8 +264,7 @@ const backgroundImageUrl = `url(${(await getImage({ src: backgroundImage })).src
     .voices {
       display: flex;
       flex-direction: column;
-      @extend .is-max-widescreen;
-      @extend .mb-6;
+      margin-bottom: 3rem !important;
 
       .voice-cards {
         display: flex;
@@ -292,41 +284,55 @@ const backgroundImageUrl = `url(${(await getImage({ src: backgroundImage })).src
           background-color: #282828;
           border-radius: 0.5rem;
           width: 10rem;
-          @extend .py-3;
+          padding-top: 0.75rem !important;
+          padding-bottom: 0.75rem !important;
 
           .voice-card-image {
             width: 70%;
           }
 
           .voice-card-content {
-            @extend .has-text-centered;
+            text-align: center;
 
             display: flex;
             flex-direction: column;
             gap: 0.5rem;
 
             .title {
-              @extend .is-6;
-              @extend .has-text-weight-medium;
-              @extend .mb-0;
+              font-size: 1rem;
+              font-weight: 500;
+              margin-bottom: 0 !important;
             }
 
             .buttons {
               align-items: center;
               justify-content: center;
-              @extend .mb-0;
+              margin-bottom: 0 !important;
               gap: 8px;
 
               .button {
-                @extend .mb-0;
+                margin-bottom: 0 !important;
               }
             }
 
             .style-name {
-              @extend .is-size-7;
+              font-size: 0.75rem !important;
             }
           }
         }
+      }
+    }
+
+    @media screen and (max-width: 768px) {
+      .feature .feature-cell {
+        font-size: 1rem !important;
+      }
+    }
+
+    @media screen and (min-width: 1408px) {
+      .feature.container,
+      .voices.container {
+        max-width: 1152px;
       }
     }
   }
