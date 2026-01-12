@@ -1,6 +1,7 @@
 # Bulma → Tailwind 移行進捗
 
 ## 2026-01-11
+
 - Tailwind v4 を導入（`pnpm astro add tailwind --yes`）。`@tailwindcss/vite` が `astro.config.ts` に追加され、`src/styles/global.css` が生成された。
 - `src/layouts/Base.astro` で `src/styles/global.css` を読み込み、`html` に `class="dark"`（条件付き）を付与して `dark:` 運用の入口を作成（`data-theme` は温存）。
 - Tailwind の `dark` variant を class 駆動に変更（`src/styles/global.css` に `@custom-variant dark (&:where(.dark, .dark *));` を追加）。
@@ -14,10 +15,12 @@
 - `CI=1 pnpm test:e2e tests/e2e/screenshot/index.spec.ts` が `20 passed` することを確認（port 4321 が残っている場合は停止してから実行）。
 
 ### 次にやる（plan2 Phase 1/0）
+
 - Bulma 依存の“削除対象台帳”を `rg "bulma/sass|--bulma-|@extend \\.|has-background-|is-" src` 等で固定し、置換単位（ページ/断面）を切る。
 - preflight で崩れるページ/種類を分類（特に markdown / header / 共通レイアウト）。
 
 ## 2026-01-12
+
 - Markdown の Bulma 依存（`src/styles/markdown.scss`）を Tailwind 側へ寄せる検討を実施したが、VRT（`tests/e2e/screenshot/index.spec.ts`）の差分が大きく、既存スナップショット維持を優先して一旦保留。
 - 既存の見た目（Bulma `.content` + `.title`/spacing 相当）を維持するため、`src/styles/markdown.scss` を復元し、`src/components/Markdown.astro` / `src/components/modal/Modals.astro` の読み込みを復帰。
 - `src/pages/qa/_layout.astro` の `@extend`（Bulma helper）も VRT 互換のため復帰。
@@ -61,3 +64,12 @@
 - `src/pages/nemo/_SpeakerComponent.astro` の dropdown / link buttons も Bulma クラスを明示付与し、Nemo 側の `@extend` を撤去。
 - `bulma-ledger.md` から `src/pages/nemo/index.astro` の Bulma Sass 依存を除外。
 - `CI=1 pnpm test:e2e tests/e2e/screenshot/index.spec.ts` が `20 passed` することを確認。
+
+### 追加: スクリーンショットテストが再び不安定
+
+- `pnpm run test-build` → Playwright 再実行（port kill 含む）でも VRT が落ちる状態になった（作業ツリーを変更前に戻しても再現）。
+- 失敗ケース（差分が極端に大きい＝CSS/画像が読み込めていない見え方）:
+  - `test-results/e2e-screenshot-index-screenshots-nemo-Desktop-Chrome/screenshots-nemo-2-{expected,actual,diff}.png`
+  - `test-results/e2e-screenshot-index-screenshots-nemo-iPhone-X/screenshots-nemo-2-{expected,actual,diff}.png`
+  - `test-results/e2e-screenshot-index-screenshots-song-iPhone-X/screenshots-song-2-{expected,actual,diff}.png`
+- 次回はまず同じ現象を再現させ、原因調査を行う。解決後この項目は削除予定。
