@@ -38,3 +38,6 @@
 - `CI=1 pnpm test:e2e tests/e2e/screenshot/index.spec.ts` が `20 passed` することを確認。
 - `src/pages/talk/_CharacterCard.astro` の Bulma Sass helper 依存（`@use "bulma/sass/helpers"` + `@extend .py-1`）を撤去し、同等の padding を直書き（VRT 維持）。
 - `bulma-ledger.md` から `src/pages/talk/_CharacterCard.astro` の Bulma Sass 依存を除外。
+- `src/pages/dormitory/call_names/_Cell.astro` の Bulma Sass 依存（`@use "bulma/sass/*"` + `@extend .m-1` + `$radius`）を撤去し、`margin`/`border-radius` を直書き（`border-radius` は `--vv-radius` を参照）。
+- `src/styles/global.css` に `--vv-radius`（Bulma→アプリ token ブリッジ）を追加。
+- `bulma-ledger.md` から `src/pages/dormitory/call_names/_Cell.astro` の Bulma Sass 依存を除外。

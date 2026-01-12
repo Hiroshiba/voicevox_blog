@@ -66,9 +66,6 @@ const { callNames, characterInfo, additionalClass } = Astro.props;
 </script>
 
 <style lang="scss">
-  @use "bulma/sass/utilities/initial-variables" as *;
-  @use "bulma/sass/helpers" as *;
-
   p {
     height: 100%;
     width: 100%;
@@ -82,7 +79,7 @@ const { callNames, characterInfo, additionalClass } = Astro.props;
 
     // コピーボタン
     .icon {
-      @extend .m-1;
+      margin: 0.25rem !important;
 
       visibility: hidden;
       position: absolute;
@@ -95,7 +92,7 @@ const { callNames, characterInfo, additionalClass } = Astro.props;
     &:hover {
       // NOTE: ちらつくので border ではなく outline
       outline: 2px solid;
-      border-radius: $radius;
+      border-radius: var(--vv-radius);
 
       .icon {
         visibility: visible;
