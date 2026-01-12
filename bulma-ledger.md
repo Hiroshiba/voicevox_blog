@@ -4,7 +4,6 @@
 
 ## 1) グローバル読み込み
 - `src/layouts/Base.astro`（`@use "@/styles/bulma.scss"` を `is:global`）
-- `src/pages/dev/thumb_generator/product/[characterId].astro`（`import "@/styles/bulma.scss"`）
 
 ## 2) SCSS の `@use "bulma/sass/*"`（mixin / 変数 / helpers）
 - `src/styles/bulma.scss`
