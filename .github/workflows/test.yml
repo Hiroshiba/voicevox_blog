@@ -62,12 +62,9 @@ jobs:
           if [ -z "$hits" ]; then
             exit 0
           fi
-          forbidden="$(printf '%s\n' "$hits" | rg -v '^(src/styles/bulma\\.scss|src/styles/markdown\\.scss|src/styles/helper\\.scss|src/pages/song/index\\.astro|src/pages/nemo/index\\.astro):' || true)"
-          if [ -n "$forbidden" ]; then
-            echo "Unexpected Bulma Sass @use found (keep it in the known legacy style files only):"
-            echo "$forbidden"
-            exit 1
-          fi
+          echo "Unexpected Bulma Sass @use found (Bulma Sass should be fully removed):"
+          echo "$hits"
+          exit 1
 
       - name: Lint
         run: pnpm run lint

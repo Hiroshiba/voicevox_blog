@@ -106,12 +106,12 @@ export default function CharacterCard({
   };
 
   return (
-    <div className="voice-card">
+    <div className="voice-card py-3">
       <LinkToProductPage className="voice-card-image">
         {children}
       </LinkToProductPage>
-      <div className="voice-card-content">
-        <h3 className="title">
+      <div className="voice-card-content has-text-centered">
+        <h3 className="title is-6 has-text-weight-medium mb-0">
           <LinkToProductPage style={{ color: "inherit" }}>
             {characterInfo.name}
           </LinkToProductPage>
@@ -119,10 +119,10 @@ export default function CharacterCard({
 
         {styleState && (
           <>
-            <div className="buttons">
+            <div className="buttons mb-0">
               {styleState.styles.length > 1 && (
                 <button
-                  className={`button circle-icon is-small`}
+                  className="button circle-icon is-small mb-0"
                   style={coloredStyle}
                   type="button"
                   aria-label="前のサンプル音声へ"
@@ -144,7 +144,7 @@ export default function CharacterCard({
 
               {styleState.styles.length > 1 && (
                 <button
-                  className={`button circle-icon is-small`}
+                  className="button circle-icon is-small mb-0"
                   style={coloredStyle}
                   type="button"
                   aria-label="次のサンプル音声へ"
@@ -154,7 +154,7 @@ export default function CharacterCard({
                 </button>
               )}
             </div>
-            <h4 className="style-name">{fullStyleName}</h4>
+            <h4 className="style-name is-size-7">{fullStyleName}</h4>
           </>
         )}
       </div>

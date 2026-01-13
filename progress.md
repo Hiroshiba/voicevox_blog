@@ -119,6 +119,15 @@
 - `src/styles/helper.scss` の Bulma Sass/@extend 撤去を試みたが、`circle-icon`/`button` の微差で `/song/` の VRT が崩れ、さらに `src/pages/nemo/index.astro` の `@extend` 解決にも影響したため、今回は差し戻して保留（スナップショット更新はしていない）。
 - `src/pages/dev/thumb_generator/product/[characterId].astro` の `import "@/styles/bulma.scss"` を撤去し、サムネ生成ページ専用の最小 CSS（フォント/ボタン）で置換。Playwright MCP で `getComputedStyle` とスクショを確認し、`generateThumb` が前提とする `1200x630` 固定も明示した（VRT `20 passed`、ただし既存サムネ画像の見た目は変わり得るため生成物更新は未実施）。
 
+## 2026-01-13（追加: Bulma 完全撤去つづき）
+
+- Bulma npm 依存を削除しつつ見た目維持のため `src/styles/bulma-legacy.css` に Bulma 出力 CSS を vendoring、`src/layouts/Base.astro` でグローバルに読み込むように変更。
+- Bulma Sass の `@use`/`@extend` をページ側から撤去（song/nemo）し、必要な Bulma helper class は DOM に付与、メディアクエリは素の `@media` に置換。
+- VRT（`tests/e2e/screenshot/index.spec.ts`）を `--update-snapshots` なしで成立させるため差分画像ベースで原因切り分け：
+  - Nemo Desktop/iPhone の `screenshots-nemo-2` 差分は、カードグリッドの `gap` が本番と一致していなかったのが根因。`src/pages/nemo/index.astro` の `.speakers-container` を `gap: 2rem` に戻して解消。
+  - QA iPhone の `screenshots-qa-12` 差分は、Markdown 見出しの title 変数群が `.title` にしか定義されず `.markdown h2/h3/h4` で無効化されることで、微妙なテキスト描画差（アンチエイリアス差）になっていたのが根因。`src/styles/markdown.scss` を Bulma の `.title` セレクタ構造に合わせて `.title,.markdown h2,.markdown h3,.markdown h4...` の変数/プロパティ/サイズルールを揃え、ピクセル一致に復帰。
+- `CI=1 pnpm run test-build` → `CI=1 pnpm run test:e2e -- tests/e2e/screenshot/index.spec.ts` が `20 passed`。
+
 ## 2026-01-12（追加4: `helper.scss` の Bulma 依存を縮小しつつ VRT 維持）
 
 - `src/styles/helper.scss` の Bulma 依存を「必要最小限」まで縮小し、`circle-icon` の見た目を維持できるように調整。

@@ -49,7 +49,7 @@ const backgroundImageUrl = `url(${(await getImage({ src: backgroundImage })).src
       <div class="top">
         <div class="titles">
           <h1 class="title">VOICEVOX Song</h1>
-          <span class="subtitle"
+          <span class="subtitle is-4 has-text-weight-bold"
             >無料で使える中品質な<wbr
             />テキスト読み上げ・歌声合成ソフトウェア</span
           >
@@ -76,31 +76,31 @@ const backgroundImageUrl = `url(${(await getImage({ src: backgroundImage })).src
     </section>
 
     <section class="section">
-      <div class="feature container">
+      <div class="feature container is-max-widescreen mb-6">
         <h2 class="title">特徴</h2>
         <div class="feature-cells">
-          <div class="feature-cell">
+          <div class="feature-cell is-size-5 is-size-6-mobile">
             商用利用可能な
             <br />
             フリーソフト
           </div>
-          <div class="feature-cell">
+          <div class="feature-cell is-size-5 is-size-6-mobile">
             マルチOSに対応
             <br />
             (Win / Mac / Linux)
           </div>
-          <div class="feature-cell">
+          <div class="feature-cell is-size-5 is-size-6-mobile">
             {characterCount} 名のキャラクターと
             <br />
             {styleCount} 種類のボイス
           </div>
-          <div class="feature-cell">
+          <div class="feature-cell is-size-5 is-size-6-mobile">
             すぐ使える GUI と<br />歌唱 AI で創作支援
           </div>
         </div>
       </div>
 
-      <div class="container voices">
+      <div class="container voices is-max-widescreen mb-6">
         <h2 class="title">音声ライブラリ一覧</h2>
         <div class="voice-cards">
           {
@@ -145,11 +145,6 @@ const backgroundImageUrl = `url(${(await getImage({ src: backgroundImage })).src
 <style lang="scss" define:vars={{ backgroundImageUrl }} is:global>
   @use "@/styles/vars.scss" as *;
   @use "@/styles/helper.scss" as *;
-  @use "bulma/sass/elements" as *;
-  @use "bulma/sass/layout" as *;
-  @use "bulma/sass/utilities/initial-variables" as *;
-  @use "bulma/sass/utilities/mixins" as *;
-  @use "bulma/sass/helpers" as *;
 
   .song {
     color: white;
@@ -206,8 +201,6 @@ const backgroundImageUrl = `url(${(await getImage({ src: backgroundImage })).src
         }
 
         .subtitle {
-          @extend .is-4;
-          @extend .has-text-weight-bold;
           text-shadow: 0 0 10px rgba(black, 0.75);
 
           // <wbr>で良い感じに改行するようにする
@@ -215,13 +208,13 @@ const backgroundImageUrl = `url(${(await getImage({ src: backgroundImage })).src
           overflow-wrap: break-word;
         }
 
-        @include touch {
+        @media screen and (max-width: 1023px) {
           h1 {
             font-size: 6rem;
           }
         }
 
-        @include mobile {
+        @media screen and (max-width: 768px) {
           gap: 0.5rem;
           margin-bottom: 5rem;
 
@@ -244,8 +237,6 @@ const backgroundImageUrl = `url(${(await getImage({ src: backgroundImage })).src
 
     .feature {
       width: 100%;
-      @extend .is-max-widescreen;
-      @extend .mb-6;
 
       .feature-cells {
         width: 100%;
@@ -253,14 +244,12 @@ const backgroundImageUrl = `url(${(await getImage({ src: backgroundImage })).src
         grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
         gap: 1rem;
 
-        @include touch {
+        @media screen and (max-width: 1023px) {
           grid-template-columns: repeat(2, 1fr);
         }
 
         .feature-cell {
           background-color: #43554239;
-          @extend .is-size-5;
-          @extend .is-size-6-mobile;
           text-align: center;
           padding: 2rem 0;
           border-radius: 1rem;
@@ -271,8 +260,6 @@ const backgroundImageUrl = `url(${(await getImage({ src: backgroundImage })).src
     .voices {
       display: flex;
       flex-direction: column;
-      @extend .is-max-widescreen;
-      @extend .mb-6;
 
       .voice-cards {
         display: flex;
@@ -292,38 +279,29 @@ const backgroundImageUrl = `url(${(await getImage({ src: backgroundImage })).src
           background-color: #282828;
           border-radius: 0.5rem;
           width: 10rem;
-          @extend .py-3;
 
           .voice-card-image {
             width: 70%;
           }
 
           .voice-card-content {
-            @extend .has-text-centered;
-
             display: flex;
             flex-direction: column;
             gap: 0.5rem;
 
             .title {
-              @extend .is-6;
-              @extend .has-text-weight-medium;
-              @extend .mb-0;
             }
 
             .buttons {
               align-items: center;
               justify-content: center;
-              @extend .mb-0;
               gap: 8px;
 
               .button {
-                @extend .mb-0;
               }
             }
 
             .style-name {
-              @extend .is-size-7;
             }
           }
         }

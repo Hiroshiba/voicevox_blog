@@ -1,31 +1,330 @@
-@use "bulma/sass/elements" as *;
-@use "bulma/sass/helpers" as *;
-
 .markdown {
-  @extend .content;
+  --bulma-content-heading-color: var(--bulma-text-strong);
+  --bulma-content-heading-weight: var(--bulma-weight-extrabold);
+  --bulma-content-heading-line-height: 1.125;
+  --bulma-content-block-margin-bottom: 1em;
+  --bulma-content-blockquote-background-color: var(--bulma-background);
+  --bulma-content-blockquote-border-left: 5px solid var(--bulma-border);
+  --bulma-content-blockquote-padding: 1.25em 1.5em;
+  --bulma-content-pre-padding: 1.25em 1.5em;
+  --bulma-content-table-cell-border: 1px solid var(--bulma-border);
+  --bulma-content-table-cell-border-width: 0 0 1px;
+  --bulma-content-table-cell-padding: 0.5em 0.75em;
+  --bulma-content-table-cell-heading-color: var(--bulma-text-strong);
+  --bulma-content-table-head-cell-border-width: 0 0 2px;
+  --bulma-content-table-head-cell-color: var(--bulma-text-strong);
+  --bulma-content-table-body-last-row-cell-border-bottom-width: 0;
+  --bulma-content-table-foot-cell-border-width: 2px 0 0;
+  --bulma-content-table-foot-cell-color: var(--bulma-text-strong);
+}
 
-  h2 {
-    @extend .title;
-    @extend .is-4;
-    @extend .mb-3;
-  }
+.markdown li + li {
+  margin-top: 0.25em;
+}
+.markdown p:not(:last-child),
+.markdown dl:not(:last-child),
+.markdown ol:not(:last-child),
+.markdown ul:not(:last-child),
+.markdown blockquote:not(:last-child),
+.markdown pre:not(:last-child),
+.markdown table:not(:last-child) {
+  margin-bottom: var(--bulma-content-block-margin-bottom);
+}
+.markdown h1,
+.markdown h2,
+.markdown h3,
+.markdown h4,
+.markdown h5,
+.markdown h6 {
+  color: var(--bulma-content-heading-color);
+  font-weight: var(--bulma-content-heading-weight);
+  line-height: var(--bulma-content-heading-line-height);
+}
+.markdown h1 {
+  font-size: 2em;
+  margin-bottom: 0.5em;
+}
+.markdown h1:not(:first-child) {
+  margin-top: 1em;
+}
+.markdown h2 {
+  font-size: 1.75em;
+  margin-bottom: 0.5714em;
+}
+.markdown h2:not(:first-child) {
+  margin-top: 1.1428em;
+}
+.markdown h3 {
+  font-size: 1.5em;
+  margin-bottom: 0.6666em;
+}
+.markdown h3:not(:first-child) {
+  margin-top: 1.3333em;
+}
+.markdown h4 {
+  font-size: 1.25em;
+  margin-bottom: 0.8em;
+}
+.markdown h5 {
+  font-size: 1.125em;
+  margin-bottom: 0.8888em;
+}
+.markdown h6 {
+  font-size: 1em;
+  margin-bottom: 1em;
+}
+.markdown blockquote {
+  background-color: var(--bulma-content-blockquote-background-color);
+  border-inline-start: var(--bulma-content-blockquote-border-left);
+  padding: var(--bulma-content-blockquote-padding);
+}
+.markdown ol {
+  list-style-position: outside;
+  margin-inline-start: 2em;
+}
+.markdown ol:not(:first-child) {
+  margin-top: 1em;
+}
+.markdown ol:not([type]) {
+  list-style-type: decimal;
+}
+.markdown ol:not([type]).is-lower-alpha {
+  list-style-type: lower-alpha;
+}
+.markdown ol:not([type]).is-lower-roman {
+  list-style-type: lower-roman;
+}
+.markdown ol:not([type]).is-upper-alpha {
+  list-style-type: upper-alpha;
+}
+.markdown ol:not([type]).is-upper-roman {
+  list-style-type: upper-roman;
+}
+.markdown ul {
+  list-style: disc outside;
+  margin-inline-start: 2em;
+}
+.markdown ul:not(:first-child) {
+  margin-top: 1em;
+}
+.markdown ul ul {
+  list-style-type: circle;
+  margin-bottom: 0.25em;
+  margin-top: 0.25em;
+}
+.markdown ul ul ul {
+  list-style-type: square;
+}
+.markdown dd {
+  margin-inline-start: 2em;
+}
+.markdown figure:not([class]) {
+  margin-left: 2em;
+  margin-right: 2em;
+  text-align: center;
+}
+.markdown figure:not([class]):not(:first-child) {
+  margin-top: 2em;
+}
+.markdown figure:not([class]):not(:last-child) {
+  margin-bottom: 2em;
+}
+.markdown figure:not([class]) img {
+  display: inline-block;
+}
+.markdown figure:not([class]) figcaption {
+  font-style: italic;
+}
+.markdown pre {
+  -webkit-overflow-scrolling: touch;
+  overflow-x: auto;
+  padding: var(--bulma-content-pre-padding);
+  white-space: pre;
+  word-wrap: normal;
+}
+.markdown sup,
+.markdown sub {
+  font-size: 75%;
+}
+.markdown table td,
+.markdown table th {
+  border: var(--bulma-content-table-cell-border);
+  border-width: var(--bulma-content-table-cell-border-width);
+  padding: var(--bulma-content-table-cell-padding);
+  vertical-align: top;
+}
+.markdown table th {
+  color: var(--bulma-content-table-cell-heading-color);
+}
+.markdown table th:not([align]) {
+  text-align: inherit;
+}
+.markdown table thead td,
+.markdown table thead th {
+  border-width: var(--bulma-content-table-head-cell-border-width);
+  color: var(--bulma-content-table-head-cell-color);
+}
+.markdown table tfoot td,
+.markdown table tfoot th {
+  border-width: var(--bulma-content-table-foot-cell-border-width);
+  color: var(--bulma-content-table-foot-cell-color);
+}
+.markdown table tbody tr:last-child td,
+.markdown table tbody tr:last-child th {
+  border-bottom-width: var(--bulma-content-table-body-last-row-cell-border-bottom-width);
+}
+.markdown .tabs li + li {
+  margin-top: 0;
+}
+.markdown.is-small {
+  font-size: var(--bulma-size-small);
+}
+.markdown.is-normal {
+  font-size: var(--bulma-size-normal);
+}
+.markdown.is-medium {
+  font-size: var(--bulma-size-medium);
+}
+.markdown.is-large {
+  font-size: var(--bulma-size-large);
+}
 
-  h3 {
-    @extend .title;
-    @extend .is-5;
-    @extend .mb-3;
-  }
+.title,
+.markdown h2,
+.markdown h3,
+.markdown h4,
+.modal-nemo-guidance .modal-card-body .step-by-step h3,
+.subtitle {
+  --bulma-title-color: var(--bulma-text-strong);
+  --bulma-title-family: false;
+  --bulma-title-size: var(--bulma-size-3);
+  --bulma-title-weight: var(--bulma-weight-extrabold);
+  --bulma-title-line-height: 1.125;
+  --bulma-title-strong-color: inherit;
+  --bulma-title-strong-weight: inherit;
+  --bulma-title-sub-size: 0.75em;
+  --bulma-title-sup-size: 0.75em;
+  --bulma-subtitle-color: var(--bulma-text);
+  --bulma-subtitle-family: false;
+  --bulma-subtitle-size: var(--bulma-size-5);
+  --bulma-subtitle-weight: var(--bulma-weight-normal);
+  --bulma-subtitle-line-height: 1.25;
+  --bulma-subtitle-strong-color: var(--bulma-text-strong);
+  --bulma-subtitle-strong-weight: var(--bulma-weight-semibold);
+}
 
-  h4 {
-    @extend .title;
-    @extend .is-6;
-    @extend .mt-5;
-    @extend .mb-3;
-  }
+.title,
+.markdown h2,
+.markdown h3,
+.markdown h4,
+.modal-nemo-guidance .modal-card-body .step-by-step h3,
+.subtitle {
+  word-break: break-word;
+}
 
-  img {
-    @extend .mb-3;
-    vertical-align: middle;
-    border: 1px solid #333;
-  }
+.title em,
+.markdown h2 em,
+.markdown h3 em,
+.markdown h4 em,
+.modal-nemo-guidance .modal-card-body .step-by-step h3 em,
+.title span,
+.markdown h2 span,
+.markdown h3 span,
+.markdown h4 span,
+.modal-nemo-guidance .modal-card-body .step-by-step h3 span,
+.subtitle em,
+.subtitle span {
+  font-weight: inherit;
+}
+
+.title sub,
+.markdown h2 sub,
+.markdown h3 sub,
+.markdown h4 sub,
+.modal-nemo-guidance .modal-card-body .step-by-step h3 sub,
+.subtitle sub {
+  font-size: var(--bulma-title-sub-size);
+}
+
+.title sup,
+.markdown h2 sup,
+.markdown h3 sup,
+.markdown h4 sup,
+.modal-nemo-guidance .modal-card-body .step-by-step h3 sup,
+.subtitle sup {
+  font-size: var(--bulma-title-sup-size);
+}
+
+.title .tag,
+.markdown h2 .tag,
+.markdown h3 .tag,
+.markdown h4 .tag,
+.modal-nemo-guidance .modal-card-body .step-by-step h3 .tag,
+.subtitle .tag {
+  vertical-align: middle;
+}
+
+.title,
+.markdown h2,
+.markdown h3,
+.markdown h4,
+.modal-nemo-guidance .modal-card-body .step-by-step h3 {
+  color: var(--bulma-title-color);
+  font-size: var(--bulma-title-size);
+  font-weight: var(--bulma-title-weight);
+  line-height: var(--bulma-title-line-height);
+}
+
+.title strong,
+.markdown h2 strong,
+.markdown h3 strong,
+.markdown h4 strong,
+.modal-nemo-guidance .modal-card-body .step-by-step h3 strong {
+  color: var(--bulma-title-strong-color);
+  font-weight: var(--bulma-title-strong-weight);
+}
+
+.title.is-4,
+.markdown h3.is-4,
+.markdown h4.is-4,
+.modal-nemo-guidance .modal-card-body .step-by-step h3.is-4,
+.markdown h2 {
+  font-size: 1.5rem;
+}
+
+.title.is-5,
+.markdown h2.is-5,
+.markdown h4.is-5,
+.modal-nemo-guidance .modal-card-body .step-by-step h3.is-5,
+.markdown h3,
+.modal-nemo-guidance .modal-card-body .step-by-step .markdown h3,
+.markdown .modal-nemo-guidance .modal-card-body .step-by-step h3 {
+  font-size: 1.25rem;
+}
+
+.title.is-6,
+.markdown h2.is-6,
+.markdown h3.is-6,
+.modal-nemo-guidance .modal-card-body .step-by-step h3.is-6,
+.markdown h4 {
+  font-size: 1rem;
+}
+
+.markdown h2 {
+  margin-bottom: 0.75rem !important;
+}
+
+.markdown h3 {
+  margin-bottom: 0.75rem !important;
+}
+
+.markdown h4 {
+  margin-top: 1.5rem !important;
+  margin-bottom: 0.75rem !important;
+}
+
+.markdown img {
+  margin-bottom: 0.75rem !important;
+  vertical-align: middle;
+  border: 1px solid #333;
 }

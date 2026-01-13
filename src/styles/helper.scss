@@ -1,6 +1,3 @@
-@use "bulma/sass/helpers" as *;
-@use "bulma/sass/elements/button" as *;
-
 .circle-icon {
   // Bulmaの `is-outlined` + `is-rounded` を「classを増やさず」再現する。
   // これにより、既存DOM (`button circle-icon is-primary` 等) の見た目を維持しつつ
