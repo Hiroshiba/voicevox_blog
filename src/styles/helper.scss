@@ -1,33 +1,56 @@
-@use "bulma/sass/elements/button" as *;
-@use "bulma/sass/utilities/initial-variables" as *;
 @use "bulma/sass/helpers" as *;
+@use "bulma/sass/elements/button" as *;
 
 .circle-icon {
-  @extend .is-outlined;
-  @extend .is-rounded;
+  // Bulmaの `is-outlined` + `is-rounded` を「classを増やさず」再現する。
+  // これにより、既存DOM (`button circle-icon is-primary` 等) の見た目を維持しつつ
+  // `@extend` を外して Bulma 依存を縮める。
+  --bulma-button-border-width: max(1px, 0.0625em);
+  --bulma-loading-color: hsl(
+    var(--bulma-button-h),
+    var(--bulma-button-s),
+    var(--bulma-button-l)
+  );
+
+  border-radius: var(--bulma-radius-rounded);
 
   padding-left: 0 !important;
   padding-right: 0 !important;
 
-  width: $size-1;
-  height: $size-1;
+  width: 3rem;
+  height: 3rem;
   border-width: 1.8px;
 
+  &:hover {
+    --bulma-button-border-width: max(2px, 0.125em);
+    --bulma-button-outer-shadow-alpha: 1;
+  }
+
   &.is-small {
-    width: $size-2;
-    height: $size-2;
+    width: 2.5rem;
+    height: 2.5rem;
     border-width: 1px;
   }
   &.is-medium {
-    width: $size-1 * 1.2;
-    height: $size-1 * 1.2;
+    width: 3.6rem;
+    height: 3.6rem;
     border-width: 2px;
   }
   &.is-large {
-    width: $size-1 * 1.4;
-    height: $size-1 * 1.4;
+    width: 4.2rem;
+    height: 4.2rem;
     border-width: 2.4px;
   }
+}
+
+.button.circle-icon {
+  background-color: transparent !important;
+  border-color: currentColor !important;
+  border-radius: var(--bulma-radius-rounded) !important;
+}
+
+.button.circle-icon.is-primary {
+  color: var(--bulma-primary) !important;
 }
 
 /** idタグにジャンプるするときにヘッダーサイズ分ずれるのを防ぐ */
