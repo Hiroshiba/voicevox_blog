@@ -1,53 +1,82 @@
 .circle-icon {
-  // Bulmaの `is-outlined` + `is-rounded` を「classを増やさず」再現する。
-  // これにより、既存DOM (`button circle-icon is-primary` 等) の見た目を維持しつつ
-  // `@extend` を外して Bulma 依存を縮める。
-  --bulma-button-border-width: max(1px, 0.0625em);
-  --bulma-loading-color: hsl(
-    var(--bulma-button-h),
-    var(--bulma-button-s),
-    var(--bulma-button-l)
-  );
+  /* Bulma の `.button` に依存しない “丸アイコンボタン” をここで完結させる。 */
+  appearance: none;
+  align-items: center;
+  border-style: solid;
+  border-radius: var(--vv-radius-rounded);
+  box-shadow: none;
+  cursor: pointer;
+  display: inline-flex;
+  flex-grow: 0;
+  flex-shrink: 0;
+  font-size: 1rem;
+  justify-content: center;
+  line-height: 1.5;
+  padding: 0 !important;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: top;
+  white-space: nowrap;
 
-  border-radius: var(--bulma-radius-rounded);
-
-  padding-left: 0 !important;
-  padding-right: 0 !important;
+  background-color: transparent !important;
+  border-color: currentColor !important;
 
   width: 3rem;
   height: 3rem;
   border-width: 1.8px;
 
   &:hover {
-    --bulma-button-border-width: max(2px, 0.125em);
-    --bulma-button-outer-shadow-alpha: 1;
+    border-width: 2px;
   }
 
   &.is-small {
     width: 2.5rem;
     height: 2.5rem;
     border-width: 1px;
+    font-size: 0.75rem;
   }
   &.is-medium {
     width: 3.6rem;
     height: 3.6rem;
     border-width: 2px;
+    font-size: 1.25rem;
   }
   &.is-large {
     width: 4.2rem;
     height: 4.2rem;
     border-width: 2.4px;
+    font-size: 1.5rem;
   }
 }
 
-.button.circle-icon {
-  background-color: transparent !important;
-  border-color: currentColor !important;
-  border-radius: var(--bulma-radius-rounded) !important;
+.circle-icon.is-primary {
+  color: var(--vv-primary) !important;
 }
 
-.button.circle-icon.is-primary {
-  color: var(--bulma-primary) !important;
+.circle-icon.is-black {
+  color: var(--vv-black) !important;
+}
+
+.circle-icon.is-loading {
+  box-shadow: none;
+  color: transparent !important;
+  pointer-events: none;
+}
+
+.circle-icon.is-loading::after {
+  animation: spinAround 500ms infinite linear;
+  border: 2px solid var(--vv-loading-color, var(--vv-primary));
+  border-radius: var(--vv-radius-rounded);
+  border-right-color: transparent;
+  border-top-color: transparent;
+  content: "";
+  display: block;
+  height: 1em;
+  left: calc(50% - 1em * 0.5);
+  position: absolute !important;
+  top: calc(50% - 1em * 0.5);
+  width: 1em;
 }
 
 /** idタグにジャンプるするときにヘッダーサイズ分ずれるのを防ぐ */
@@ -76,5 +105,14 @@
     img {
       height: 100%;
     }
+  }
+}
+
+@keyframes spinAround {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
   }
 }

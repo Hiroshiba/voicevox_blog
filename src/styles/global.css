@@ -3,15 +3,13 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --vv-primary: var(--bulma-primary);
-  --vv-link-text: var(--bulma-link-text);
-  --vv-radius: var(--bulma-radius);
-  --vv-radius-rounded: var(--bulma-radius-rounded);
-  --vv-navbar-height: var(--bulma-navbar-height);
-}
-
-.vv-bulma-loading-bridge {
-  --bulma-loading-color: var(--vv-loading-color, var(--vv-primary));
+  /* Bulma を剥がす前提で、アプリ側トークンを “実値” で固定していく。 */
+  --vv-primary: hsla(130deg, 35%, 74%, 1);
+  --vv-link-text: hsl(130deg, 35%, 28.9215686275%);
+  --vv-radius: 0.375rem;
+  --vv-radius-rounded: 9999px;
+  --vv-navbar-height: 3.25rem;
+  --vv-black: hsla(221deg, 14%, 4%, 1);
 }
 
 .vv-bulma-navbar-burger-color-bridge {

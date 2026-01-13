@@ -140,3 +140,10 @@
 
 - CI の `lint` job に「Bulma Sass の `@use "bulma/sass"` が “既知の legacy ファイル以外” に増えたら fail」するガードを追加（`.github/workflows/test.yml`）。
 - `CI=1 pnpm run test-build` → `CI=1 pnpm run test:e2e -- tests/e2e/screenshot/index.spec.ts` が `20 passed`（`--update-snapshots` は実行していない）。
+
+## 2026-01-13（続き: circle-icon を Bulma `.button` から切り離し）
+
+- Bulma の `.button` / `--bulma-loading-color` に依存していた “丸アイコンボタン” を `src/styles/helper.scss` で自前完結に変更（`circle-icon` が display/padding/align/spinner を持つ）。
+- `src/components/PlayButton/PlayButton.tsx` / `src/pages/song/CharacterCard.tsx` / `src/pages/product/_TopContainer.astro` / `src/pages/nemo/_SpeakerComponent.astro` から `button` クラスを撤去し、`circle-icon` のみで成立させた（`is-loading` は `circle-icon` 側で再実装）。
+- `src/styles/global.css` の `--vv-*` トークンを Bulma 変数参照ではなく “実値” に固定し始めた（将来 `bulma-legacy.css` を外すための地ならし）。
+- `pnpm run test-build` → `CI=1 pnpm run test:e2e -- tests/e2e/screenshot/index.spec.ts` が `20 passed`（`--update-snapshots` は未使用）。
