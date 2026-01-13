@@ -49,7 +49,7 @@ const backgroundImageUrl = `url(${(await getImage({ src: backgroundImage })).src
       <div class="top">
         <div class="titles">
           <h1 class="title">VOICEVOX Song</h1>
-          <span class="subtitle is-4 has-text-weight-bold"
+          <span class="subtitle is-4 !font-bold"
             >無料で使える中品質な<wbr
             />テキスト読み上げ・歌声合成ソフトウェア</span
           >
@@ -63,7 +63,7 @@ const backgroundImageUrl = `url(${(await getImage({ src: backgroundImage })).src
             <span class="icon">
               <FontAwesomeIcon icon={faDownload} />
             </span>
-            <span class="has-text-weight-semibold">ダウンロード</span>
+            <span class="!font-semibold">ダウンロード</span>
           </button>
           <a
             href={withBaseUrl("/term/")}

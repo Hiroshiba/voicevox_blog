@@ -154,3 +154,9 @@
 - `src/helper/playwrightHelper.ts` の待機条件も `.circle-icon--loading` を見るように更新（従来の `.is-loading` も互換で残す）。
 - `src/pages/talk/AudioSample.tsx` が `PlayButton` に `className="is-small"` を渡しており VRT が崩れたため、`circle-icon--sm` に修正して解消（差分は “読み込み待ち不足” ではなく単純な class 名不一致）。
 - `pnpm run test-build` → `CI=1 pnpm run test:e2e -- tests/e2e/screenshot/index.spec.ts` が `20 passed`（`--update-snapshots` は未使用）。
+
+## 2026-01-14
+
+- Bulma を完全撤去するため `src/styles/bulma-legacy.css` を外し、`src/styles/bulma-shim.css`（最小互換レイヤー）で置き換える案を試したが、`.title/.section/.columns/.button/.navbar` 等の差分が広範囲に出て VRT が壊れたため撤回（「UI が安定していない」ではなく、単純に互換 CSS が不足していたのが根因）。`src/layouts/Base.astro` は `import "@/styles/bulma-legacy.css"` に復帰。
+- 併用期間中に Bulma utility を Tailwind utility に置換する試行として `has-text-weight-*` を `font-*` に置換したが、Tailwind は `global.css`（先）・Bulma は `bulma-legacy.css`（後）で読み込まれるため、同等のセレクタでは Bulma 側に上書きされて VRT 差分が発生した（全ページで微差）。Tailwind の `!` 付き utility（例: `!font-semibold`）に置換し、Bulma 側に上書きされないようにして `20 passed` に復帰。
+- `pnpm run test-build` → `CI=1 pnpm run test:e2e -- tests/e2e/screenshot/index.spec.ts` が `20 passed`（`--update-snapshots` は未使用）。

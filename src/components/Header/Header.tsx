@@ -155,7 +155,7 @@ export default function Header({
             <span className="icon">
               <FontAwesomeIcon icon={faDownload} />
             </span>
-            <span className="has-text-weight-semibold">ダウンロード</span>
+            <span className="!font-semibold">ダウンロード</span>
           </button>
         </div>
       ),
@@ -175,7 +175,7 @@ export default function Header({
         <div className="navbar-brand">
           <a href={withBaseUrl("/")} className="navbar-item">
             <img src={iconUrl} alt="" width="28" height="28" />
-            <span className="has-text-weight-bold is-size-5"> VOICEVOX </span>
+            <span className="!font-bold is-size-5"> VOICEVOX </span>
           </a>
 
           {menus.map(({ Component, hideType }, i) => (

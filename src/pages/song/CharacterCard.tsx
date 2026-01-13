@@ -111,7 +111,7 @@ export default function CharacterCard({
         {children}
       </LinkToProductPage>
       <div className="voice-card-content has-text-centered">
-        <h3 className="title is-6 has-text-weight-medium mb-0">
+        <h3 className="title is-6 !font-medium mb-0">
           <LinkToProductPage style={{ color: "inherit" }}>
             {characterInfo.name}
           </LinkToProductPage>
