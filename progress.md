@@ -147,3 +147,10 @@
 - `src/components/PlayButton/PlayButton.tsx` / `src/pages/song/CharacterCard.tsx` / `src/pages/product/_TopContainer.astro` / `src/pages/nemo/_SpeakerComponent.astro` から `button` クラスを撤去し、`circle-icon` のみで成立させた（`is-loading` は `circle-icon` 側で再実装）。
 - `src/styles/global.css` の `--vv-*` トークンを Bulma 変数参照ではなく “実値” に固定し始めた（将来 `bulma-legacy.css` を外すための地ならし）。
 - `pnpm run test-build` → `CI=1 pnpm run test:e2e -- tests/e2e/screenshot/index.spec.ts` が `20 passed`（`--update-snapshots` は未使用）。
+
+## 2026-01-13（続き: circle-icon の Bulma `is-*` クラス撤去）
+
+- `.circle-icon` が依存していた Bulma 風の `is-small/is-medium/is-large/is-primary/is-black/is-loading` を自前プレフィックスへ置換（`circle-icon--sm/md/lg/primary/black/loading`）。
+- `src/helper/playwrightHelper.ts` の待機条件も `.circle-icon--loading` を見るように更新（従来の `.is-loading` も互換で残す）。
+- `src/pages/talk/AudioSample.tsx` が `PlayButton` に `className="is-small"` を渡しており VRT が崩れたため、`circle-icon--sm` に修正して解消（差分は “読み込み待ち不足” ではなく単純な class 名不一致）。
+- `pnpm run test-build` → `CI=1 pnpm run test:e2e -- tests/e2e/screenshot/index.spec.ts` が `20 passed`（`--update-snapshots` は未使用）。

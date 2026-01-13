@@ -109,8 +109,8 @@ export default function PlayButton({
   return (
     <button
       onClick={isPlaying ? stop : play}
-      className={`circle-icon ${color ? "" : "is-primary"} ${
-        !(isReady || debouncedIsReady) ? "is-loading" : ""
+      className={`circle-icon ${color ? "" : "circle-icon--primary"} ${
+        !(isReady || debouncedIsReady) ? "circle-icon--loading" : ""
       } ${className}`}
       style={colorAddedStyle}
       type="button"

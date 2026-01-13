@@ -30,19 +30,19 @@
     border-width: 2px;
   }
 
-  &.is-small {
+  &.circle-icon--sm {
     width: 2.5rem;
     height: 2.5rem;
     border-width: 1px;
     font-size: 0.75rem;
   }
-  &.is-medium {
+  &.circle-icon--md {
     width: 3.6rem;
     height: 3.6rem;
     border-width: 2px;
     font-size: 1.25rem;
   }
-  &.is-large {
+  &.circle-icon--lg {
     width: 4.2rem;
     height: 4.2rem;
     border-width: 2.4px;
@@ -50,21 +50,21 @@
   }
 }
 
-.circle-icon.is-primary {
+.circle-icon.circle-icon--primary {
   color: var(--vv-primary) !important;
 }
 
-.circle-icon.is-black {
+.circle-icon.circle-icon--black {
   color: var(--vv-black) !important;
 }
 
-.circle-icon.is-loading {
+.circle-icon.circle-icon--loading {
   box-shadow: none;
   color: transparent !important;
   pointer-events: none;
 }
 
-.circle-icon.is-loading::after {
+.circle-icon.circle-icon--loading::after {
   animation: spinAround 500ms infinite linear;
   border: 2px solid var(--vv-loading-color, var(--vv-primary));
   border-radius: var(--vv-radius-rounded);

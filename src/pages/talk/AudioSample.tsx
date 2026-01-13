@@ -39,7 +39,7 @@ export default function AudioSample({
               name={`${characterName}の${selectedStyle}スタイルのサンプルボイス${
                 index + 1
               }`}
-              className="is-small"
+              className="circle-icon--sm"
             />
           ))}
         </div>

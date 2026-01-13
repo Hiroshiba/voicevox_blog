@@ -79,7 +79,7 @@ export async function waitForImages(page: Page) {
 export async function waitForAudios(page: Page) {
   const audioEvaluateCallback = () => {
     const loadingButtons = Array.from(
-      document.querySelectorAll(".is-loading"),
+      document.querySelectorAll(".is-loading, .circle-icon--loading"),
     ).filter((element) => element instanceof HTMLButtonElement);
     return {
       total: 1,
