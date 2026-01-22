@@ -28,3 +28,7 @@ pnpm-debug.log*
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+
+# Storybook
+*storybook.log
+storybook-static

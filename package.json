@@ -11,6 +11,8 @@
     "test-build": "cross-env TEST=1 astro build",
     "lint": "astro check && eslint src/ --cache && prettier src/ --check --cache",
     "fmt": "eslint src/ --fix --cache && prettier src/ --write --cache",
+    "storybook": "storybook dev -p 6006 -c src/.storybook",
+    "build-storybook": "storybook build -c src/.storybook",
     "test:e2e": "cross-env TEST=1 playwright test",
     "generateThumb": "tsx ./src/tools/generateThumb.mts",
     "generateLatestDefaultEngineInfos": "tsx ./src/tools/generateLatestDefaultEngineInfos.ts",
@@ -26,6 +28,7 @@
     "@astrojs/react": "^4.4.2",
     "@astrojs/rss": "^4.0.14",
     "@astrojs/sitemap": "^3.6.1",
+    "@chromatic-com/storybook": "^5.0.0",
     "@eslint/js": "^9.39.2",
     "@fortawesome/fontawesome-svg-core": "^7.1.0",
     "@fortawesome/free-brands-svg-icons": "^7.1.0",
@@ -33,6 +36,11 @@
     "@fortawesome/react-fontawesome": "^3.1.1",
     "@nanostores/react": "^1.0.0",
     "@playwright/test": "^1.57.0",
+    "@storybook/addon-a11y": "^10.1.11",
+    "@storybook/addon-docs": "^10.1.11",
+    "@storybook/addon-onboarding": "^10.1.11",
+    "@storybook/addon-vitest": "^10.1.11",
+    "@storybook/react-vite": "^10.1.11",
     "@trivago/prettier-plugin-sort-imports": "^6.0.2",
     "@types/gtag.js": "^0.0.20",
     "@types/node": "^25.0.8",
@@ -40,6 +48,8 @@
     "@types/react-dom": "^19.2.3",
     "@types/semver": "^7.7.1",
     "@typescript-eslint/parser": "^8.53.0",
+    "@vitest/browser-playwright": "^4.0.17",
+    "@vitest/coverage-v8": "^4.0.17",
     "astro": "^5.16.9",
     "astro-seo": "^1.1.0",
     "bulma": "^1.0.4",
@@ -49,6 +59,7 @@
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-astro": "^1.5.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-storybook": "^10.1.11",
     "nanostores": "^1.1.0",
     "playwright": "^1.57.0",
     "prettier": "^3.7.4",
@@ -59,10 +70,12 @@
     "sass": "^1.97.2",
     "semver": "^7.7.3",
     "sharp": "^0.34.5",
+    "storybook": "^10.1.11",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.53.0",
     "vite": "^7.3.1",
+    "vitest": "^4.0.17",
     "xml-formatter": "^3.6.7",
     "zod": "^4.3.5"
   },
@@ -76,6 +89,9 @@
       "@parcel/watcher",
       "esbuild",
       "sharp"
-    ]
+    ],
+    "overrides": {
+      "@babel/core": "7.28.5"
+    }
   }
 }

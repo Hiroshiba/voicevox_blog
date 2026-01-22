@@ -2,6 +2,7 @@ import js from "@eslint/js";
 import gitignore from "eslint-config-flat-gitignore";
 import prettier from "eslint-config-prettier";
 import astro from "eslint-plugin-astro";
+import storybook from "eslint-plugin-storybook";
 import typescript from "typescript-eslint";
 
 export default typescript.config(
@@ -14,4 +15,5 @@ export default typescript.config(
   {
     ignores: ["src/layouts/Base.astro"], // NOTE: なぜか<html>周りでエラーが出るため
   },
+  storybook.configs["flat/recommended"],
 );
