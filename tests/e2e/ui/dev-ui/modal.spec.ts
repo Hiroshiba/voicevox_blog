@@ -1,5 +1,5 @@
-import { gotoAndWait } from "../helper";
-import { getLocators } from "./helper";
+import { gotoAndWait } from "../../helper";
+import { getLocators } from "../helper";
 import { expect, test } from "@playwright/test";
 
 test.describe("dev/ui/modal", () => {

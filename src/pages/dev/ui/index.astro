@@ -1,0 +1,42 @@
+---
+import "@/styles/global.css";
+
+const modalPages = [
+  { path: "/dev/ui/modal/privacy-policy/", label: "プライバシーポリシー" },
+  { path: "/dev/ui/modal/nemo-term/", label: "VOICEVOX Nemo 利用規約" },
+  { path: "/dev/ui/modal/library-term-intro/", label: "利用規約" },
+  { path: "/dev/ui/modal/nemo-guidance/", label: "VOICEVOX Nemo ご利用案内" },
+  { path: "/dev/ui/modal/download-nemo/", label: "Nemo エンジン ダウンロード" },
+  { path: "/dev/ui/modal/download/", label: "VOICEVOX ダウンロード" },
+];
+---
+
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>UI 確認用ページ</title>
+  </head>
+  <body class="p-8">
+    <h1 class="text-2xl font-bold mb-6">UI 確認用ページ</h1>
+
+    <section class="mb-8">
+      <h2 class="text-xl font-semibold mb-4">モーダル</h2>
+      <ul class="space-y-2">
+        {
+          modalPages.map((page) => (
+            <li>
+              <a
+                href={page.path}
+                class="text-emerald-600 hover:text-emerald-700 underline"
+              >
+                {page.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+  </body>
+</html>

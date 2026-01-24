@@ -69,16 +69,10 @@ primaryとemelaldは違うので元がどっちだったかを意識してくだ
 以上が今までのタスクです。
 今回は以下のタスクを実行してください。
 
-`pnpm run test:e2e --project="iPhone X" tests/e2e/ui/nemo.spec.ts`を実行すると分かる通り、テストが通りません。
-スクショテストが落ちているのは今回は問題ないのですが、Modalが表示されていないのが問題です。
-
-上記のテストはタイム・アウトするまで時間がかかるので、開発サーバーを立ち上げてplaywright mcpで動作確認してください。
-とりあえず直せたら教えて下さい。
-
-もしかしたらBulmaのmodalにはあったis-activeが消えているからかもしれません。
-あるいはそれ以外のbulma時代にだけあったコードかも。
-`src/components/modal/download/DownloadModal.tsx`辺りのコードを、`upstream/master`ブランチの同じファイルと比較して、差を見出してください。
-そしてbulmaに関してのcontext7を調べて、何が必要そうかを推測してください。
+`dev-ui-modal.spec.ts`を`dev-ui/modal.spec.ts`に移動してください。
+今後は`dev/ui`ディレクトリにUI確認用のテストをまとめてください。
+それと`src/pages/dev/ui`にindex.astroを作成して、`dev/ui`以下のコンポーネントへ遷移するボタンを配置してください。
+今後追加するUI確認用ページはすべてここからアクセスできるようにしてください。
 
 astroやzagjsについてわからないことがあればcontext7で調べてください。
 
@@ -87,7 +81,7 @@ astroやzagjsについてわからないことがあればcontext7で調べて�
 最後に以下をすべて実行して通過させてください。
 ```bash
 pnpm run fmt && pnpm run lint
-pnpm run test-build && pnpm run test:e2e
+pnpm run test-build && pnpm run test:e2e tests/e2e/ui/dev-ui/
 ```
 
 タスク遂行の際、余計なことをしないように注意してください。
