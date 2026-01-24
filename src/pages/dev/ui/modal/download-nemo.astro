@@ -1,7 +1,6 @@
 ---
 import DownloadNemoModal from "@/components/modal/download/DownloadNemoModal";
-import "@/styles/bulma.scss";
-import "@/styles/global.scss";
+import "@/styles/global.css";
 ---
 
 <html lang="ja">
@@ -20,23 +19,3 @@ import "@/styles/global.scss";
 
   $nemoDownloadModal.set(true);
 </script>
-
-<style lang="scss" is:global>
-  @use "bulma/sass/layout" as *;
-  @use "bulma/sass/utilities/mixins" as *;
-
-  .modal {
-    --bulma-body-color: var(--bulma-text);
-    --bulma-hr-background-color: var(--bulma-background);
-
-    color: var(--bulma-body-color);
-  }
-
-  .modal-download {
-    @include tablet {
-      .modal-card {
-        width: 670px;
-      }
-    }
-  }
-</style>

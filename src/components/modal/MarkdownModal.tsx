@@ -11,32 +11,44 @@ export default function MarkdownModal({
   hide: () => void;
   className?: string;
 }) {
+  if (!isActive) return null;
+
   return (
     <div
-      className={`${className} modal` + (isActive ? " is-active" : "")}
+      className={`fixed inset-0 ${className || ""}`}
       role="dialog"
       data-theme="light"
     >
-      <div className="modal-background" onClick={hide}></div>
-      <div className="modal-card">
-        <header className="modal-card-head has-text-centered">
-          <p className="modal-card-title">{title}</p>
-          <button
-            className="delete"
-            aria-label="close"
-            onClick={hide}
-            type="button"
-          />
-        </header>
-        <section className="modal-card-body">
-          <div
-            className="markdown"
-            dangerouslySetInnerHTML={{
-              __html: html,
-            }}
-          ></div>
-        </section>
-        <footer className="modal-card-foot is-justify-content-flex-end"></footer>
+      <div
+        className="fixed inset-0 bg-black/50"
+        onClick={hide}
+        role="presentation"
+      />
+      <div className="fixed inset-0 flex items-center justify-center p-4">
+        <div className="w-full max-w-[670px] rounded-md bg-white shadow-2xl">
+          <header className="relative flex items-center justify-center border-b border-gray-300 px-6 py-4">
+            <p className="text-xl font-bold text-gray-900">{title}</p>
+            <button
+              className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full bg-gray-100 text-2xl leading-none text-gray-600 hover:bg-gray-200"
+              aria-label="close"
+              onClick={hide}
+              type="button"
+            >
+              <span aria-hidden="true" className="text-xl leading-none">
+                ×
+              </span>
+            </button>
+          </header>
+          <section className="px-6 py-6">
+            <div
+              className="markdown"
+              dangerouslySetInnerHTML={{
+                __html: html,
+              }}
+            />
+          </section>
+          <footer className="flex items-center justify-end gap-3 border-t border-gray-300 px-6 py-4" />
+        </div>
       </div>
     </div>
   );

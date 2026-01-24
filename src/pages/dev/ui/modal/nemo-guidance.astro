@@ -1,7 +1,6 @@
 ---
 import NemoGuidanceModal from "@/components/modal/NemoGuidanceModal";
-import "@/styles/bulma.scss";
-import "@/styles/global.scss";
+import "@/styles/global.css";
 ---
 
 <html lang="ja">
@@ -20,51 +19,3 @@ import "@/styles/global.scss";
 
   $nemoGuidanceModal.set(true);
 </script>
-
-<style lang="scss" is:global>
-  @use "@/styles/markdown";
-
-  @use "bulma/sass/layout" as *;
-  @use "bulma/sass/utilities/mixins" as *;
-  @use "bulma/sass/helpers" as *;
-
-  .modal {
-    --bulma-body-color: var(--bulma-text);
-    --bulma-hr-background-color: var(--bulma-background);
-
-    color: var(--bulma-body-color);
-  }
-
-  .modal-nemo-guidance {
-    .modal-card-body {
-      display: flex;
-      flex-direction: column;
-      text-align: center;
-      align-items: center;
-
-      .step-by-step {
-        display: flex;
-        flex-direction: column;
-        text-align: center;
-        align-items: center;
-        gap: 0.75rem;
-
-        h3 {
-          @extend .mb-0;
-          @extend .title;
-          @extend .is-size-5;
-        }
-      }
-
-      hr {
-        @extend .my-4;
-        flex-shrink: 0;
-        align-self: stretch;
-      }
-
-      .policy-note {
-        @extend .has-text-grey-dark;
-      }
-    }
-  }
-</style>

@@ -10,3 +10,82 @@
     cursor: pointer;
   }
 }
+
+@layer components {
+  .markdown {
+    color: theme("colors.gray.700");
+    line-height: 1.75;
+  }
+
+  .markdown h2 {
+    font-size: theme("fontSize.2xl");
+    font-weight: theme("fontWeight.semibold");
+    color: theme("colors.gray.900");
+    margin-bottom: theme("spacing.3");
+  }
+
+  .markdown h3 {
+    font-size: theme("fontSize.xl");
+    font-weight: theme("fontWeight.semibold");
+    color: theme("colors.gray.900");
+    margin-bottom: theme("spacing.3");
+  }
+
+  .markdown h4 {
+    font-size: theme("fontSize.lg");
+    font-weight: theme("fontWeight.semibold");
+    color: theme("colors.gray.900");
+    margin-top: theme("spacing.5");
+    margin-bottom: theme("spacing.3");
+  }
+
+  .markdown p {
+    margin-bottom: theme("spacing.4");
+  }
+
+  .markdown ul,
+  .markdown ol {
+    margin-left: theme("spacing.6");
+    margin-bottom: theme("spacing.4");
+  }
+
+  .markdown li {
+    margin-bottom: theme("spacing.2");
+  }
+
+  .markdown img {
+    margin-bottom: theme("spacing.3");
+    vertical-align: middle;
+    border: 1px solid theme("colors.gray.800");
+  }
+
+  .markdown a {
+    color: theme("colors.emerald.600");
+    text-decoration: underline;
+  }
+
+  .markdown a:hover {
+    color: theme("colors.emerald.700");
+  }
+
+  .markdown code {
+    background-color: theme("colors.gray.100");
+    padding: theme("spacing.1") theme("spacing.2");
+    border-radius: theme("borderRadius.DEFAULT");
+    font-size: theme("fontSize.sm");
+    font-family: ui-monospace, monospace;
+  }
+
+  .markdown pre {
+    background-color: theme("colors.gray.100");
+    padding: theme("spacing.4");
+    border-radius: theme("borderRadius.md");
+    overflow-x: auto;
+    margin-bottom: theme("spacing.4");
+  }
+
+  .markdown pre code {
+    background-color: transparent;
+    padding: 0;
+  }
+}
