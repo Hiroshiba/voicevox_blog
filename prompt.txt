@@ -1,28 +1,50 @@
 このリポジトリは bulma フレームワークに依存しています。
 その依存をなくし、tailwindcssとzag.jsを使用するように置き換えることが最終目標です。
-zag.jsはAstroのアイランドを用いずにも利用します。
+zag.jsはReact版の他にAstroのアイランドを介さないバニラでも利用します。
+
 タスクを順に進めていきましょう。
 
-git addとgit commitは絶対に勝手に行わないでください。
+git add・git commit・git reset・git restoreは絶対に勝手に行わないでください。
 
 もしスクリーンショットを更新する際は`pnpm run test-build`を実行したあと`pnpm run test:e2e --update-snapshots`を実行してください。
+`test-build`を忘れるとスクリーンショットが正しく更新されません。
 
 tailwindを導入します。
 astro環境でtailwiandを導入する方法をcontext7で調べて実行してください。
+
+zagjsを導入してください。
+やり方はcontext7で調べてください。
 
 ---
 
 以上が今までのタスクです。
 今回は以下のタスクを実行してください。
 
-zagjsを導入してください。
-やり方はcontext7で調べてください。
-今回は導入タスクだけです。
+少しずつUIを移行していくために、UIの確認用のページを作って、Bulmaを用いた状態でスクリーンショットテストを追加してください。
+`src/pages/dev/thumb_generator`と同じように`src/pages/dev/ui`ディレクトリを作成してください。
+
+追加したページはSEO対策に注意し、インデックスを阻止してください。
+`src/pages/dev/thumb_generator`以下のページを参考にしてください。
+
+Modal確認用のページを作成してください。
+対象のModalは`src/components/modal/Modals.astro`にあるものすべてです。
+最初に一番簡単そうなModal１つ選んで、importして表示するだけのページを作成してください。
+ボタンを押したら開くのではなく、ページにアクセスしたら最初からModalが開いている状態にしてください。
+Modalを開くには`src/store/index.ts`のコードを正しく理解する必要があるので読んでください。
+それで撮ったスクリーンショットが意図したものになっているか確認してください。
+意図したものになっていたら、他のモーダルも同様に追加してください。
+
+まずはBulmaを用いてスクリーンショットを作成しますが、後々はtailwindに変えていくので、その機構も考慮して実装してください。
+
+astroやzagjsについてわからないことがあればcontext7で調べてください。
+
+---
 
 最後に以下をすべて実行して通過させてください。
-
 ```bash
 pnpm run fmt
 pnpm run lint
 pnpm run test:e2e
 ```
+
+タスク遂行の際、余計なことをしないように注意してください。
