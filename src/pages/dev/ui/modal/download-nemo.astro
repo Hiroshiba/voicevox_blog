@@ -1,0 +1,36 @@
+---
+import "@/styles/bulma.scss";
+import "@/styles/global.scss";
+import { DownloadNemoModalPage } from "./_DownloadNemoModalPage";
+---
+
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="robots" content="noindex, nofollow" />
+  </head>
+  <body>
+    <DownloadNemoModalPage client:load />
+  </body>
+</html>
+
+<style lang="scss" is:global>
+  @use "bulma/sass/layout" as *;
+  @use "bulma/sass/utilities/mixins" as *;
+
+  .modal {
+    --bulma-body-color: var(--bulma-text);
+    --bulma-hr-background-color: var(--bulma-background);
+
+    color: var(--bulma-body-color);
+  }
+
+  .modal-download {
+    @include tablet {
+      .modal-card {
+        width: 670px;
+      }
+    }
+  }
+</style>

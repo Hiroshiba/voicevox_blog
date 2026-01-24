@@ -1,0 +1,50 @@
+---
+import { compiledContent as libraryTermIntroTemplateHtml } from "@/assets/library-term-intro-template.md";
+import {
+  characterEntries,
+  characterKeys,
+  type CharacterKey,
+} from "@/constants/characterEntry";
+import { makeAssetsRecordSingleOptional } from "@/helper";
+import "@/styles/bulma.scss";
+import "@/styles/global.scss";
+import type { MarkdownInstance } from "astro";
+import { LibraryTermIntroModalPage } from "./_LibraryTermIntroModalPage";
+
+export const libraryTermIntroMarkdowns = makeAssetsRecordSingleOptional(
+  characterKeys,
+  characterEntries,
+  import.meta.glob<MarkdownInstance<object>>(
+    "@/assets/library-term-intro-markdowns/*.md",
+    {
+      eager: true,
+    },
+  ),
+);
+
+const libraryTermIntroHtmls = await (async () => {
+  const htmls = {} as Record<CharacterKey, string | undefined>;
+  for (const key of characterKeys) {
+    htmls[key] = await libraryTermIntroMarkdowns[key]?.compiledContent();
+  }
+  return htmls;
+})();
+
+const characterKey = characterKeys[0];
+---
+
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="robots" content="noindex, nofollow" />
+  </head>
+  <body>
+    <LibraryTermIntroModalPage
+      client:load
+      htmls={libraryTermIntroHtmls}
+      templateHtml={await libraryTermIntroTemplateHtml()}
+      characterKey={characterKey}
+    />
+  </body>
+</html>

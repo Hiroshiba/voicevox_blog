@@ -1,0 +1,17 @@
+---
+import { compiledContent as privacyPolicyHtml } from "@/assets/privacy-policy.md";
+import "@/styles/bulma.scss";
+import "@/styles/global.scss";
+import { PrivacyPolicyModalPage } from "./_PrivacyPolicyModalPage";
+---
+
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="robots" content="noindex, nofollow" />
+  </head>
+  <body>
+    <PrivacyPolicyModalPage client:load html={await privacyPolicyHtml()} />
+  </body>
+</html>

@@ -6,8 +6,13 @@ zag.jsはReact版の他にAstroのアイランドを介さないバニラでも�
 
 git add・git commit・git reset・git restoreは絶対に勝手に行わないでください。
 
+コードを書き足す際は周囲にあるコードや兄弟ファイルのコードをよく観察して、フォーマット、書き方、処理順序、ファイル名など、なるべく既存のコードと同じスタイルで書いてください。
+
 もしスクリーンショットを更新する際は`pnpm run test-build`を実行したあと`pnpm run test:e2e --update-snapshots`を実行してください。
 `test-build`を忘れるとスクリーンショットが正しく更新されません。
+変化しないはずのスクリーンショットが変わってしまった場合は、原因を特定して修正してください。
+
+---
 
 tailwindを導入します。
 astro環境でtailwiandを導入する方法をcontext7で調べて実行してください。
@@ -42,9 +47,8 @@ astroやzagjsについてわからないことがあればcontext7で調べて�
 
 最後に以下をすべて実行して通過させてください。
 ```bash
-pnpm run fmt
-pnpm run lint
-pnpm run test:e2e
+pnpm run fmt && pnpm run lint
+pnpm run test-build && pnpm run test:e2e
 ```
 
 タスク遂行の際、余計なことをしないように注意してください。
