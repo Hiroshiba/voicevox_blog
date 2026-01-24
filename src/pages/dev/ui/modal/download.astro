@@ -1,7 +1,7 @@
 ---
+import DownloadModal from "@/components/modal/download/DownloadModal";
 import "@/styles/bulma.scss";
 import "@/styles/global.scss";
-import { DownloadModalPage } from "./_DownloadModalPage";
 ---
 
 <html lang="ja">
@@ -11,9 +11,15 @@ import { DownloadModalPage } from "./_DownloadModalPage";
     <meta name="robots" content="noindex, nofollow" />
   </head>
   <body>
-    <DownloadModalPage client:load />
+    <DownloadModal client:only="react" />
   </body>
 </html>
+
+<script>
+  import { $downloadModal } from "@/store";
+
+  $downloadModal.set(true);
+</script>
 
 <style lang="scss" is:global>
   @use "bulma/sass/layout" as *;

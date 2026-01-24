@@ -1,5 +1,6 @@
 ---
 import { compiledContent as libraryTermIntroTemplateHtml } from "@/assets/library-term-intro-template.md";
+import LibraryTermIntroModal from "@/components/modal/LibraryTermIntroModal";
 import {
   characterEntries,
   characterKeys,
@@ -9,7 +10,6 @@ import { makeAssetsRecordSingleOptional } from "@/helper";
 import "@/styles/bulma.scss";
 import "@/styles/global.scss";
 import type { MarkdownInstance } from "astro";
-import { LibraryTermIntroModalPage } from "./_LibraryTermIntroModalPage";
 
 export const libraryTermIntroMarkdowns = makeAssetsRecordSingleOptional(
   characterKeys,
@@ -29,8 +29,6 @@ const libraryTermIntroHtmls = await (async () => {
   }
   return htmls;
 })();
-
-const characterKey = characterKeys[0];
 ---
 
 <html lang="ja">
@@ -40,11 +38,17 @@ const characterKey = characterKeys[0];
     <meta name="robots" content="noindex, nofollow" />
   </head>
   <body>
-    <LibraryTermIntroModalPage
-      client:load
+    <LibraryTermIntroModal
+      client:only="react"
       htmls={libraryTermIntroHtmls}
       templateHtml={await libraryTermIntroTemplateHtml()}
-      characterKey={characterKey}
     />
   </body>
 </html>
+
+<script>
+  import { characterKeys } from "@/constants/characterEntry";
+  import { $libraryTermIntroModal } from "@/store";
+
+  $libraryTermIntroModal.set({ show: true, characterKey: characterKeys[0] });
+</script>

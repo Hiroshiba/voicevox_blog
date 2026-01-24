@@ -1,8 +1,8 @@
 ---
 import { compiledContent as nemoReadmeHtml } from "@/assets/nemo-term.md";
+import { NemoTermModel } from "@/components/modal/MarkdownModals";
 import "@/styles/bulma.scss";
 import "@/styles/global.scss";
-import { NemoTermModalPage } from "./_NemoTermModalPage";
 ---
 
 <html lang="ja">
@@ -12,6 +12,12 @@ import { NemoTermModalPage } from "./_NemoTermModalPage";
     <meta name="robots" content="noindex, nofollow" />
   </head>
   <body>
-    <NemoTermModalPage client:load html={await nemoReadmeHtml()} />
+    <NemoTermModel client:only="react" html={await nemoReadmeHtml()} />
   </body>
 </html>
+
+<script>
+  import { $nemoTermModal } from "@/store";
+
+  $nemoTermModal.set(true);
+</script>

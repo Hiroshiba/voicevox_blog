@@ -1,7 +1,7 @@
 ---
+import NemoGuidanceModal from "@/components/modal/NemoGuidanceModal";
 import "@/styles/bulma.scss";
 import "@/styles/global.scss";
-import { NemoGuidanceModalPage } from "./_NemoGuidanceModalPage";
 ---
 
 <html lang="ja">
@@ -11,9 +11,15 @@ import { NemoGuidanceModalPage } from "./_NemoGuidanceModalPage";
     <meta name="robots" content="noindex, nofollow" />
   </head>
   <body>
-    <NemoGuidanceModalPage client:load />
+    <NemoGuidanceModal client:only="react" />
   </body>
 </html>
+
+<script>
+  import { $nemoGuidanceModal } from "@/store";
+
+  $nemoGuidanceModal.set(true);
+</script>
 
 <style lang="scss" is:global>
   @use "@/styles/markdown";

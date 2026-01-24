@@ -1,7 +1,7 @@
 ---
+import DownloadNemoModal from "@/components/modal/download/DownloadNemoModal";
 import "@/styles/bulma.scss";
 import "@/styles/global.scss";
-import { DownloadNemoModalPage } from "./_DownloadNemoModalPage";
 ---
 
 <html lang="ja">
@@ -11,9 +11,15 @@ import { DownloadNemoModalPage } from "./_DownloadNemoModalPage";
     <meta name="robots" content="noindex, nofollow" />
   </head>
   <body>
-    <DownloadNemoModalPage client:load />
+    <DownloadNemoModal client:only="react" />
   </body>
 </html>
+
+<script>
+  import { $nemoDownloadModal } from "@/store";
+
+  $nemoDownloadModal.set(true);
+</script>
 
 <style lang="scss" is:global>
   @use "bulma/sass/layout" as *;

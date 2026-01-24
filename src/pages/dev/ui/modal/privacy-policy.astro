@@ -1,8 +1,8 @@
 ---
 import { compiledContent as privacyPolicyHtml } from "@/assets/privacy-policy.md";
+import { PrivacyPolicyModal } from "@/components/modal/MarkdownModals";
 import "@/styles/bulma.scss";
 import "@/styles/global.scss";
-import { PrivacyPolicyModalPage } from "./_PrivacyPolicyModalPage";
 ---
 
 <html lang="ja">
@@ -12,6 +12,12 @@ import { PrivacyPolicyModalPage } from "./_PrivacyPolicyModalPage";
     <meta name="robots" content="noindex, nofollow" />
   </head>
   <body>
-    <PrivacyPolicyModalPage client:load html={await privacyPolicyHtml()} />
+    <PrivacyPolicyModal client:only="react" html={await privacyPolicyHtml()} />
   </body>
 </html>
+
+<script>
+  import { $privacyPolicyModal } from "@/store";
+
+  $privacyPolicyModal.set(true);
+</script>
