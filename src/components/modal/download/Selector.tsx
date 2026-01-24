@@ -10,29 +10,28 @@ export default function Selector<T extends string>({
   candidates: T[];
 }) {
   return (
-    <div className="columns is-tablet is-centered is-vcentered py-0 my-2">
-      <div className="column is-3 py-0 my-1">
-        <p className="has-text-centered is-size-5 has-text-weight-bold">
-          {label}
-        </p>
-      </div>
-      <div className="column is-6 py-0 my-1">
-        <div className="buttons is-centered">
-          {candidates.map((candidate, index) => (
+    <div className="flex flex-col items-center justify-center gap-4 py-2 sm:flex-row sm:justify-between">
+      <p className="text-center text-xl font-bold text-gray-900 sm:w-1/3">
+        {label}
+      </p>
+      <div className="flex flex-wrap items-center justify-center gap-2 sm:w-2/3">
+        {candidates.map((candidate, index) => {
+          const isSelected = candidate === selected;
+          return (
             <button
               key={index}
-              className={`button is-rounded ${
-                candidate == selected
-                  ? "is-success has-text-weight-semibold"
-                  : ""
-              }`}
+              className={
+                isSelected
+                  ? "inline-flex items-center justify-center rounded-full border-none bg-emerald-400 px-6 py-2.5 text-base font-semibold text-black hover:bg-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:ring-offset-2"
+                  : "inline-flex items-center justify-center rounded-full border border-gray-300 bg-white px-6 py-2.5 text-base font-normal text-black hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:ring-offset-2"
+              }
               onClick={() => setSelected(candidate)}
               type="button"
             >
-              <span>{candidate}</span>
+              {candidate}
             </button>
-          ))}
-        </div>
+          );
+        })}
       </div>
     </div>
   );

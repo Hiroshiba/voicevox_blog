@@ -176,63 +176,85 @@ export default function DownloadModal() {
     }
   };
 
+  if (!isActive) return null;
+
   return (
-    <div
-      className={"modal-download modal" + (isActive ? " is-active" : "")}
-      role="dialog"
-      data-theme="light"
-    >
-      <div className="modal-background" onClick={hide} role="presentation" />
-      <div className="modal-card">
-        <header className="modal-card-head has-text-centered">
-          <p className="modal-card-title">VOICEVOX ダウンロード</p>
-          <button
-            className="delete"
-            aria-label="close"
-            onClick={hide}
-            type="button"
-          />
-        </header>
+    <div className="fixed inset-0 z-50" role="dialog" data-theme="light">
+      <div
+        className="fixed inset-0 bg-black/50"
+        onClick={hide}
+        role="presentation"
+      />
+      <div className="fixed inset-0 flex items-center justify-center p-4">
+        <div className="w-full max-w-[670px] rounded-md bg-white shadow-2xl">
+          <header className="relative flex items-center justify-center border-b border-gray-300 px-6 py-4">
+            <p className="text-xl font-bold text-gray-900">
+              VOICEVOX ダウンロード
+            </p>
+            <button
+              className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full bg-gray-100 text-2xl leading-none text-gray-600 hover:bg-gray-200"
+              aria-label="close"
+              onClick={hide}
+              type="button"
+            >
+              <span aria-hidden="true" className="text-xl leading-none">
+                ×
+              </span>
+            </button>
+          </header>
 
-        <section className="modal-card-body">
-          <Selector
-            label="OS"
-            selected={selectedOs}
-            setSelected={selectOs}
-            candidates={["Windows", "Mac", "Linux"]}
-          />
+          <section className="space-y-6 px-6 py-6">
+            <Selector
+              label="OS"
+              selected={selectedOs}
+              setSelected={selectOs}
+              candidates={["Windows", "Mac", "Linux"]}
+            />
 
-          <hr className="my-3" />
+            <hr className="border-t border-gray-300" />
 
-          <Selector
-            label="対応モード"
-            selected={selectedOrDefaultMode}
-            setSelected={(mode) => selectMode(selectedOs, mode)}
-            candidates={modeAvailables[selectedOs]}
-          />
-          <p className="has-text-centered is-size-7">
-            ※ GPUモードの方が快適ですが、利用するためには
-            <a href={withBaseUrl("/qa/")}>対応するGPU</a>
-            が必要です
-          </p>
+            <div className="space-y-2">
+              <Selector
+                label="対応モード"
+                selected={selectedOrDefaultMode}
+                setSelected={(mode) => selectMode(selectedOs, mode)}
+                candidates={modeAvailables[selectedOs]}
+              />
+              <p className="text-center text-sm text-gray-600">
+                ※ GPUモードの方が快適ですが、利用するためには
+                <a
+                  href={withBaseUrl("/qa/")}
+                  className="text-emerald-600 underline hover:text-emerald-700"
+                >
+                  対応するGPU
+                </a>
+                が必要です
+              </p>
+            </div>
 
-          <hr className="my-3" />
+            <hr className="border-t border-gray-300" />
 
-          <Selector
-            label="パッケージ"
-            selected={selectedOrDefaultPackage}
-            setSelected={setSelectedPackage}
-            candidates={packageAvailables[selectedOs][selectedOrDefaultMode]!}
-          />
-          <p className="has-text-centered is-size-7">
-            ※ 推奨パッケージはインストーラー版です
-          </p>
-        </section>
+            <div className="space-y-2">
+              <Selector
+                label="パッケージ"
+                selected={selectedOrDefaultPackage}
+                setSelected={setSelectedPackage}
+                candidates={
+                  packageAvailables[selectedOs][selectedOrDefaultMode]!
+                }
+              />
+              <p className="text-center text-sm text-gray-600">
+                ※ 推奨パッケージはインストーラー版です
+              </p>
+            </div>
+          </section>
 
-        <footer className="modal-card-foot is-justify-content-flex-end">
-          <div className="buttons">
-            <a href={withBaseUrl("/term/")} className="button">
-              <span>利用規約</span>
+          <footer className="flex items-center justify-end gap-3 border-t border-gray-300 px-6 py-4">
+            <a
+              href={withBaseUrl("/term/")}
+              className="inline-flex items-center justify-center rounded border border-gray-300 bg-white px-4 py-2 text-base font-normal text-black hover:bg-gray-50"
+            >
+              利用規約
             </a>
             <a
               href={
@@ -243,12 +265,12 @@ export default function DownloadModal() {
               }
               target="_blank"
               rel="noreferrer"
-              className="button is-primary"
+              className="inline-flex items-center justify-center rounded border border-transparent bg-primary px-4 py-2 text-base font-semibold text-black hover:brightness-90"
             >
-              <span className="has-text-weight-semibold">ダウンロード</span>
+              ダウンロード
             </a>
-          </div>
-        </footer>
+          </footer>
+        </div>
       </div>
     </div>
   );
