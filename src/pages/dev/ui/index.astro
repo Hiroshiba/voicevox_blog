@@ -9,6 +9,8 @@ const modalPages = [
   { path: "/dev/ui/modal/download-nemo/", label: "Nemo エンジン ダウンロード" },
   { path: "/dev/ui/modal/download/", label: "VOICEVOX ダウンロード" },
 ];
+
+const componentPages = [{ path: "/dev/ui/play-button/", label: "PlayButton" }];
 ---
 
 <html lang="ja">
@@ -26,6 +28,24 @@ const modalPages = [
       <ul class="space-y-2">
         {
           modalPages.map((page) => (
+            <li>
+              <a
+                href={page.path}
+                class="text-emerald-600 hover:text-emerald-700 underline"
+              >
+                {page.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section class="mb-8">
+      <h2 class="text-xl font-semibold mb-4">コンポーネント</h2>
+      <ul class="space-y-2">
+        {
+          componentPages.map((page) => (
             <li>
               <a
                 href={page.path}
