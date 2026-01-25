@@ -1,0 +1,38 @@
+---
+import "@/styles/bulma.scss";
+import "@/styles/global.scss";
+import "@/styles/helper.scss";
+
+import {
+  StyleDropdownClosed,
+  StyleDropdownOpened,
+} from "./_StyleDropdownDemo.tsx";
+---
+
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>StyleDropdown 確認用ページ</title>
+  </head>
+  <body class="p-8">
+    <h1 class="text-2xl font-bold mb-6">StyleDropdown 確認用ページ</h1>
+
+    <section class="mb-8">
+      <h2 class="text-xl font-semibold mb-4">基本表示（閉じた状態）</h2>
+      <StyleDropdownClosed
+        client:load
+        styles={["ノーマル", "あまあま", "ツンツン", "セクシー"]}
+      />
+    </section>
+
+    <section class="mb-8">
+      <h2 class="text-xl font-semibold mb-4">開いた状態</h2>
+      <StyleDropdownOpened
+        client:load
+        styles={["ノーマル", "あまあま", "ツンツン", "セクシー"]}
+      />
+    </section>
+  </body>
+</html>

@@ -1,7 +1,7 @@
 ## UIコンポーネント（簡単順）
 
 - [x] **PlayButton** `src/components/PlayButton/` → `dev/ui/play-button/` 音声再生ボタン
-- [ ] **StyleDropdown** `src/components/StyleDropdown.tsx` → `dev/ui/style-dropdown/` スタイル選択
+- [x] **StyleDropdown** `src/components/StyleDropdown.tsx` → `dev/ui/style-dropdown/` スタイル選択
 - [ ] **Footer** `src/components/Footer.astro` → `dev/ui/footer/` サイトフッター
 - [ ] **Header** `src/components/Header/` → `dev/ui/header/` ナビゲーションバー
 
