@@ -14,7 +14,7 @@ async function waitForResourcesWithTimeout(
   evaluateCallback: () => ResourceCount,
   stepName: string,
 ) {
-  const timeoutMs = 3000;
+  const timeoutMs = 5000;
   const checkIntervalMs = 100;
 
   const executor = async () => {

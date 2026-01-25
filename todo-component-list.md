@@ -3,7 +3,7 @@
 - [x] **PlayButton** `src/components/PlayButton/` → `dev/ui/play-button/` 音声再生ボタン
 - [x] **StyleDropdown** `src/components/StyleDropdown.tsx` → `dev/ui/style-dropdown/` スタイル選択
 - [x] **Footer** `src/components/Footer.astro` → `dev/ui/footer/` サイトフッター
-- [ ] **Header** `src/components/Header/` → `dev/ui/header/` ナビゲーションバー
+- [x] **Header** `src/components/Header/` → `dev/ui/header/` ナビゲーションバー
 
 ### ページセクション系
 
