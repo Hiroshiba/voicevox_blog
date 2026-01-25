@@ -16,23 +16,25 @@ import {
     <meta name="robots" content="noindex, nofollow" />
     <title>StyleDropdown 確認用ページ</title>
   </head>
-  <body class="p-8">
-    <h1 class="text-2xl font-bold mb-6">StyleDropdown 確認用ページ</h1>
+  <body>
+    <div style="padding: 2rem;">
+      <h1 class="text-2xl font-bold mb-6">StyleDropdown 確認用ページ</h1>
 
-    <section class="mb-8">
-      <h2 class="text-xl font-semibold mb-4">基本表示（閉じた状態）</h2>
-      <StyleDropdownClosed
-        client:load
-        styles={["ノーマル", "あまあま", "ツンツン", "セクシー"]}
-      />
-    </section>
+      <section class="mb-8">
+        <h2 class="text-xl font-semibold mb-4">基本表示（閉じた状態）</h2>
+        <StyleDropdownClosed
+          client:load
+          styles={["ノーマル", "あまあま", "ツンツン", "セクシー"]}
+        />
+      </section>
 
-    <section class="mb-8">
-      <h2 class="text-xl font-semibold mb-4">開いた状態</h2>
-      <StyleDropdownOpened
-        client:load
-        styles={["ノーマル", "あまあま", "ツンツン", "セクシー"]}
-      />
-    </section>
+      <section class="mb-8">
+        <h2 class="text-xl font-semibold mb-4">開いた状態</h2>
+        <StyleDropdownOpened
+          client:load
+          styles={["ノーマル", "あまあま", "ツンツン", "セクシー"]}
+        />
+      </section>
+    </div>
   </body>
 </html>
