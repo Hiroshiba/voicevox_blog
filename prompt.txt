@@ -31,6 +31,7 @@ primary color以外はtailwindにある色を使うようにしてください�
 Codexの場合、サーバーの起動やe2eテストには権限の昇格が必要になることがあります。
 portが変わったり`[::1]`になっていたりするので、hostやportを指定して起動すると確実です。
 Codex専用コマンド：`nohup pnpm start -- --host 127.0.0.1 --port 4321 --strictPort`
+これで起動しているので、**絶対に疎通チェックは一切せず**いきなりplaywrightで動作確認してください。
 
 ---
 
