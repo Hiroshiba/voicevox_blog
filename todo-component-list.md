@@ -15,11 +15,12 @@
 - [x] **CharacterCard (dormitory)** `src/pages/dormitory/_CharacterCard.astro` → `dev/ui/character-card-dormitory/`
 - [x] **TopIllustContainer** `src/pages/dormitory/_TopIllustContainer.astro` → `dev/ui/top-illust/`
 - [x] **ExplainSection** `src/pages/dormitory/_ExplainSection.astro` → `dev/ui/explain-section/`
-- [ ] **SpeakerComponent (nemo)** `src/pages/nemo/_SpeakerComponent.astro` → `dev/ui/nemo-speaker/` CVドロップダウン＋依頼先ボタン＋サンプルボイス
+- [ ] **Dormitory Character Page** `src/pages/dormitory/[characterId]/[...descriptionType].astro` → `dev/ui/dormitory-character-page/` `/dormitory/shikoku_metan/` など（プロフィール/呼び方）
+- [x] **SpeakerComponent (nemo)** `src/pages/nemo/_SpeakerComponent.astro` → `dev/ui/nemo-speaker/` CVドロップダウン＋依頼先ボタン＋サンプルボイス
 - [ ] **Product TopContainer** `src/pages/product/_TopContainer.astro` → `dev/ui/product-top-container/` 製品ページのファーストビュー（キャラ表示＋キャラ一覧）
-- [ ] **AudioSample (product)** `src/pages/product/AudioSample.tsx` → `dev/ui/product-audio-sample/` 製品ページのサンプルボイスUI
-- [ ] **AudioSample (talk)** `src/pages/talk/AudioSample.tsx` → `dev/ui/talk-audio-sample/` トップページの音声サンプルUI
-- [ ] **CharacterCard (song)** `src/pages/song/CharacterCard.tsx` → `dev/ui/song-character-card/` ソングページのキャラクターカード
+- [x] **AudioSample (product)** `src/pages/product/AudioSample.tsx` → `dev/ui/product-audio-sample/` 製品ページのサンプルボイスUI
+- [x] **AudioSample (talk)** `src/pages/talk/AudioSample.tsx` → `dev/ui/talk-audio-sample/` トップページの音声サンプルUI
+- [x] **CharacterCard (song)** `src/pages/song/CharacterCard.tsx` → `dev/ui/song-character-card/` ソングページのキャラクターカード
 
 ---
 

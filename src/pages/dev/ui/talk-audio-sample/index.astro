@@ -1,0 +1,72 @@
+---
+import { characterInfos } from "@/constants/characterInfo";
+import AudioSample from "@/pages/talk/AudioSample";
+import "@/styles/bulma.scss";
+import "@/styles/global.scss";
+import "@/styles/helper.scss";
+
+const characterInfo = characterInfos["ずんだもん"];
+---
+
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>AudioSample (talk) 確認用ページ</title>
+  </head>
+  <body>
+    <div style="padding: 2rem;">
+      <h1 class="text-2xl font-bold mb-6">AudioSample (talk) 確認用ページ</h1>
+
+      <section class="mb-8">
+        <h2 class="text-xl font-semibold mb-4">音声サンプルUI</h2>
+        <div class="container is-max-desktop is-flex is-flex-direction-column">
+          <div class="columns is-multiline is-centered">
+            <div class="column is-6-tablet is-4-desktop">
+              <div class="card">
+                <div class="card-content has-text-centered">
+                  <h3 class="title is-4 mb-0">{characterInfo.name}</h3>
+                  <AudioSample
+                    client:load
+                    audioSamples={characterInfo.talkVoiceAudios}
+                    characterName={characterInfo.name}
+                    className=""
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>
+
+<style lang="scss" is:global>
+  /* NOTE: src/pages/talk/_CharacterCard.astro の is:global スタイルを dev/ui でも再現するため、必要最小限を複製しています */
+  @use "bulma/sass/helpers" as *;
+
+  .audio-sample {
+    .audio-sample-pair {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 3px 10px;
+
+      @extend .py-1;
+
+      .audio-sample-label {
+        width: 100px;
+        // @include from($tablet) {
+        //   text-align: right !important;
+        // }
+      }
+      .audio-sample-content {
+        display: flex;
+        gap: 3px;
+      }
+    }
+  }
+</style>
