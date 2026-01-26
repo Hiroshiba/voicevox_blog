@@ -12,7 +12,7 @@
 - [x] **OssGuidanceSection** `src/pages/_OssGuidanceSection.astro` → `dev/ui/oss-guidance/`
 - [x] **LinkListSection** `src/pages/_LinkListSection.astro` → `dev/ui/link-list/`
 - [x] **CharacterCard (talk)** `src/pages/talk/_CharacterCard.astro` → `dev/ui/character-card-talk/`
-- [ ] **CharacterCard (dormitory)** `src/pages/dormitory/_CharacterCard.astro` → `dev/ui/character-card-dormitory/`
+- [x] **CharacterCard (dormitory)** `src/pages/dormitory/_CharacterCard.astro` → `dev/ui/character-card-dormitory/`
 - [ ] **TopIllustContainer** `src/pages/dormitory/_TopIllustContainer.astro` → `dev/ui/top-illust/`
 - [ ] **ExplainSection** `src/pages/dormitory/_ExplainSection.astro` → `dev/ui/explain-section/`
 
