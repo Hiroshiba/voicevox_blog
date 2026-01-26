@@ -10,7 +10,7 @@
 - [x] **SoftwareFeature** `src/pages/_SoftwareFeature.astro` → `dev/ui/software-feature/`
 - [x] **EngineGuidanceSection** `src/pages/_EngineGuidanceSection.astro` → `dev/ui/engine-guidance/`
 - [x] **OssGuidanceSection** `src/pages/_OssGuidanceSection.astro` → `dev/ui/oss-guidance/`
-- [ ] **LinkListSection** `src/pages/_LinkListSection.astro` → `dev/ui/link-list/`
+- [x] **LinkListSection** `src/pages/_LinkListSection.astro` → `dev/ui/link-list/`
 - [ ] **CharacterCard (talk)** `src/pages/talk/_CharacterCard.astro` → `dev/ui/character-card-talk/`
 - [ ] **CharacterCard (dormitory)** `src/pages/dormitory/_CharacterCard.astro` → `dev/ui/character-card-dormitory/`
 - [ ] **TopIllustContainer** `src/pages/dormitory/_TopIllustContainer.astro` → `dev/ui/top-illust/`
