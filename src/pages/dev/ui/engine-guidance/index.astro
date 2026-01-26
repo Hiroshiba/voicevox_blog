@@ -1,0 +1,38 @@
+---
+import EngineGuidanceSection from "@/pages/_EngineGuidanceSection.astro";
+import "@/styles/bulma.scss";
+import "@/styles/global.scss";
+import "@/styles/helper.scss";
+---
+
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>EngineGuidanceSection 確認用ページ</title>
+  </head>
+  <body>
+    <div style="padding: 2rem;">
+      <h1 class="text-2xl font-bold mb-6">
+        EngineGuidanceSection 確認用ページ
+      </h1>
+
+      <section class="mb-8">
+        <h2 class="text-xl font-semibold mb-4">デフォルト</h2>
+        <EngineGuidanceSection />
+      </section>
+
+      <section class="mb-8">
+        <h2 class="text-xl font-semibold mb-4">isDark</h2>
+        {/* NOTE: `/song` に合わせて isDark の本文色は親側で白にしています。 */}
+        <div
+          data-theme="dark"
+          class="has-text-white has-background-grey-darker"
+        >
+          <EngineGuidanceSection isDark />
+        </div>
+      </section>
+    </div>
+  </body>
+</html>
