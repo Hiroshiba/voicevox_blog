@@ -7,7 +7,7 @@
 
 ### ページセクション系
 
-- [ ] **SoftwareFeature** `src/pages/_SoftwareFeature.astro` → `dev/ui/software-feature/`
+- [x] **SoftwareFeature** `src/pages/_SoftwareFeature.astro` → `dev/ui/software-feature/`
 - [ ] **EngineGuidanceSection** `src/pages/_EngineGuidanceSection.astro` → `dev/ui/engine-guidance/`
 - [ ] **OssGuidanceSection** `src/pages/_OssGuidanceSection.astro` → `dev/ui/oss-guidance/`
 - [ ] **LinkListSection** `src/pages/_LinkListSection.astro` → `dev/ui/link-list/`
