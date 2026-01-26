@@ -13,8 +13,8 @@
 - [x] **LinkListSection** `src/pages/_LinkListSection.astro` → `dev/ui/link-list/`
 - [x] **CharacterCard (talk)** `src/pages/talk/_CharacterCard.astro` → `dev/ui/character-card-talk/`
 - [x] **CharacterCard (dormitory)** `src/pages/dormitory/_CharacterCard.astro` → `dev/ui/character-card-dormitory/`
-- [ ] **TopIllustContainer** `src/pages/dormitory/_TopIllustContainer.astro` → `dev/ui/top-illust/`
-- [ ] **ExplainSection** `src/pages/dormitory/_ExplainSection.astro` → `dev/ui/explain-section/`
+- [x] **TopIllustContainer** `src/pages/dormitory/_TopIllustContainer.astro` → `dev/ui/top-illust/`
+- [x] **ExplainSection** `src/pages/dormitory/_ExplainSection.astro` → `dev/ui/explain-section/`
 
 ---
 
