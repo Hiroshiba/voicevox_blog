@@ -1,4 +1,5 @@
 import { gotoAndWait } from "../../helper";
+import { takeScreenshots } from "../../screenshot/helper";
 import { getLocators } from "../helper";
 import { expect, test } from "@playwright/test";
 
@@ -7,6 +8,6 @@ test.describe("dev/ui/header", () => {
     await gotoAndWait(page, "/dev/ui/header/");
     const { header } = getLocators(page);
     await expect(header).toBeVisible();
-    await expect(page).toHaveScreenshot();
+    await takeScreenshots(page);
   });
 });

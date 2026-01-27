@@ -1,6 +1,10 @@
-import { expect, test } from "@playwright/test";
+import { gotoAndWait } from "../../helper";
+import { takeScreenshots } from "../../screenshot/helper";
+import { test } from "@playwright/test";
 
-test("type-button", async ({ page }) => {
-  await page.goto("/dev/ui/type-button/");
-  await expect(page).toHaveScreenshot({ fullPage: true });
+test.describe("dev/ui/type-button", () => {
+  test("default", async ({ page }) => {
+    await gotoAndWait(page, "/dev/ui/type-button/");
+    await takeScreenshots(page);
+  });
 });

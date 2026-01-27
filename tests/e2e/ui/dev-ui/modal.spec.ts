@@ -1,4 +1,5 @@
 import { gotoAndWait } from "../../helper";
+import { takeScreenshots } from "../../screenshot/helper";
 import { getLocators } from "../helper";
 import { expect, test } from "@playwright/test";
 
@@ -8,7 +9,7 @@ test.describe("dev/ui/modal", () => {
     const { modal } = getLocators(page);
     await expect(modal).toBeVisible();
     await expect(modal.locator("header")).toContainText("プライバシーポリシー");
-    await expect(page).toHaveScreenshot();
+    await takeScreenshots(page);
   });
 
   test("nemo-term", async ({ page }) => {
@@ -18,7 +19,7 @@ test.describe("dev/ui/modal", () => {
     await expect(modal.locator("header")).toContainText(
       "VOICEVOX Nemo 利用規約",
     );
-    await expect(page).toHaveScreenshot();
+    await takeScreenshots(page);
   });
 
   test("library-term-intro", async ({ page }) => {
@@ -26,7 +27,7 @@ test.describe("dev/ui/modal", () => {
     const { modal } = getLocators(page);
     await expect(modal).toBeVisible();
     await expect(modal.locator("header")).toContainText("利用規約");
-    await expect(page).toHaveScreenshot();
+    await takeScreenshots(page);
   });
 
   test("nemo-guidance", async ({ page }) => {
@@ -36,7 +37,7 @@ test.describe("dev/ui/modal", () => {
     await expect(modal.locator("header")).toContainText(
       "VOICEVOX Nemo ご利用案内",
     );
-    await expect(page).toHaveScreenshot();
+    await takeScreenshots(page);
   });
 
   test("download-nemo", async ({ page }) => {
@@ -46,7 +47,7 @@ test.describe("dev/ui/modal", () => {
     await expect(modal.locator("header")).toContainText(
       "Nemo エンジン ダウンロード",
     );
-    await expect(page).toHaveScreenshot();
+    await takeScreenshots(page);
   });
 
   test("download", async ({ page }) => {
@@ -56,6 +57,6 @@ test.describe("dev/ui/modal", () => {
     await expect(modal.locator("header")).toContainText(
       "VOICEVOX ダウンロード",
     );
-    await expect(page).toHaveScreenshot();
+    await takeScreenshots(page);
   });
 });
