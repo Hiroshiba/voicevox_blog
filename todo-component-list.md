@@ -15,7 +15,8 @@
 - [x] **CharacterCard (dormitory)** `src/pages/dormitory/_CharacterCard.astro` → `dev/ui/character-card-dormitory/`
 - [x] **TopIllustContainer** `src/pages/dormitory/_TopIllustContainer.astro` → `dev/ui/top-illust/`
 - [x] **ExplainSection** `src/pages/dormitory/_ExplainSection.astro` → `dev/ui/explain-section/`
-- [ ] **Dormitory Character Page** `src/pages/dormitory/[characterId]/[...descriptionType].astro` → `dev/ui/dormitory-character-page/` `/dormitory/shikoku_metan/` など（プロフィール/呼び方）
+- [x] **TypeButton** `src/pages/dormitory/[characterId]/_TypeButton.astro` → `dev/ui/type-button/` タブ切り替えボタン
+- [x] **CallBox** `src/pages/dormitory/[characterId]/_CallBox.astro` → `dev/ui/call-box/` キャラクター間の呼び方表示
 - [x] **SpeakerComponent (nemo)** `src/pages/nemo/_SpeakerComponent.astro` → `dev/ui/nemo-speaker/` CVドロップダウン＋依頼先ボタン＋サンプルボイス
 - [ ] **Product TopContainer** `src/pages/product/_TopContainer.astro` → `dev/ui/product-top-container/` 製品ページのファーストビュー（キャラ表示＋キャラ一覧）
 - [x] **AudioSample (product)** `src/pages/product/AudioSample.tsx` → `dev/ui/product-audio-sample/` 製品ページのサンプルボイスUI

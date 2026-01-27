@@ -1,0 +1,81 @@
+---
+import { characterInfos } from "@/constants/characterInfo";
+import { descriptionTypes } from "@/pages/dormitory/[characterId]/_constants";
+import TypeButton from "@/pages/dormitory/[characterId]/_TypeButton.astro";
+import "@/styles/bulma.scss";
+import "@/styles/global.scss";
+import "@/styles/helper.scss";
+
+const descriptionNames = {
+  profile: "プロフィール",
+  calls: "呼び方",
+} satisfies Record<(typeof descriptionTypes)[number], string>;
+
+const shikokuMetan = characterInfos.四国めたん;
+const zundamon = characterInfos.ずんだもん;
+---
+
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>TypeButton 確認用ページ</title>
+  </head>
+  <body>
+    <div style="padding: 2rem;">
+      <h1 class="text-2xl font-bold mb-6">TypeButton 確認用ページ</h1>
+
+      <section class="mb-8">
+        <h2 class="text-xl font-semibold mb-4">
+          四国めたん（プロフィール選択状態）
+        </h2>
+        <div class="buttons has-addons">
+          <TypeButton
+            characterInfo={shikokuMetan}
+            selectedType="profile"
+            targetType="profile"
+            targetName={descriptionNames.profile}
+          />
+          <TypeButton
+            characterInfo={shikokuMetan}
+            selectedType="profile"
+            targetType="calls"
+            targetName={descriptionNames.calls}
+          />
+        </div>
+      </section>
+
+      <section class="mb-8">
+        <h2 class="text-xl font-semibold mb-4">ずんだもん（呼び方選択状態）</h2>
+        <div class="buttons has-addons">
+          <TypeButton
+            characterInfo={zundamon}
+            selectedType="calls"
+            targetType="profile"
+            targetName={descriptionNames.profile}
+          />
+          <TypeButton
+            characterInfo={zundamon}
+            selectedType="calls"
+            targetType="calls"
+            targetName={descriptionNames.calls}
+          />
+        </div>
+      </section>
+    </div>
+  </body>
+</html>
+
+<style lang="scss" is:global>
+  /* NOTE: src/pages/dormitory/[characterId]/[...descriptionType].astro の is:global スタイルを dev/ui でも再現するため、必要最小限を複製しています */
+
+  .description-type-button {
+    box-shadow: none;
+    border-width: 1.5px;
+
+    &.description-type-button-selected {
+      font-weight: bold;
+    }
+  }
+</style>
