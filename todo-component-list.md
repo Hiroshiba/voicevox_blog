@@ -1,45 +1,144 @@
-## UIコンポーネント（簡単順）
+## Tailwind化タスクリスト（簡単順）
 
-- [x] **PlayButton** `src/components/PlayButton/` → `dev/ui/play-button/` 音声再生ボタン
-- [x] **StyleDropdown** `src/components/StyleDropdown.tsx` → `dev/ui/style-dropdown/` スタイル選択
-- [x] **Footer** `src/components/Footer.astro` → `dev/ui/footer/` サイトフッター
-- [x] **Header** `src/components/Header/` → `dev/ui/header/` ナビゲーションバー
+### ✅ 完了済み
 
-### ページセクション系
+- [x] **MarkdownModal** `src/components/modal/MarkdownModal.tsx`
+  - モーダルベースコンポーネント
 
-- [x] **SoftwareFeature** `src/pages/_SoftwareFeature.astro` → `dev/ui/software-feature/`
-- [x] **EngineGuidanceSection** `src/pages/_EngineGuidanceSection.astro` → `dev/ui/engine-guidance/`
-- [x] **OssGuidanceSection** `src/pages/_OssGuidanceSection.astro` → `dev/ui/oss-guidance/`
-- [x] **LinkListSection** `src/pages/_LinkListSection.astro` → `dev/ui/link-list/`
-- [x] **CharacterCard (talk)** `src/pages/talk/_CharacterCard.astro` → `dev/ui/character-card-talk/`
-- [x] **CharacterCard (dormitory)** `src/pages/dormitory/_CharacterCard.astro` → `dev/ui/character-card-dormitory/`
-- [x] **TopIllustContainer** `src/pages/dormitory/_TopIllustContainer.astro` → `dev/ui/top-illust/`
-- [x] **ExplainSection** `src/pages/dormitory/_ExplainSection.astro` → `dev/ui/explain-section/`
-- [x] **TypeButton** `src/pages/dormitory/[characterId]/_TypeButton.astro` → `dev/ui/type-button/` タブ切り替えボタン
-- [x] **CallBox** `src/pages/dormitory/[characterId]/_CallBox.astro` → `dev/ui/call-box/` キャラクター間の呼び方表示
-- [x] **SpeakerComponent (nemo)** `src/pages/nemo/_SpeakerComponent.astro` → `dev/ui/nemo-speaker/` CVドロップダウン＋依頼先ボタン＋サンプルボイス
-- [x] **Product TopContainer** `src/pages/product/_TopContainer.astro` → `dev/ui/product-top-container/` 製品ページのファーストビュー（キャラ表示＋キャラ一覧）
-- [x] **AudioSample (product)** `src/pages/product/AudioSample.tsx` → `dev/ui/product-audio-sample/` 製品ページのサンプルボイスUI
-- [x] **AudioSample (talk)** `src/pages/talk/AudioSample.tsx` → `dev/ui/talk-audio-sample/` トップページの音声サンプルUI
-- [x] **CharacterCard (song)** `src/pages/song/CharacterCard.tsx` → `dev/ui/song-character-card/` ソングページのキャラクターカード
+- [x] **PrivacyPolicyModal** `src/components/modal/MarkdownModals.tsx`
+  - プライバシーポリシーモーダル
+
+- [x] **NemoTermModal** `src/components/modal/MarkdownModals.tsx`
+  - VOICEVOX Nemo 利用規約モーダル
+
+- [x] **LibraryTermIntroModal** `src/components/modal/LibraryTermIntroModal.tsx`
+  - 利用規約モーダル
+
+- [x] **NemoGuidanceModal** `src/components/modal/NemoGuidanceModal.tsx`
+  - VOICEVOX Nemo ご利用案内モーダル
+
+- [x] **DownloadNemoModal** `src/components/modal/download/DownloadNemoModal.tsx`
+  - Nemo エンジン ダウンロードモーダル
+
+- [x] **DownloadModal** `src/components/modal/download/DownloadModal.tsx`
+  - VOICEVOX ダウンロードモーダル
+
+### 低難易度（基本レイアウトのみ、状態管理なし）
+
+- [ ] **Footer** `src/components/Footer.astro`
+  - `button`, `is-small`, `is-dark` → Tailwindのボタンスタイル
+  - `container`, `is-flex`, `is-justify-content-center` → Flexboxレイアウト
+
+- [ ] **TopIllustContainer** `src/pages/dormitory/_TopIllustContainer.astro`
+  - シンプルなコンテナレイアウト → Tailwindで再現
+
+- [ ] **SoftwareFeature** `src/pages/_SoftwareFeature.astro`
+  - Bulmaのグリッド・タイポグラフィ → Tailwindのグリッド・テキストスタイル
+
+- [ ] **EngineGuidanceSection** `src/pages/_EngineGuidanceSection.astro`
+  - セクションレイアウト → Tailwindで再現
+
+- [ ] **OssGuidanceSection** `src/pages/_OssGuidanceSection.astro`
+  - セクションレイアウト → Tailwindで再現
+
+- [ ] **LinkListSection** `src/pages/_LinkListSection.astro`
+  - リストレイアウト → Tailwindで再現
+
+- [ ] **ExplainSection** `src/pages/dormitory/_ExplainSection.astro`
+  - 基本的なセクションレイアウト → Tailwindで再現
+
+- [ ] **CharacterCard (dormitory)** `src/pages/dormitory/_CharacterCard.astro`
+  - カードスタイル → Tailwindで再現
+
+- [ ] **CharacterCard (talk)** `src/pages/talk/_CharacterCard.astro`
+  - カードスタイル → Tailwindで再現
+
+### 中難易度（カスタムスタイルまたは軽い状態管理）
+
+- [ ] **TypeButton** `src/pages/dormitory/[characterId]/_TypeButton.astro`
+  - タブボタンのスタイル → Tailwindで再現
+
+- [ ] **AudioSample (product)** `src/pages/product/AudioSample.tsx`
+  - サンプルボイスUI（React版） → Tailwindで再現
+
+- [ ] **AudioSample (talk)** `src/pages/talk/AudioSample.tsx`
+  - サンプルボイスUI（React版） → Tailwindで再現
+
+- [ ] **CharacterCard (song)** `src/pages/song/CharacterCard.tsx`
+  - カードスタイル（React版） → Tailwindで再現
+
+- [ ] **SpeakerComponent (nemo)** `src/pages/nemo/_SpeakerComponent.astro`
+  - CVドロップダウン＋ボタン＋サンプルボイス → Tailwindで再現
+
+- [ ] **CallBox** `src/pages/dormitory/[characterId]/_CallBox.astro`
+  - ボックスレイアウト → Tailwindで再現
+
+### 高難易度（複雑な状態管理・インタラクション）
+
+- [ ] **PlayButton** `src/components/PlayButton/PlayButton.tsx`
+  - `button`, `is-primary`, `is-loading` → Tailwindのボタン＋ローディング状態
+  - `circle-icon` → カスタムスタイル（そのまま残すかTailwindで再現）
+  - 複雑な状態管理、カスタムフック、CSSカスタムプロパティ
+
+- [ ] **Product TopContainer** `src/pages/product/_TopContainer.astro`
+  - 複雑なレイアウト（キャラ表示＋キャラ一覧） → Tailwindで再現
+  - nanostores、スクロール制御、110行以上のSCSS
+
+- [ ] **StyleDropdown** `src/components/StyleDropdown.tsx`
+  - `dropdown`, `dropdown-trigger`, `dropdown-menu`, `dropdown-content` → zag.jsのドロップダウン + Tailwindスタイル
+  - `dropdown-item`, `button`, `is-rounded` → Tailwindで再現
+
+- [ ] **Header** `src/components/Header/Header.tsx`
+  - `navbar`, `navbar-brand`, `navbar-item`, `navbar-menu` → Tailwindのナビゲーション
+  - `navbar-burger`, `navbar-end` → レスポンシブメニュー（zag.js検討）
+  - `is-fixed-top`, `has-shadow` → Tailwindのfixed + shadow
+  - Intersection Observer、状態管理はそのまま維持
 
 ---
 
 ## 参考情報
 
-### Bulma依存クラス一覧
+### Tailwind化の方針
 
-| コンポーネント | Bulmaクラス                                                                                                         |
-| -------------- | ------------------------------------------------------------------------------------------------------------------- |
-| PlayButton     | `button`, `is-primary`, `is-loading`, `circle-icon`                                                                 |
-| StyleDropdown  | `dropdown`, `dropdown-trigger`, `dropdown-menu`, `dropdown-content`, `dropdown-item`, `button`, `is-rounded`        |
-| Footer         | `button`, `is-small`, `is-dark`, `container`, `is-flex`, `is-justify-content-center`                                |
-| Header         | `navbar`, `navbar-brand`, `navbar-item`, `navbar-menu`, `navbar-burger`, `navbar-end`, `is-fixed-top`, `has-shadow` |
+1. **デザインを大きく変えない**
+   - 既存のスクリーンショットと細かいところまで見比べる
+   - レイアウト、余白、サイズ、色を可能な限り維持
+
+2. **カラーパレット**
+   - Primary color: カスタムカラー（既存のまま）
+   - その他: Tailwindの標準カラーを使用
+
+3. **zag.jsの使用判断**
+   - 状態管理が複雑なコンポーネント（ドロップダウン、メニュー等）で検討
+   - シンプルなコンポーネントは不要
+
+4. **実装の流れ**
+   - 元のコンポーネントを直接Tailwindで置き換え
+   - 開発サーバーでPlaywrightを使って動作確認
+   - ユーザーに確認を依頼（AskSkill）
+   - スクリーンショット更新: `pnpm run test:e2e --update-snapshots=all tests/e2e/ui/dev-ui/`
+
+### 主要なBulmaクラスとTailwind対応（適宜更新）
+
+| Bulmaクラス                 | Tailwind対応例                                         |
+| --------------------------- | ------------------------------------------------------ |
+| `button`                    | `px-4 py-2 rounded font-medium`                        |
+| `is-primary`                | `bg-primary text-white hover:bg-primary-dark`          |
+| `is-small`                  | `text-sm px-3 py-1`                                    |
+| `is-dark`                   | `bg-gray-800 text-white`                               |
+| `is-loading`                | カスタムローディングスピナー＋`opacity-50 cursor-wait` |
+| `is-rounded`                | `rounded-full`                                         |
+| `container`                 | `container mx-auto px-4`                               |
+| `is-flex`                   | `flex`                                                 |
+| `is-justify-content-center` | `justify-center`                                       |
+| `navbar`                    | `fixed top-0 w-full bg-white shadow`                   |
+| `dropdown`                  | zag.jsのドロップダウン + Tailwindスタイル              |
 
 ### 複雑さの目安
 
-| レベル | コンポーネント                                                                                     |
-| ------ | -------------------------------------------------------------------------------------------------- |
-| 低     | Footer, SoftwareFeature, EngineGuidanceSection, OssGuidanceSection, LinkListSection, CharacterCard |
-| 中     | PlayButton, StyleDropdown, TopIllustContainer, ExplainSection                                      |
-| 高     | Header（レスポンシブ、Intersection Observer、状態管理）                                            |
+| レベル  | コンポーネント                                                                                                                                          | 備考                               |
+| ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------- |
+| ✅ 完了 | Modal系（MarkdownModal, PrivacyPolicyModal, NemoTermModal, LibraryTermIntroModal, NemoGuidanceModal, DownloadModal, DownloadNemoModal）                 | zag.js dialog + Tailwind化完了     |
+| 低      | Footer, TopIllustContainer, SoftwareFeature, EngineGuidanceSection, OssGuidanceSection, LinkListSection, ExplainSection, CharacterCard (dormitory/talk) | 基本レイアウトのみ、状態管理なし   |
+| 中      | TypeButton, AudioSample, CharacterCard (song), SpeakerComponent, CallBox                                                                                | カスタムスタイルまたは軽い状態管理 |
+| 高      | PlayButton, Product TopContainer, StyleDropdown, Header                                                                                                 | 複雑な状態管理・インタラクション   |
