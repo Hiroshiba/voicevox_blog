@@ -6,38 +6,41 @@ interface Props {
 
 import { APP_VERSION } from "@/constants";
 import { showDownloadModalAttr } from "@/store";
+import "@/styles/global.css";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const { class: className, style } = Astro.props;
 ---
 
-<div class={`${className} is-flex is-flex-direction-column`} style={style}>
-  <h2 id="feature" class="title">特徴</h2>
-  <div class="content">
-    <ul class="mt-0">
+<div class={`${className} flex flex-col items-start`} style={style}>
+  <h2 id="feature" class="text-4xl font-bold mb-4">特徴</h2>
+  <div>
+    <ul class="list-disc list-inside space-y-2">
       <li>
         商用・非商用問わず無料{" "}
-        <span style={{ fontSize: "0.7em" }}>(※1)</span>
+        <span class="text-xs">(※1)</span>
       </li>
       <li>
         すぐに使えるソフトウェア{" "}
-        <span style={{ fontSize: "0.7em" }}>(※2)</span>
+        <span class="text-xs">(※2)</span>
       </li>
       <li>イントネーションの詳細な調整が可能</li>
       <li>喋り声で歌えるハミング機能搭載</li>
     </ul>
   </div>
-  <p class="is-size-7">※1 詳しくは各キャラクターの利用規約をご参照ください</p>
-  <p class="is-size-7">※2 Windows / Mac / Linux に対応</p>
+  <p class="text-xs mt-4">
+    ※1 詳しくは各キャラクターの利用規約をご参照ください
+  </p>
+  <p class="text-xs">※2 Windows / Mac / Linux に対応</p>
   <button
     {...{ [showDownloadModalAttr]: "" }}
-    class="button is-align-self-center mt-5 is-primary is-rounded is-large"
+    class="self-center mt-5 bg-primary text-black hover:brightness-90 rounded-full px-8 py-4 text-2xl font-semibold flex items-center gap-2"
   >
-    <span class="icon">
+    <span class="inline-flex items-center">
       <FontAwesomeIcon icon={faDownload} />
     </span>
-    <span class="has-text-weight-semibold">ダウンロード</span>
+    <span>ダウンロード</span>
   </button>
-  <p class="is-align-self-center is-size-6">Version {APP_VERSION}</p>
+  <p class="self-center text-base mt-2">Version {APP_VERSION}</p>
 </div>

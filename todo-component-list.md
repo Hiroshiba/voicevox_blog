@@ -32,7 +32,7 @@
 - [ ] **TopIllustContainer** `src/pages/dormitory/_TopIllustContainer.astro`
   - シンプルなコンテナレイアウト → Tailwindで再現
 
-- [ ] **SoftwareFeature** `src/pages/_SoftwareFeature.astro`
+- [x] **SoftwareFeature** `src/pages/_SoftwareFeature.astro`
   - Bulmaのグリッド・タイポグラフィ → Tailwindのグリッド・テキストスタイル
 
 - [ ] **EngineGuidanceSection** `src/pages/_EngineGuidanceSection.astro`
@@ -136,9 +136,9 @@
 
 ### 複雑さの目安
 
-| レベル  | コンポーネント                                                                                                                                          | 備考                               |
-| ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------- |
-| ✅ 完了 | Modal系（MarkdownModal, PrivacyPolicyModal, NemoTermModal, LibraryTermIntroModal, NemoGuidanceModal, DownloadModal, DownloadNemoModal）                 | zag.js dialog + Tailwind化完了     |
-| 低      | Footer, TopIllustContainer, SoftwareFeature, EngineGuidanceSection, OssGuidanceSection, LinkListSection, ExplainSection, CharacterCard (dormitory/talk) | 基本レイアウトのみ、状態管理なし   |
-| 中      | TypeButton, AudioSample, CharacterCard (song), SpeakerComponent, CallBox                                                                                | カスタムスタイルまたは軽い状態管理 |
-| 高      | PlayButton, Product TopContainer, StyleDropdown, Header                                                                                                 | 複雑な状態管理・インタラクション   |
+| レベル  | コンポーネント                                                                                                                                                   | 備考                               |
+| ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------- |
+| ✅ 完了 | Modal系（MarkdownModal, PrivacyPolicyModal, NemoTermModal, LibraryTermIntroModal, NemoGuidanceModal, DownloadModal, DownloadNemoModal）, Footer, SoftwareFeature | zag.js dialog + Tailwind化完了     |
+| 低      | TopIllustContainer, EngineGuidanceSection, OssGuidanceSection, LinkListSection, ExplainSection, CharacterCard (dormitory/talk)                                   | 基本レイアウトのみ、状態管理なし   |
+| 中      | TypeButton, AudioSample, CharacterCard (song), SpeakerComponent, CallBox                                                                                         | カスタムスタイルまたは軽い状態管理 |
+| 高      | PlayButton, Product TopContainer, StyleDropdown, Header                                                                                                          | 複雑な状態管理・インタラクション   |

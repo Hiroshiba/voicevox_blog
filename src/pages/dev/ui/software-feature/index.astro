@@ -1,8 +1,6 @@
 ---
 import SoftwareFeature from "@/pages/_SoftwareFeature.astro";
-import "@/styles/bulma.scss";
-import "@/styles/global.scss";
-import "@/styles/helper.scss";
+import "@/styles/global.css";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 ---
 
@@ -14,14 +12,14 @@ import "@fortawesome/fontawesome-svg-core/styles.css";
     <title>SoftwareFeature 確認用ページ</title>
   </head>
   <body>
-    <div class="software-feature-page" style="padding: 2rem;">
+    <div class="p-8">
       <h1 class="text-2xl font-bold mb-6">SoftwareFeature 確認用ページ</h1>
 
       <section class="mb-8">
         <h2 class="text-xl font-semibold mb-4">デフォルト</h2>
-        <section class="section not-header is-flex is-justify-content-center">
-          <div class="container is-max-desktop columns is-desktop is-vcentered">
-            <SoftwareFeature class="column is-narrow" />
+        <section class="flex justify-center py-12">
+          <div class="container max-w-screen-md lg:flex lg:max-w-screen-xl">
+            <SoftwareFeature class="lg:flex-none lg:w-auto" />
           </div>
         </section>
       </section>
