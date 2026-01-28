@@ -8,11 +8,12 @@ git add・git commit・git reset・git restoreは絶対に勝手に行わない�
 
 コードを書き足す際は周囲にあるコードや兄弟ファイルのコードをよく観察して、フォーマット、書き方、処理順序、ファイル名など、なるべく既存のコードと同じスタイルで書いてください。
 
-実行チェックには`pnpm start`で開発サーバーを立ち上げて、playwright-browser-operatorサブエージェントを使ってplaywright mcpを使った動作確認をしてください。
+実行チェックには開発サーバー`http://127.0.0.1:4321`へアクセスへplaywright-browser-operatorサブエージェントを使ってplaywright mcpを使った動作確認をしてください。
+開発サーバーが起動していない場合は`pnpm start -- --host 127.0.0.1 --port 4321`で立ち上げてください。
 初回アクセス時は時間がかかることがありますが、ホットリロードが効くので、２回目以降の確認は速いはずです。
 
-もしスクリーンショットを更新する際は、開発サーバーを停止した後、`pnpm run test-build`を実行し、`pnpm run test:e2e --update-snapshots`を実行してください。
-開発サーバーの停止や`test-build`を忘れるとスクリーンショットが正しく更新されません。
+もしスクリーンショットを更新する際は、`pnpm run test-build`を実行し、`pnpm run test:e2e --update-snapshots`を実行してください。
+`test-build`を忘れるとスクリーンショットが正しく更新されません。
 変化しないはずのスクリーンショットが変わってしまった場合は、原因を特定して修正してください。
 
 置き換えるときは既存のコンポーネントなどを直接Tailwind等で置き換えてください。
@@ -30,8 +31,8 @@ primary color以外はtailwindにある色を使うようにしてください�
 
 Codexの場合、サーバーの起動やe2eテストには権限の昇格が必要になることがあります。
 portが変わったり`[::1]`になっていたりするので、hostやportを指定して起動すると確実です。
-Codex専用コマンド：`nohup pnpm start -- --host 127.0.0.1 --port 4321 --strictPort`
-これで起動しているので、**絶対に疎通チェックは一切せず**いきなりplaywrightで動作確認してください。
+Codexで開発サーバーを立ち上げるときは`nohup`を使ってください。
+開発サーバーは起動しているので、**絶対に疎通チェックは一切せず**いきなりplaywrightで動作確認してください。
 
 ---
 
@@ -84,7 +85,7 @@ createElementなどは使わず、既存コンポーネントをimportして表�
 もしコンポーネント切り出しをする必要がある場合は、方法を考えてユーザーへAskSkillで実行するかどうかを質問してください。
 
 まずはbulmaを用いたページを作り、開発環境でplaywrightで確認して意図通りか確かめ、それが実際に使われているページの見た目と一致しているか確認した後、テストを更新して、スクリーンショットを撮りましょう。
-スクショ更新コマンドはこちらです。開発サーバーの停止を忘れずに。
+スクショ更新コマンドはこちらです。
 `pnpm run test:e2e --update-snapshots=all tests/e2e/ui/dev-ui/`
 
 必要なimportは`import "@/styles/bulma.scss"`と`import "@/styles/global.scss"`になると思います。
@@ -99,7 +100,7 @@ createElementなどは使わず、既存コンポーネントをimportして表�
 今回は以下のタスクを実行してください。
 
 `todo-component-list.md`のTailwind化タスクを上から順に１つずつ進めてください。
-手順：Planモードでfrontend-designスキル実行→Editモードで再度frontend-designスキル実行→既存コンポーネントをTailwindで置き換え→開発環境でplaywright mcpやsubagentで確認→ユーザー確認→スクリーンショット更新
+手順：Planモードでfrontend-designスキル実行→Editモードで再度frontend-designスキル実行→既存コンポーネントをTailwindで置き換え→開発サーバーでplaywright mcpやsubagentで確認→ユーザー確認→スクリーンショット更新
 
 tailwindのcssが読み込まれていないことがあります。
 `import "@/styles/global.css";`を忘れずに行ってください。
