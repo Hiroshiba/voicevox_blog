@@ -25,7 +25,7 @@
 
 ### 低難易度（基本レイアウトのみ、状態管理なし）
 
-- [ ] **Footer** `src/components/Footer.astro`
+- [x] **Footer** `src/components/Footer.astro`
   - `button`, `is-small`, `is-dark` → Tailwindのボタンスタイル
   - `container`, `is-flex`, `is-justify-content-center` → Flexboxレイアウト
 

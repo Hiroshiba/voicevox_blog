@@ -4,44 +4,40 @@ import { faGithub, faXTwitter } from "@fortawesome/free-brands-svg-icons";
 import FontAwesomeIcon from "./FontAwesomeIcon.astro";
 
 interface Props {
-  isDark?: boolean; // Nemoやソングのページかどうか
+  isDark?: boolean;
 }
 
-const { isDark } = Astro.props;
+// TODO: 不要になっているのでTailwind化後に消す
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const { isDark: _isDark } = Astro.props;
 ---
 
-<div class={`container is-flex is-justify-content-center`}>
+<div class="flex justify-center">
   <a
-    class={`button is-small ml-1 mr-1 ${!isDark ? "" : "is-dark"}`}
+    class="inline-flex items-center gap-1 border rounded px-2.5 py-1 text-xs mx-1 border-gray-400 dark:border-gray-600 bg-white dark:bg-gray-800 text-black dark:text-white hover:bg-gray-50 dark:hover:bg-gray-700"
     href="https://github.com/VOICEVOX/voicevox"
     target="_blank"
     rel="noreferrer"
   >
-    <span class="icon">
-      <FontAwesomeIcon icon={faGithub} />
-    </span>
+    <FontAwesomeIcon icon={faGithub} />
     <span>GitHub</span>
   </a>
   <a
-    class={`button is-small ml-1 mr-1 ${!isDark ? "" : "is-dark"}`}
+    class="inline-flex items-center gap-1 border rounded px-2.5 py-1 text-xs mx-1 border-gray-400 dark:border-gray-600 bg-white dark:bg-gray-800 text-black dark:text-white hover:bg-gray-50 dark:hover:bg-gray-700"
     href="https://x.com/voicevox_pj"
     target="_blank"
     rel="noreferrer"
   >
-    <span class="icon">
-      <FontAwesomeIcon icon={faXTwitter} />
-    </span>
+    <FontAwesomeIcon icon={faXTwitter} />
     <span>Official SNS</span>
   </a>
 </div>
-<div class="container is-flex is-justify-content-center mt-2">
+<div class="flex justify-center mt-2">
   <button
     {...{ [showPrivacyPolicyModalAttr]: "" }}
-    class={`is-size-7 ml-1 mr-1 ${isDark ? "has-text-primary" : ""}`}
+    class="text-xs mx-1 dark:text-primary"
   >
     プライバシーポリシー
   </button>
-  <p class={`is-size-7	ml-1 mr-1 ${isDark ? "has-text-white-bis" : ""}`}>
-    © Hiroshiba Kazuyuki
-  </p>
+  <p class="text-xs mx-1 dark:text-gray-100">© Hiroshiba Kazuyuki</p>
 </div>

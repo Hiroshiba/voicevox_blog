@@ -90,20 +90,31 @@ createElementなどは使わず、既存コンポーネントをimportして表�
 必要なimportは`import "@/styles/bulma.scss"`と`import "@/styles/global.scss"`になると思います。
 インデックスを阻止することを忘れないでください。
 
-完了後はチェックボックスを埋めてください。
-１つやったらタスク完了です。
+大体のコンポーネントの切り出しができたので、次はtailwindcssを使って置き換えていきます。
+まずは`todo-component-list.md`のタスクリストを、tailwind化のために書き換えてください。
 
 ---
 
 以上が今までのタスクです。
 今回は以下のタスクを実行してください。
 
-大体のコンポーネントの切り出しができたので、次はtailwindcssを使って置き換えていきます。
-まずは`todo-component-list.md`のタスクリストを、tailwind化のために書き換えてください。
-
 `todo-component-list.md`のTailwind化タスクを上から順に１つずつ進めてください。
-手順：Planモードでfrontend-designスキル実行→既存コンポーネントをTailwindで置き換え→開発環境でplaywright確認→ユーザー確認→スクリーンショット更新
-１つ完了したらタスク完了です。
+手順：Planモードでfrontend-designスキル実行→Editモードで再度frontend-designスキル実行→既存コンポーネントをTailwindで置き換え→開発環境でplaywright mcpやsubagentで確認→ユーザー確認→スクリーンショット更新
+
+tailwindのcssが読み込まれていないことがあります。
+`import "@/styles/global.css";`を忘れずに行ってください。
+
+確認は `/dev/ui` から行ってください。
+そこそこ近い見た目であれば大丈夫ですが、大きくハズレていたら修正してください。
+既存のスクリーンショットと見比べたり、bulma時代(commit hash:3b5a86938c5ad5c0dbe6720ed6f6040aad840e19)のページと見比べたりしてください。
+Bulma時代の例は`http://localhost:54321/dev/ui/`で見ることができます。
+起動していなければユーザーに報告してください。
+
+おそらくzagjsはまだ不要だと思います。
+今回のタスクは曖昧なので、曖昧な点がなくなるまでユーザーにaskskillで質問してください。
+
+完了後はチェックボックスを埋めてください。
+１つやったらタスク完了です。
 
 astroやbulmaやtailwindについてわからないことがあればcontext7で調べてください。
 
