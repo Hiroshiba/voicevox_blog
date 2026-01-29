@@ -29,7 +29,7 @@
   - `button`, `is-small`, `is-dark` → Tailwindのボタンスタイル
   - `container`, `is-flex`, `is-justify-content-center` → Flexboxレイアウト
 
-- [ ] **TopIllustContainer** `src/pages/dormitory/_TopIllustContainer.astro`
+- [x] **TopIllustContainer** `src/pages/dormitory/_TopIllustContainer.astro`
   - シンプルなコンテナレイアウト → Tailwindで再現
 
 - [x] **SoftwareFeature** `src/pages/_SoftwareFeature.astro`
@@ -129,6 +129,7 @@
 | `is-loading`                | カスタムローディングスピナー＋`opacity-50 cursor-wait` |
 | `is-rounded`                | `rounded-full`                                         |
 | `container`                 | `container mx-auto px-4`                               |
+| `is-max-desktop`            | `max-w-[960px]`                                        |
 | `is-flex`                   | `flex`                                                 |
 | `is-justify-content-center` | `justify-center`                                       |
 | `navbar`                    | `fixed top-0 w-full bg-white shadow`                   |
