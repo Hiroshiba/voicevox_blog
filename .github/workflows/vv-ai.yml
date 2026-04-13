@@ -1,0 +1,235 @@
+name: vv-ai
+
+on:
+  issue_comment:
+    types: [created]
+  workflow_dispatch:
+    inputs:
+      command:
+        description: "コマンド"
+        required: true
+        type: choice
+        options: [reply, plan, implement, review, issue]
+      target_type:
+        description: "対象種別 (issue / pr)"
+        required: false
+        type: choice
+        options: ["", issue, pr]
+        default: ""
+      target_number:
+        description: "対象番号"
+        required: false
+        type: string
+      target_url:
+        description: "対象 URL"
+        required: false
+        type: string
+      instruction:
+        description: "指示"
+        required: false
+        type: string
+      provider:
+        description: "AI プロバイダ (codex / claude)"
+        required: false
+        type: choice
+        options: ["", codex, claude]
+        default: ""
+      session_mode:
+        description: "セッション継続方式 (inherit / compact / new)"
+        required: false
+        type: choice
+        options: ["", inherit, compact, new]
+        default: ""
+      dry_run:
+        description: "ドライラン"
+        required: false
+        type: boolean
+        default: false
+      repo:
+        description: "Issue 作成先 org/repo (issue コマンド用)"
+        required: false
+        type: string
+
+concurrency:
+  group: >-
+    ${{ github.workflow }}-${{
+      github.event.issue.number ||
+      inputs.target_number ||
+      inputs.target_url ||
+      github.run_id
+    }}
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure git user
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Setup secrets
+        env:
+          VV_OPENAI_API_KEY: ${{ secrets.VV_OPENAI_API_KEY }}
+          VV_ANTHROPIC_API_KEY: ${{ secrets.VV_ANTHROPIC_API_KEY }}
+          VV_AI_AGE_PUBLIC_KEY: ${{ secrets.VV_AI_AGE_PUBLIC_KEY }}
+          VV_AI_AGE_SECRET_KEY: ${{ secrets.VV_AI_AGE_SECRET_KEY }}
+          VV_CODEX_AUTH_JSON: ${{ secrets.VV_CODEX_AUTH_JSON }}
+        run: |
+          mkdir -p /home/runner/.vv-secrets
+          chmod 700 /home/runner/.vv-secrets
+          printf '%s' "$VV_OPENAI_API_KEY"    > /home/runner/.vv-secrets/openai_key
+          printf '%s' "$VV_ANTHROPIC_API_KEY" > /home/runner/.vv-secrets/anthropic_key
+          printf '%s' "$VV_AI_AGE_PUBLIC_KEY" > /home/runner/.vv-secrets/age_public_key
+          printf '%s' "$VV_AI_AGE_SECRET_KEY" > /home/runner/.vv-secrets/age_secret_key
+          chmod 400 /home/runner/.vv-secrets/*
+          if [ -n "$VV_CODEX_AUTH_JSON" ]; then
+            mkdir -p /home/runner/.vv-secrets/codex_home
+            printf '%s' "$VV_CODEX_AUTH_JSON" > /home/runner/.vv-secrets/codex_home/auth.json
+            chmod 400 /home/runner/.vv-secrets/codex_home/auth.json
+          fi
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+
+      - name: Install age
+        run: |
+          age_install_dir="$(mktemp -d "$RUNNER_TEMP/age-install.XXXXXX")"
+          curl -sL https://github.com/FiloSottile/age/releases/download/v1.2.1/age-v1.2.1-linux-amd64.tar.gz \
+            | tar xz -C "$age_install_dir"
+          sudo mv "$age_install_dir/age/age" "$age_install_dir/age/age-keygen" /usr/local/bin/
+          rm -rf "$age_install_dir"
+
+      - name: Install AI CLIs
+        run: |
+          npm install -g @openai/codex
+          npm install -g @anthropic-ai/claude-code
+          # TODO: anthropics/claude-code#43367 workaround: v2.1.92 で実行ビットが落ちる。修正版がリリースされたら削除する
+          chmod +x /usr/local/lib/node_modules/@anthropic-ai/claude-code/vendor/seccomp/*/apply-seccomp || true
+
+      # NOTE: プロトタイプ運用の暫定措置。プロトタイプ段階なのでワークフロー側で処理する。
+      - name: Sync AI prompts from hiho_ai_coding
+        run: |
+          mkdir -p "$HOME/.claude" "$HOME/.codex"
+          tmp_dir="$(mktemp -d)"
+          git clone --depth 1 \
+            https://github.com/Hiroshiba/hiho_ai_coding.git \
+            "$tmp_dir/hiho_ai_coding"
+          python "$tmp_dir/hiho_ai_coding/sync.py"
+          rm -rf "$tmp_dir"
+
+      - name: Enable Linux sandbox
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update && sudo apt-get install -y bubblewrap socat
+          current_userns="$(sysctl -n kernel.unprivileged_userns_clone 2>/dev/null || true)"
+          if [ -n "$current_userns" ] && [ "$current_userns" != "1" ]; then
+            sudo sysctl -w kernel.unprivileged_userns_clone=1
+          fi
+          current_apparmor="$(sysctl -n kernel.apparmor_restrict_unprivileged_userns 2>/dev/null || true)"
+          if [ -n "$current_apparmor" ] && [ "$current_apparmor" != "0" ]; then
+            sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
+          fi
+
+      - name: Generate read-only token
+        id: readonly-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.VV_AI_APP_ID }}
+          private-key: ${{ secrets.VV_AI_APP_PRIVATE_KEY }}
+
+      - name: Run vv-ai
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VV_GH_READONLY_TOKEN: ${{ steps.readonly-token.outputs.token }}
+          VV_OPENAI_API_KEY_FILE: /home/runner/.vv-secrets/openai_key
+          VV_ANTHROPIC_API_KEY_FILE: /home/runner/.vv-secrets/anthropic_key
+          VV_AI_AGE_PUBLIC_KEY_FILE: /home/runner/.vv-secrets/age_public_key
+          VV_AI_AGE_SECRET_KEY_FILE: /home/runner/.vv-secrets/age_secret_key
+          VV_CLAUDE_SETTINGS: ${{ secrets.VV_CLAUDE_SETTINGS }}
+          VV_CODEX_HOME: /home/runner/.vv-secrets/codex_home
+        run: |
+          uvx --from git+https://github.com/Hiroshiba/vv-ai@main vv-ai \
+            --event "${{ github.event_name }}" \
+            --event-file "$GITHUB_EVENT_PATH"
+
+      - name: Resolve artifact paths
+        if: always()
+        id: artifact_paths
+        run: |
+          shopt -s nullglob
+
+          session_files=(.vv-ai/artifacts/*/sessions/*.tar.age)
+          metrics_files=(.vv-ai/artifacts/*/metrics/*.json.age)
+          report_files=(.vv-ai/artifacts/*/reports/*.md.age)
+
+          if [ ${#session_files[@]} -gt 1 ]; then
+            echo "session artifact が複数あります" >&2
+            printf '%s\n' "${session_files[@]}" >&2
+            exit 1
+          fi
+          if [ ${#metrics_files[@]} -gt 1 ]; then
+            echo "metrics artifact が複数あります" >&2
+            printf '%s\n' "${metrics_files[@]}" >&2
+            exit 1
+          fi
+          if [ ${#report_files[@]} -gt 1 ]; then
+            echo "report artifact が複数あります" >&2
+            printf '%s\n' "${report_files[@]}" >&2
+            exit 1
+          fi
+
+          if [ ${#session_files[@]} -eq 1 ]; then
+            session_path="${session_files[0]}"
+            session_name="$(basename "$session_path" .tar.age)"
+            echo "session_path=$session_path" >> "$GITHUB_OUTPUT"
+            echo "session_name=$session_name" >> "$GITHUB_OUTPUT"
+          fi
+
+          if [ ${#metrics_files[@]} -eq 1 ]; then
+            metrics_path="${metrics_files[0]}"
+            metrics_name="$(basename "$metrics_path" .json.age)"
+            echo "metrics_path=$metrics_path" >> "$GITHUB_OUTPUT"
+            echo "metrics_name=$metrics_name" >> "$GITHUB_OUTPUT"
+          fi
+
+          if [ ${#report_files[@]} -eq 1 ]; then
+            report_path="${report_files[0]}"
+            report_name="$(basename "$report_path" .md.age)"
+            echo "report_path=$report_path" >> "$GITHUB_OUTPUT"
+            echo "report_name=$report_name" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Upload session artifact
+        if: always() && steps.artifact_paths.outputs.session_path != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.artifact_paths.outputs.session_name }}
+          path: ${{ steps.artifact_paths.outputs.session_path }}
+          retention-days: 90
+
+      - name: Upload metrics artifact
+        if: always() && steps.artifact_paths.outputs.metrics_path != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.artifact_paths.outputs.metrics_name }}
+          path: ${{ steps.artifact_paths.outputs.metrics_path }}
+          retention-days: 90
+
+      - name: Upload report artifact
+        if: always() && steps.artifact_paths.outputs.report_path != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.artifact_paths.outputs.report_name }}
+          path: ${{ steps.artifact_paths.outputs.report_path }}
+          retention-days: 90
