@@ -69,6 +69,9 @@ jobs:
       issues: write
       pull-requests: write
 
+    env:
+      VV_CODEX_HOME: /home/runner/.vv-secrets/codex_home
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -120,12 +123,12 @@ jobs:
       # NOTE: プロトタイプ運用の暫定措置。プロトタイプ段階なのでワークフロー側で処理する。
       - name: Sync AI prompts from hiho_ai_coding
         run: |
-          mkdir -p "$HOME/.claude" "$HOME/.codex"
+          mkdir -p "$HOME/.claude" "$VV_CODEX_HOME"
           tmp_dir="$(mktemp -d)"
           git clone --depth 1 \
             https://github.com/Hiroshiba/hiho_ai_coding.git \
             "$tmp_dir/hiho_ai_coding"
-          python "$tmp_dir/hiho_ai_coding/sync.py"
+          python "$tmp_dir/hiho_ai_coding/sync.py" --codex-home "$VV_CODEX_HOME"
           rm -rf "$tmp_dir"
 
       - name: Enable Linux sandbox
@@ -157,7 +160,6 @@ jobs:
           VV_AI_AGE_PUBLIC_KEY_FILE: /home/runner/.vv-secrets/age_public_key
           VV_AI_AGE_SECRET_KEY_FILE: /home/runner/.vv-secrets/age_secret_key
           VV_CLAUDE_SETTINGS: ${{ secrets.VV_CLAUDE_SETTINGS }}
-          VV_CODEX_HOME: /home/runner/.vv-secrets/codex_home
         run: |
           uvx --from git+https://github.com/Hiroshiba/vv-ai@main vv-ai \
             --event "${{ github.event_name }}" \
