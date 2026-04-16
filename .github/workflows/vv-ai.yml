@@ -35,10 +35,10 @@ on:
         options: ["", codex, claude]
         default: ""
       session_mode:
-        description: "セッション継続方式 (inherit / compact / new)"
+        description: "セッション継続方式 (inherit / inherit_or_new / compact / new)"
         required: false
         type: choice
-        options: ["", inherit, compact, new]
+        options: ["", inherit, inherit_or_new, compact, new]
         default: ""
       dry_run:
         description: "ドライラン"
@@ -65,9 +65,7 @@ jobs:
     runs-on: ubuntu-latest
 
     permissions:
-      contents: write
-      issues: write
-      pull-requests: write
+      contents: read
 
     env:
       VV_CODEX_HOME: /home/runner/.vv-secrets/codex_home
@@ -150,10 +148,22 @@ jobs:
         with:
           app-id: ${{ secrets.VV_AI_APP_ID }}
           private-key: ${{ secrets.VV_AI_APP_PRIVATE_KEY }}
+          permission-metadata: read # NOTE: 無指定だとGithub Appの全権限になってしまうため、適当に１つだけ指定する
+
+      - name: Generate write token
+        id: write-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.VV_AI_APP_ID }}
+          private-key: ${{ secrets.VV_AI_APP_PRIVATE_KEY }}
+          permission-contents: write
+          permission-issues: write
+          permission-pull-requests: write
+          permission-workflows: write # NOTE: `.github/workflows` をpushするために必要
 
       - name: Run vv-ai
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ steps.write-token.outputs.token }}
           VV_GH_READONLY_TOKEN: ${{ steps.readonly-token.outputs.token }}
           VV_OPENAI_API_KEY_FILE: /home/runner/.vv-secrets/openai_key
           VV_ANTHROPIC_API_KEY_FILE: /home/runner/.vv-secrets/anthropic_key
@@ -175,8 +185,8 @@ jobs:
           metrics_files=(.vv-ai/artifacts/*/metrics/*.json.age)
           report_files=(.vv-ai/artifacts/*/reports/*.md.age)
 
-          if [ ${#session_files[@]} -gt 1 ]; then
-            echo "session artifact が複数あります" >&2
+          if [ ${#session_files[@]} -gt 2 ]; then
+            echo "session artifact が3つ以上あります" >&2
             printf '%s\n' "${session_files[@]}" >&2
             exit 1
           fi
@@ -191,11 +201,17 @@ jobs:
             exit 1
           fi
 
-          if [ ${#session_files[@]} -eq 1 ]; then
+          if [ ${#session_files[@]} -ge 1 ]; then
             session_path="${session_files[0]}"
             session_name="$(basename "$session_path" .tar.age)"
             echo "session_path=$session_path" >> "$GITHUB_OUTPUT"
             echo "session_name=$session_name" >> "$GITHUB_OUTPUT"
+          fi
+          if [ ${#session_files[@]} -ge 2 ]; then
+            session_path_1="${session_files[1]}"
+            session_name_1="$(basename "$session_path_1" .tar.age)"
+            echo "session_path_1=$session_path_1" >> "$GITHUB_OUTPUT"
+            echo "session_name_1=$session_name_1" >> "$GITHUB_OUTPUT"
           fi
 
           if [ ${#metrics_files[@]} -eq 1 ]; then
@@ -218,6 +234,14 @@ jobs:
         with:
           name: ${{ steps.artifact_paths.outputs.session_name }}
           path: ${{ steps.artifact_paths.outputs.session_path }}
+          retention-days: 90
+
+      - name: Upload session artifact (forked)
+        if: always() && steps.artifact_paths.outputs.session_path_1 != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.artifact_paths.outputs.session_name_1 }}
+          path: ${{ steps.artifact_paths.outputs.session_path_1 }}
           retention-days: 90
 
       - name: Upload metrics artifact
