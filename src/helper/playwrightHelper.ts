@@ -75,6 +75,20 @@ export async function waitForImages(page: Page) {
   );
 }
 
+/** ページ内のフォントがすべて読み込まれるまで待機する */
+export async function waitForFonts(page: Page) {
+  const executor = async () => {
+    await page.evaluate(async () => {
+      await document.fonts.ready;
+    });
+  };
+
+  await executeWithStepRecording(
+    "フォントの読み込みが完了するまで待つ",
+    executor,
+  );
+}
+
 /** 読み込み中属性を持つボタンがなくなるまで待機する */
 export async function waitForAudios(page: Page) {
   const audioEvaluateCallback = () => {
