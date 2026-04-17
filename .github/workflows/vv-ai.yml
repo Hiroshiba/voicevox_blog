@@ -73,6 +73,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          persist-credentials: false
 
       - name: Configure git user
         run: |
@@ -86,6 +88,7 @@ jobs:
           VV_AI_AGE_PUBLIC_KEY: ${{ secrets.VV_AI_AGE_PUBLIC_KEY }}
           VV_AI_AGE_SECRET_KEY: ${{ secrets.VV_AI_AGE_SECRET_KEY }}
           VV_CODEX_AUTH_JSON: ${{ secrets.VV_CODEX_AUTH_JSON }}
+          VV_CONTEXT7_API_KEY: ${{ secrets.VV_CONTEXT7_API_KEY }}
         run: |
           mkdir -p /home/runner/.vv-secrets
           chmod 700 /home/runner/.vv-secrets
@@ -98,6 +101,19 @@ jobs:
             mkdir -p /home/runner/.vv-secrets/codex_home
             printf '%s' "$VV_CODEX_AUTH_JSON" > /home/runner/.vv-secrets/codex_home/auth.json
             chmod 400 /home/runner/.vv-secrets/codex_home/auth.json
+          fi
+          if [ -n "$VV_CONTEXT7_API_KEY" ]; then
+            printf '{"mcpServers":{"context7":{"type":"http","url":"https://mcp.context7.com/mcp","headers":{"CONTEXT7_API_KEY":"%s"}}}}' \
+              "$VV_CONTEXT7_API_KEY" > "$HOME/.claude.json"
+            chmod 400 "$HOME/.claude.json"
+            mkdir -p "$VV_CODEX_HOME"
+            cat > "$VV_CODEX_HOME/config.toml" <<TOML
+          [mcp_servers.context7]
+          url = "https://mcp.context7.com/mcp"
+          [mcp_servers.context7.http_headers]
+          CONTEXT7_API_KEY = "$VV_CONTEXT7_API_KEY"
+          TOML
+            chmod 400 "$VV_CODEX_HOME/config.toml"
           fi
 
       - name: Install uv
