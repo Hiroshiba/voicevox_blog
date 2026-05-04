@@ -1,0 +1,6 @@
+allowed_users:
+  - Hiroshiba
+provider_priority:
+  - codex
+  - claude
+pull_request_target_branch: master
