@@ -130,41 +130,6 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Setup secrets
-        env:
-          VV_OPENAI_API_KEY: ${{ secrets.VV_OPENAI_API_KEY }}
-          VV_ANTHROPIC_API_KEY: ${{ secrets.VV_ANTHROPIC_API_KEY }}
-          VV_AI_AGE_PUBLIC_KEY: ${{ secrets.VV_AI_AGE_PUBLIC_KEY }}
-          VV_AI_AGE_SECRET_KEY: ${{ secrets.VV_AI_AGE_SECRET_KEY }}
-          VV_CODEX_AUTH_JSON: ${{ secrets.VV_CODEX_AUTH_JSON }}
-          VV_CONTEXT7_API_KEY: ${{ secrets.VV_CONTEXT7_API_KEY }}
-        run: |
-          mkdir -p /home/runner/.vv-secrets
-          chmod 700 /home/runner/.vv-secrets
-          printf '%s' "$VV_OPENAI_API_KEY"    > /home/runner/.vv-secrets/openai_key
-          printf '%s' "$VV_ANTHROPIC_API_KEY" > /home/runner/.vv-secrets/anthropic_key
-          printf '%s' "$VV_AI_AGE_PUBLIC_KEY" > /home/runner/.vv-secrets/age_public_key
-          printf '%s' "$VV_AI_AGE_SECRET_KEY" > /home/runner/.vv-secrets/age_secret_key
-          chmod 400 /home/runner/.vv-secrets/*
-          if [ -n "$VV_CODEX_AUTH_JSON" ]; then
-            mkdir -p /home/runner/.vv-secrets/codex_home
-            printf '%s' "$VV_CODEX_AUTH_JSON" > /home/runner/.vv-secrets/codex_home/auth.json
-            chmod 400 /home/runner/.vv-secrets/codex_home/auth.json
-          fi
-          if [ -n "$VV_CONTEXT7_API_KEY" ]; then
-            printf '{"mcpServers":{"context7":{"type":"http","url":"https://mcp.context7.com/mcp","headers":{"CONTEXT7_API_KEY":"%s"}}}}' \
-              "$VV_CONTEXT7_API_KEY" > "$HOME/.claude.json"
-            chmod 400 "$HOME/.claude.json"
-            mkdir -p "$VV_CODEX_HOME"
-            cat > "$VV_CODEX_HOME/config.toml" <<TOML
-          [mcp_servers.context7]
-          url = "https://mcp.context7.com/mcp"
-          [mcp_servers.context7.http_headers]
-          CONTEXT7_API_KEY = "$VV_CONTEXT7_API_KEY"
-          TOML
-            chmod 400 "$VV_CODEX_HOME/config.toml"
-          fi
-
       - name: Install uv
         uses: astral-sh/setup-uv@d4b2f3b6ecc6e67c4457f6d3e41ec42d3d0fcb86 # v5.4.2
 
@@ -193,6 +158,48 @@ jobs:
             "$tmp_dir/hiho_ai_coding"
           python "$tmp_dir/hiho_ai_coding/sync.py" --codex-home "$VV_CODEX_HOME"
           rm -rf "$tmp_dir"
+
+      - name: Setup secrets
+        env:
+          VV_OPENAI_API_KEY: ${{ secrets.VV_OPENAI_API_KEY }}
+          VV_ANTHROPIC_API_KEY: ${{ secrets.VV_ANTHROPIC_API_KEY }}
+          VV_AI_AGE_PUBLIC_KEY: ${{ secrets.VV_AI_AGE_PUBLIC_KEY }}
+          VV_AI_AGE_SECRET_KEY: ${{ secrets.VV_AI_AGE_SECRET_KEY }}
+          VV_CODEX_AUTH_JSON: ${{ secrets.VV_CODEX_AUTH_JSON }}
+          VV_CONTEXT7_API_KEY: ${{ secrets.VV_CONTEXT7_API_KEY }}
+        run: |
+          mkdir -p /home/runner/.vv-secrets "$VV_CODEX_HOME"
+          chmod 700 /home/runner/.vv-secrets "$VV_CODEX_HOME"
+          printf '%s' "$VV_OPENAI_API_KEY"    > /home/runner/.vv-secrets/openai_key
+          printf '%s' "$VV_ANTHROPIC_API_KEY" > /home/runner/.vv-secrets/anthropic_key
+          printf '%s' "$VV_AI_AGE_PUBLIC_KEY" > /home/runner/.vv-secrets/age_public_key
+          printf '%s' "$VV_AI_AGE_SECRET_KEY" > /home/runner/.vv-secrets/age_secret_key
+          chmod 400 \
+            /home/runner/.vv-secrets/openai_key \
+            /home/runner/.vv-secrets/anthropic_key \
+            /home/runner/.vv-secrets/age_public_key \
+            /home/runner/.vv-secrets/age_secret_key
+          if [ -n "$VV_CODEX_AUTH_JSON" ]; then
+            printf '%s' "$VV_CODEX_AUTH_JSON" > "$VV_CODEX_HOME/auth.json"
+            chmod 400 "$VV_CODEX_HOME/auth.json"
+          fi
+          if [ -n "$VV_CONTEXT7_API_KEY" ]; then
+            printf '{"mcpServers":{"context7":{"type":"http","url":"https://mcp.context7.com/mcp","headers":{"CONTEXT7_API_KEY":"%s"}}}}' \
+              "$VV_CONTEXT7_API_KEY" > "$HOME/.claude.json"
+            chmod 400 "$HOME/.claude.json"
+            if [ ! -f "$VV_CODEX_HOME/config.toml" ]; then
+              echo "Codex config.toml が見つかりません" >&2
+              exit 1
+            fi
+            cat >> "$VV_CODEX_HOME/config.toml" <<TOML
+
+          [mcp_servers.context7]
+          url = "https://mcp.context7.com/mcp"
+          [mcp_servers.context7.http_headers]
+          CONTEXT7_API_KEY = "$VV_CONTEXT7_API_KEY"
+          TOML
+            chmod 400 "$VV_CODEX_HOME/config.toml"
+          fi
 
       - name: Enable Linux sandbox
         if: runner.os == 'Linux'
