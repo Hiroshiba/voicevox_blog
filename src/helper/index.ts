@@ -199,7 +199,7 @@ export function assertNonNullable<T>(
 }
 
 /** 入力がnullまたはundefinedの場合エラーを投げ、それ以外の場合は入力をそのまま返す */
-export const ensureNotNullish = <T>(value: T | null | undefined): T => {
+export const ensureNotNullish = <T>(value: T): NonNullable<T> => {
   if (value == null) {
     throw new UnreachableError();
   }
