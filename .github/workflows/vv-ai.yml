@@ -70,6 +70,7 @@ concurrency:
       github.run_id
     }}
   cancel-in-progress: false
+  queue: max
 
 jobs:
   verify:
