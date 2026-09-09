@@ -51,10 +51,12 @@ jsonファイルの形式は以下の通り。
       ]
     },
     "windows-x64-directml": {},
+    "windows-x64-cuda": {},
     "macos-x64-cpu": {},
     "macos-arm64-cpu": {},
     "linux-x64-cpu": {},
-    "linux-x64-cuda": {}
+    "linux-x64-cuda": {},
+    "linux-arm64-cpu": {}
   }
 }
 ```
@@ -117,6 +119,16 @@ const runtimeTargets: RuntimeTarget[] = [
     },
   },
   {
+    os: "windows",
+    arch: "x64",
+    device: "cuda",
+    displayInfo: {
+      label: "GPU(CUDA)",
+      hint: "CUDA対応のNVIDIA製GPUでも音声を生成できます",
+      order: 2,
+    },
+  },
+  {
     os: "macos",
     arch: "x64",
     device: "cpu",
@@ -159,6 +171,17 @@ const runtimeTargets: RuntimeTarget[] = [
       order: 1,
     },
   },
+  {
+    os: "linux",
+    arch: "arm64",
+    device: "cpu",
+    displayInfo: {
+      label: "CPU",
+      hint: "CPUで音声を生成します",
+      order: 0,
+      default: true,
+    },
+  },
 ];
 
 function validateDisplayInfo(targets: RuntimeTarget[]): void {
@@ -194,10 +217,12 @@ function getVvppTxtName(target: string, version: string): string {
   const mapping: Record<string, string> = {
     "windows-x64-cpu": `voicevox_engine-windows-cpu-${version}.vvpp.txt`,
     "windows-x64-directml": `voicevox_engine-windows-directml-${version}.vvpp.txt`,
+    "windows-x64-cuda": `voicevox_engine-windows-nvidia-${version}.vvpp.txt`,
     "macos-x64-cpu": `voicevox_engine-macos-x64-${version}.vvpp.txt`,
     "macos-arm64-cpu": `voicevox_engine-macos-arm64-${version}.vvpp.txt`,
     "linux-x64-cpu": `voicevox_engine-linux-cpu-x64-${version}.vvpp.txt`,
     "linux-x64-cuda": `voicevox_engine-linux-nvidia-${version}.vvpp.txt`,
+    "linux-arm64-cpu": `voicevox_engine-linux-cpu-arm64-${version}.vvpp.txt`,
   };
 
   const result = mapping[target];

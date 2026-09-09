@@ -63,7 +63,7 @@ export default function DownloadModal() {
       "GPU / CPU": {
         インストーラー: {
           url: `https://github.com/VOICEVOX/voicevox/releases/download/${APP_VERSION}/VOICEVOX.Web.Setup.${APP_VERSION}.exe`,
-          name: `VOICEVOX.Setup.${APP_VERSION}.Windows.exe`,
+          name: `VOICEVOX.Web.Setup.${APP_VERSION}.exe`,
         },
         Zip: {
           url: `https://github.com/VOICEVOX/voicevox/releases/download/${APP_VERSION}/voicevox-windows-directml-${APP_VERSION}.zip`,
@@ -72,8 +72,8 @@ export default function DownloadModal() {
       },
       CPU: {
         インストーラー: {
-          url: `https://github.com/VOICEVOX/voicevox/releases/download/${APP_VERSION}/VOICEVOX-CPU.Web.Setup.${APP_VERSION}.exe`,
-          name: `VOICEVOX-CPU.Setup.${APP_VERSION}.Windows.exe`,
+          url: `https://github.com/VOICEVOX/voicevox/releases/download/${APP_VERSION}/VOICEVOX.Web.Setup.${APP_VERSION}.exe`,
+          name: `VOICEVOX.Web.Setup.${APP_VERSION}.exe`,
         },
         Zip: {
           url: `https://github.com/VOICEVOX/voicevox/releases/download/${APP_VERSION}/voicevox-windows-cpu-${APP_VERSION}.zip`,
@@ -230,19 +230,28 @@ export default function DownloadModal() {
         <hr className="vv-hr" />
 
         <div className="space-y-xs">
-          <Selector
-            label="対応モード"
-            selected={selectedOrDefaultMode}
-            setSelected={(mode) => selectMode(selectedOs, mode)}
-            candidates={modeAvailables[selectedOs]}
-          />
-          <p className="text-center text-xs text-neutral-800">
-            ※ GPUモードの方が快適ですが、利用するためには
-            <a href={withBaseUrl("/qa/")} className="vv-link">
-              対応するGPU
-            </a>
-            が必要です
-          </p>
+          {selectedOs === "Windows" &&
+          selectedOrDefaultPackage === "インストーラー" ? (
+            <p className="text-center text-xs text-neutral-800">
+              ※ デバイスはインストーラー内でDirectML・CPU・CUDAから選択します
+            </p>
+          ) : (
+            <>
+              <Selector
+                label="対応モード"
+                selected={selectedOrDefaultMode}
+                setSelected={(mode) => selectMode(selectedOs, mode)}
+                candidates={modeAvailables[selectedOs]}
+              />
+              <p className="text-center text-xs text-neutral-800">
+                ※ GPUモードの方が快適ですが、利用するためには
+                <a href={withBaseUrl("/qa/")} className="vv-link">
+                  対応するGPU
+                </a>
+                が必要です
+              </p>
+            </>
+          )}
         </div>
 
         <hr className="vv-hr" />
@@ -257,6 +266,20 @@ export default function DownloadModal() {
           <p className="text-center text-xs text-neutral-800">
             ※ 推奨パッケージはインストーラー版です
           </p>
+          {selectedOs === "Windows" || selectedOs === "Mac" ? (
+            <p className="text-center text-xs text-neutral-800">
+              管理者・オフラインでの導入は
+              <a
+                href="https://github.com/VOICEVOX/voicevox/blob/main/tools/deploy/README.md"
+                target="_blank"
+                rel="noreferrer"
+                className="vv-link"
+              >
+                こちらの手順
+              </a>
+              をご覧ください
+            </p>
+          ) : null}
         </div>
       </div>
     </ModalShell>
